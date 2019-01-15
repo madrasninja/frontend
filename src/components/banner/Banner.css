@@ -1,0 +1,22 @@
+.Banner {
+    background-image: url('./../../assets/img/cleaner-bg.jpg');
+    background-size: cover;
+    color: #FFFFFF;
+    height: 20rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.Banner h3 {
+    font-weight: 300;
+}
+
+.Banner .btn-primary {
+    background-color: #FFFFFF;
+    color: #333333;
+    margin: 1rem;
+    padding: 1rem 3rem;
+    font-size: 1.125rem;
+}
