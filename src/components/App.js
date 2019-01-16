@@ -1,14 +1,17 @@
 import React, { Component } from 'react';
+
 import './App.css';
 import Header from './header/Header';
-import Banner from './banner/Banner';
+import Home from './home/Home';
 
 class App extends Component {
   render() {
     return (
       <div className="App">
         <Header/>
-        <Banner/>
+        <section className="container">
+          <Home/>
+        </section>
       </div>
     );
   }

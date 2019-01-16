@@ -4,17 +4,19 @@ import { Button } from "reactstrap";
 import './Banner.css';
 
 class Banner extends Component {
-    constructor(props) {
-        super(props);
-    }
     
     render() {
         return (
             <div className="Banner">
-                <h3>
-                    Looking for a cleaning service at the Hourly rate?
-                </h3>
-                <Button color="primary">Book Now</Button>
+                <div className="content container">
+                    <h2>
+                        Your complete cleaning destination
+                    </h2>
+                    <p>
+                        Home - Restroom - Kitchen - Office
+                    </p>
+                    <Button color="primary">Book Now</Button>
+                </div>
             </div>
         );
     }

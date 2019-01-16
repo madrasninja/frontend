@@ -6,11 +6,7 @@ import {
     NavbarBrand,
     Nav,
     NavItem,
-    NavLink,
-    UncontrolledDropdown,
-    DropdownToggle,
-    DropdownMenu,
-    DropdownItem 
+    NavLink
 } from 'reactstrap';
 import "./Header.css";
 
@@ -34,24 +30,29 @@ class Header extends Component {
     
     render() {
         return (
-            <div>
-                <Navbar color="light" light expand="md">
-                    <NavbarBrand href="/">
-                        <img src={logo} className="Header-logo" alt="logo" />
-                    </NavbarBrand>
-                    <NavbarToggler onClick={this.toggle} />
-                    <Collapse isOpen={this.state.isOpen} navbar>
-                        <Nav className="ml-auto" navbar>
-                            <NavItem>
-                                <NavLink href="/components/">Our Services</NavLink>
-                            </NavItem>
-                            <NavItem>
-                                <NavLink>Login/Signup</NavLink>
-                            </NavItem>
-                        </Nav>
-                    </Collapse>
+            <header>
+                <Navbar color="light" light fixed="top" expand="md">
+                    <div className="container">
+                        <NavbarBrand href="/">
+                            <img src={logo} className="Header-logo" alt="logo" />
+                        </NavbarBrand>
+                        <NavbarToggler onClick={this.toggle} />
+                        <Collapse isOpen={this.state.isOpen} navbar>
+                            <Nav className="ml-auto" navbar>
+                                <NavItem>
+                                    <NavLink href="/home">Home</NavLink>
+                                </NavItem>
+                                <NavItem>
+                                    <NavLink href="/components">Our Services</NavLink>
+                                </NavItem>
+                                <NavItem>
+                                    <NavLink href="tel:+919360933933">+91 9360933933</NavLink>
+                                </NavItem>
+                            </Nav>
+                        </Collapse>
+                    </div>
                 </Navbar>
-            </div>
+            </header>
         )
     }
 }
