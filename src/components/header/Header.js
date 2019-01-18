@@ -8,8 +8,9 @@ import {
     NavItem,
     NavLink
 } from 'reactstrap';
-import "./Header.css";
+import { Link } from "react-router-dom";
 
+import "./Header.css";
 import logo from "./../../assets/img/logo-new.png";
 
 class Header extends Component {
@@ -40,10 +41,10 @@ class Header extends Component {
                         <Collapse isOpen={this.state.isOpen} navbar>
                             <Nav className="ml-auto" navbar>
                                 <NavItem>
-                                    <NavLink href="/home">Home</NavLink>
+                                    <Link to="/" className="nav-link">Home</Link>
                                 </NavItem>
                                 <NavItem>
-                                    <NavLink href="/components">Our Services</NavLink>
+                                    <Link to="/services" className="nav-link">Our Services</Link>
                                 </NavItem>
                                 <NavItem>
                                     <NavLink href="tel:+919360933933">+91 9360933933</NavLink>
