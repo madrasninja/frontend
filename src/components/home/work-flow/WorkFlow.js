@@ -1,6 +1,9 @@
 import React, { Component } from "react";
 import { Row, Col } from "reactstrap";
 
+import standingNinja from "./../../../assets/img/standing-ninja.png";
+import lookingNinja from "./../../../assets/img/looking-ninja.png";
+import arrivedNinja from "./../../../assets/img/arrived-ninja.png";
 import './WorkFlow.css';
 
 class WorkFlow extends Component {
@@ -13,7 +16,7 @@ class WorkFlow extends Component {
                         <Col xs={12} sm={12} md={4}> 
                             <div className="inner-block">
                                 <div className="heading">
-                                    1
+                                    <img src={standingNinja} alt="WorkFlow_icon"/>
                                 </div>
                                 <div className="body">
                                     <ul>
@@ -26,7 +29,7 @@ class WorkFlow extends Component {
                         <Col xs={12} sm={12} md={4}>
                             <div className="inner-block">
                                 <div className="heading">
-                                    2
+                                    <img src={lookingNinja} alt="WorkFlow_icon"/>
                                 </div>
                                 <div className="body">
                                     <ul>
@@ -39,7 +42,7 @@ class WorkFlow extends Component {
                         <Col xs={12} sm={12} md={4}>
                             <div className="inner-block">
                                 <div className="heading">
-                                    3
+                                    <img src={arrivedNinja} alt="WorkFlow_icon"/>
                                 </div>
                                 <div className="body">
                                     <ul>

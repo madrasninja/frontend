@@ -6,12 +6,16 @@ import {
     NavbarBrand,
     Nav,
     NavItem,
-    NavLink
+    NavLink,
+    Modal, 
+    ModalHeader, 
+    ModalBody, 
+    ModalFooter
 } from 'reactstrap';
 import { Link } from "react-router-dom";
 
 import "./Header.css";
-import logo from "./../../assets/img/logo-new.png";
+import logo from "./../../assets/img/logo.png";
 
 class Header extends Component {
     constructor(props) {
@@ -48,6 +52,11 @@ class Header extends Component {
                                 </NavItem>
                                 <NavItem>
                                     <NavLink href="tel:+919360933933">+91 9360933933</NavLink>
+                                </NavItem>
+                                <NavItem>
+                                    <Link to="/" className="nav-link">
+                                        <span className="login-btn">LOGIN</span>
+                                    </Link>
                                 </NavItem>
                             </Nav>
                         </Collapse>

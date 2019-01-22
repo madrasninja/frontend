@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Row, Col } from "reactstrap";
+import { Row, Col, Button } from "reactstrap";
 import _ from "lodash";
 
 import homeCleaning from './../../assets/img/home-cleaning.jpg';
@@ -45,13 +45,13 @@ class OurServices extends Component {
     }
 
     renderServiceCards(services) {
-        return _.map(services, data=>{
+        return _.map(services, (data, index)=>{
             return (
-                <Col xs={12} sm={6} md={4}>
+                <Col xs={12} sm={6} md={4} key={index}>
                     <div className="service-card">
                         <div className="img-block" style={{backgroundImage: 'url('+ data.bgimg +')'}}></div>
                         <h4>{data.title}</h4>
-                        <p>{data.description}</p>
+                        <p className="text-black-50">{data.description}</p>
                     </div>
                 </Col>
             )
@@ -69,6 +69,12 @@ class OurServices extends Component {
                         <Row>
                             {this.renderServiceCards(this.state.services)}
                         </Row>
+                    </Col>
+                    <Col xs={12}>
+                        <div className="text-center promotion">
+                            <h3 className="text-black-50">Here is the perfect service waiting for your request</h3>
+                            <Button color="primary" size="lg">Book Now</Button>
+                        </div>
                     </Col>
                 </Row>
             </div>

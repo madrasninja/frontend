@@ -22,3 +22,12 @@
     text-align: center;
     font-weight: 300;
 }
+
+.OurServices .promotion {
+    padding: 3rem 0rem;
+}
+
+.OurServices .promotion h3 {
+    font-weight: 300;
+    padding-bottom: 1rem;
+}

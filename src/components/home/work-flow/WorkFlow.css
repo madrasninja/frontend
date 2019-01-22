@@ -16,6 +16,13 @@
     background-attachment: fixed;
 }
 
+.work-flow-block .col-md-4:first-child {
+    padding-left: 30px;
+}
+.work-flow-block .col-md-4:last-child {
+    padding-right: 30px;
+}
+
 .work-flow-block>.heading {
     font-size: 2rem;
     font-weight: 300;
@@ -31,18 +38,12 @@
 }
 
 .work-flow-block .inner-block .heading {
-    font-size: 1.75rem;
-    font-weight: 300;
     text-align: center;
-    background: #00aeef;
-    border-radius: 50%;
-    position: absolute;
-    width: 3rem;
-    height: 3rem;
-    left: 10.5rem;
-    top: -0.6rem;
-    color: #FFFFFF;
-    border: 1.5px solid rgba(255, 255, 255, 0.85);
+}
+
+.work-flow-block .inner-block .heading img {
+    width: 5rem;
+    margin-bottom: 2rem;
 }
 
 .work-flow-block .inner-block .body ul {
