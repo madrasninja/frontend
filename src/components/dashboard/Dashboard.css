@@ -1,0 +1,15 @@
+.dashboard {
+
+}
+
+.dashboard .heading {
+    background-color: #535353;
+    padding: 2rem 0rem;
+    color: #FFFFFF;
+    margin-bottom: 2rem;
+}
+
+.dashboard .heading h3 {
+    font-weight: 300;
+    text-align: center;
+}

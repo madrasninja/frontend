@@ -13,7 +13,7 @@ class WorkFlow extends Component {
                 <Col xs={12} className="heading">How to hire a Ninja?</Col>
                 <Col xs={12}>
                     <Row>
-                        <Col xs={12} sm={12} md={4} className="d-flex align-items-stretch">
+                        <Col xs={12} sm={12} md={4}>
                             <div className="inner-block">
                                 <div className="heading">
                                     <img src={standingNinja} alt="WorkFlow_icon"/>
@@ -26,7 +26,7 @@ class WorkFlow extends Component {
                                 </div>
                             </div>
                         </Col>
-                        <Col xs={12} sm={12} md={4} className="d-flex align-items-stretch">
+                        <Col xs={12} sm={12} md={4}>
                             <div className="inner-block">
                                 <div className="heading">
                                     <img src={lookingNinja} alt="WorkFlow_icon"/>
@@ -39,7 +39,7 @@ class WorkFlow extends Component {
                                 </div>
                             </div>
                         </Col>
-                        <Col xs={12} sm={12} md={4} className="d-flex align-items-stretch">
+                        <Col xs={12} sm={12} md={4}>
                             <div className="inner-block">
                                 <div className="heading">
                                     <img src={arrivedNinja} alt="WorkFlow_icon"/>
