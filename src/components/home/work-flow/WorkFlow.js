@@ -13,41 +13,41 @@ class WorkFlow extends Component {
                 <Col xs={12} className="heading">How to hire a Ninja?</Col>
                 <Col xs={12}>
                     <Row>
-                        <Col xs={12} sm={12} md={4}> 
+                        <Col xs={12} sm={12} md={4} className="d-flex align-items-stretch">
                             <div className="inner-block">
                                 <div className="heading">
                                     <img src={standingNinja} alt="WorkFlow_icon"/>
                                 </div>
                                 <div className="body">
                                     <ul>
-                                        <li>Just Click the Book Now</li>
-                                        <li>Select the type of cleaning service</li>
+                                        <li>Click on <strong>Book Your Service</strong></li>
+                                        <li>Select your preferred cleaning service</li>
                                     </ul>
                                 </div>
                             </div>
                         </Col>
-                        <Col xs={12} sm={12} md={4}>
+                        <Col xs={12} sm={12} md={4} className="d-flex align-items-stretch">
                             <div className="inner-block">
                                 <div className="heading">
                                     <img src={lookingNinja} alt="WorkFlow_icon"/>
                                 </div>
                                 <div className="body">
                                     <ul>
-                                        <li>Pick the Date & Time</li>
-                                        <li>Select the hours of service</li>
+                                        <li>Pick the date and time</li>
+                                        <li>Select the number of hours</li>
                                     </ul>
                                 </div>
                             </div>
                         </Col>
-                        <Col xs={12} sm={12} md={4}>
+                        <Col xs={12} sm={12} md={4} className="d-flex align-items-stretch">
                             <div className="inner-block">
                                 <div className="heading">
                                     <img src={arrivedNinja} alt="WorkFlow_icon"/>
                                 </div>
                                 <div className="body">
                                     <ul>
-                                        <li>Calculate the Fare of Ninja</li>
-                                        <li>Pay it wisely & Get Ninjafied</li>
+                                        <li>Pay your fare</li>
+                                        <li>Sit back, relax & Get Ninjafied!</li>
                                     </ul>
                                 </div>
                             </div>

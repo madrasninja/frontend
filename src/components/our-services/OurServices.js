@@ -72,8 +72,8 @@ class OurServices extends Component {
                     </Col>
                     <Col xs={12}>
                         <div className="text-center promotion">
-                            <h3 className="text-black-50">Here is the perfect service waiting for your request</h3>
-                            <Button color="primary" size="lg">Book Now</Button>
+                            <h3 className="text-black-50">Don't waste your quality time cleaning. Let us take care of it.</h3>
+                            <Button color="primary" size="lg">Book a Service</Button>
                         </div>
                     </Col>
                 </Row>

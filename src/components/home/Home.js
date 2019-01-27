@@ -18,8 +18,8 @@ class Home extends Component {
                 <Col xs={12} className="description">
                     <img src={sittingNinja} className="img" alt="icon"/><br/>
                     <hr/>
-                    Madras Ninja is the first of its kind cleaning services in Chennai that provides Hourly cleaning services. 
-                    Customers book expert home cleaners by just picking a time slot according to their convenience.
+                    Madras Ninja is the first-of-its-kind cleaning service provider in Chennai. We provide a multitude of cleaning services from home to office. 
+                    You just have to pick your available date and time according to your convenience to avail the service.
                 </Col>
                 <Col xs={12}>
                     <WorkFlow />

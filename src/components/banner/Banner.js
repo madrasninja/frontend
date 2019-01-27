@@ -10,12 +10,12 @@ class Banner extends Component {
             <div className="Banner">
                 <div className="content container">
                     <h2>
-                        Your complete cleaning destination
+                        One Stop Destination For All Your Cleaning Service Needs
                     </h2>
                     <p>
                         Home - Restroom - Kitchen - Office
                     </p>
-                    <Button color="primary">Book Now</Button>
+                    <Button color="primary">Book Your Service</Button>
                 </div>
             </div>
         );
