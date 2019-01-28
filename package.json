@@ -12,7 +12,7 @@
   "bugs": {
     "url": "https://github.com/madrasninja/frontend/issues"
   },
-  "homepage": "https://github.com/madrasninja/frontend#readme",
+  "homepage": "https://madrasninja.netlify.com/",
   "private": true,
   "dependencies": {
     "axios": "^0.18.0",
