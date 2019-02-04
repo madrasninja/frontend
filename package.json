@@ -12,7 +12,7 @@
   "bugs": {
     "url": "https://github.com/madrasninja/frontend/issues"
   },
-  "homepage": "https://github.com/madrasninja/frontend#readme",
+  "homepage": "https://madrasninja.netlify.com/",
   "private": true,
   "dependencies": {
     "axios": "^0.18.0",
@@ -34,7 +34,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build && cp build/index.html build/404.html",
+    "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
