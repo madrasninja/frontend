@@ -1,0 +1,8 @@
+.book {
+    padding: 3rem 0rem;
+}
+
+.book .heading {
+    font-weight: 300;
+    padding-bottom: 2rem; 
+}
