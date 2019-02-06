@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { BrowserRouter, Route, Redirect, Switch } from 'react-router-dom';
+import { connect } from "react-redux";
 
 import './App.css';
 import Header from './header/Header';
@@ -8,8 +9,15 @@ import Footer from './footer/Footer';
 import OurServices from './our-services/OurServices';
 import Dashboard from './dashboard/Dashboard';
 import Book from './book/Book';
+import { getServiceTypeList } from "./../services/ServiceTypeList";
+import { getLocalityList } from "./../services/LocalityList";
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+    props.getServiceTypeList();
+    props.getLocalityList();
+  }
   render() {
     return (
         <BrowserRouter>
@@ -31,4 +39,7 @@ class App extends Component {
   }
 }
 
-export default App;
+export default connect(null,{
+  getServiceTypeList,
+  getLocalityList
+})(App);

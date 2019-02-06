@@ -1,15 +1,18 @@
 import React, { Component } from "react";
 import { Row, Col } from "reactstrap";
+import { connect } from "react-redux";
 
 import standingNinja from "./../../assets/img/standing-ninja.png";
 import './Book.css';
 import ServiceForm from "./form";
+import { bookService } from "./../../services/BookService";
 
 class Book extends Component {
-    bookService(data) {
-        console.log(data);
+    bookaService(values) {
+        this.props.bookService(values);
     }
     render() {
+        console.log(this.props.formResponse)
         return (
             <Row className="book">
                 <Col xs={12}>
@@ -23,7 +26,7 @@ class Book extends Component {
                         <Col xs={12} sm={9} md={6}>
                             <h4 className="text-center font-weight-light">Fill up & get ninjafied</h4>
                             <hr/>
-                            <ServiceForm getValues={(values)=>this.bookService(values)}/>
+                            <ServiceForm getValues={(values)=>this.bookaService(values)}/>
                         </Col>
                     </Row>
                 </Col>
@@ -32,4 +35,12 @@ class Book extends Component {
     }
 }
 
-export default Book;
+function mapStateToProps(reduxData) {
+    return {
+        formResponse: reduxData.BookService
+    }
+}
+
+export default connect(mapStateToProps, {
+    bookService
+})(Book);

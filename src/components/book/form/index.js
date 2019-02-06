@@ -4,20 +4,41 @@ import {
     Field,
     reduxForm
 } from "redux-form";
+import { connect } from "react-redux";
+import _ from "lodash";
 
 class ServiceForm extends Component {
 
     generateInput(field) {
-        return (
-            <div>
-                <Input
-                    type={field.type}
-                    placeholder={field.placeholder}
-                    {...field.input}
-                />
-                <span className="text-danger">{field.meta.touched? field.meta.error:''}</span>
-            </div>
-        );
+        if (field.type === 'select') {
+            let optionList = _.map(field.list, (data, index)=> {
+                return (
+                    <option value={data[field.keyword]} key={index}>
+                        {data[field.label]}
+                    </option>
+                );
+            })
+            return(
+                <div>
+                    <Input type="select" disabled={field.disable} {...field.input}>
+                        <option value="">Select {field.placeholder}</option>
+                        {optionList}
+                    </Input>
+                    <span className="text-danger">{field.meta.error}</span>
+                </div>
+            )
+        } else {
+            return (
+                <div>
+                    <Input
+                        type={field.type}
+                        placeholder={field.placeholder}
+                        {...field.input}
+                    />
+                    <span className="text-danger">{field.meta.touched? field.meta.error:''}</span>
+                </div>
+            );
+        }
     }
 
     render() {
@@ -26,8 +47,30 @@ class ServiceForm extends Component {
                 <Form onSubmit={this.props.handleSubmit(this.props.getValues.bind(this))} >
                     <FormGroup>
                         <Field
+                            placeholder="Select Service"
+                            name="Service_ID"
+                            list={this.props.serviceTypeList.data}
+                            keyword="_id"
+                            label="name"
+                            type="select"
+                            component={this.generateInput}
+                        />
+                    </FormGroup>
+                    <FormGroup>
+                        <Field
+                            placeholder="Select Locality"
+                            name="Locality_ID"
+                            list={this.props.localityList.data}
+                            keyword="_id"
+                            label="name"
+                            type="select"
+                            component={this.generateInput}
+                        />
+                    </FormGroup>
+                    <FormGroup>
+                        <Field
                             placeholder="Enter your Firstname"
-                            name="firstname"
+                            name="First_Name"
                             type="text"
                             component={this.generateInput}
                         />
@@ -35,8 +78,40 @@ class ServiceForm extends Component {
                     <FormGroup>
                         <Field
                             placeholder="Enter your Lastname"
-                            name="lastname"
+                            name="Last_Name"
                             type="text"
+                            component={this.generateInput}
+                        />
+                    </FormGroup>
+                    <FormGroup>
+                        <Field
+                            placeholder="Address"
+                            name="Address"
+                            type="textarea"
+                            component={this.generateInput}
+                        />
+                    </FormGroup>
+                    <FormGroup>
+                        <Field
+                            placeholder="Enter Mobile Number"
+                            name="Mobile_Number"
+                            type="number"
+                            component={this.generateInput}
+                        />
+                    </FormGroup>
+                    <FormGroup>
+                        <Field
+                            placeholder="Enter Alternate Mobile Number"
+                            name="Alternate_Mobile_Number"
+                            type="number"
+                            component={this.generateInput}
+                        />
+                    </FormGroup>
+                    <FormGroup>
+                        <Field
+                            placeholder="Enter your Email ID"
+                            name="Email_Id"
+                            type="email"
                             component={this.generateInput}
                         />
                     </FormGroup>
@@ -49,7 +124,14 @@ class ServiceForm extends Component {
     }
 }
 
+function mapStateToProps(reduxData) {
+    return {
+        serviceTypeList: reduxData.ServiceTypeList,
+        localityList: reduxData.LocalityList
+    }
+}
+
 export default reduxForm({
     form: 'serviceForm',
     enableReinitialize: true
-})(ServiceForm)
+})(connect(mapStateToProps, {})(ServiceForm))
