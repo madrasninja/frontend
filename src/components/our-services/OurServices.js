@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Row, Col, Button } from "reactstrap";
 import _ from "lodash";
+import { Link } from "react-router-dom";
 
 import homeCleaning from './../../assets/img/home-cleaning.jpg';
 import kitchenCleaning from './../../assets/img/kitchen-cleaning.jpg';
@@ -73,7 +74,7 @@ class OurServices extends Component {
                     <Col xs={12}>
                         <div className="text-center promotion">
                             <h3 className="text-black-50">Don't waste your quality time cleaning. Let us take care of it.</h3>
-                            <Button color="primary" size="lg">Book a Service</Button>
+                            <Link to='/book'><Button color="primary" size="lg">Book a Service</Button></Link>
                         </div>
                     </Col>
                 </Row>

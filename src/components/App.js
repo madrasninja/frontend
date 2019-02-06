@@ -7,6 +7,7 @@ import Home from './home/Home';
 import Footer from './footer/Footer';
 import OurServices from './our-services/OurServices';
 import Dashboard from './dashboard/Dashboard';
+import Book from './book/Book';
 
 class App extends Component {
   render() {
@@ -19,6 +20,7 @@ class App extends Component {
               <Route path='/' exact component={Home} />
               <Route path='/services' component={OurServices} />
               <Route path='/dashboard' component={Dashboard} />
+              <Route path='/book' component={Book} />
               <Redirect to='/' />
             </Switch>
             </section>

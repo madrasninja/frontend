@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Button } from "reactstrap";
+import { Link } from "react-router-dom";
 
 import './Banner.css';
 
@@ -15,7 +16,7 @@ class Banner extends Component {
                     <p>
                         Home - Restroom - Kitchen - Office
                     </p>
-                    <Button color="primary">Book Your Service</Button>
+                    <Link to='/book'><Button color="primary">Book Your Service</Button></Link>
                 </div>
             </div>
         );
