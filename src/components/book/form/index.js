@@ -58,6 +58,26 @@ class ServiceForm extends Component {
                     </FormGroup>
                     <FormGroup>
                         <Field
+                            placeholder="Select Date"
+                            name="serviceDate"
+                            type="date"
+                            component={this.generateInput}
+                        />
+                        <Field
+                            placeholder="Select Time"
+                            name="serviceTime"
+                            type="time"
+                            component={this.generateInput}
+                        />
+                        <Field
+                            placeholder="Select Hours"
+                            name="ServiceHours"
+                            type="number"
+                            component={this.generateInput}
+                        />
+                    </FormGroup>
+                    <FormGroup>
+                        <Field
                             placeholder="Select Locality"
                             name="Locality_ID"
                             list={this.props.localityList.data}

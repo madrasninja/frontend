@@ -9,10 +9,10 @@ import { bookService } from "./../../services/BookService";
 
 class Book extends Component {
     bookaService(values) {
-        this.props.bookService(values);
+        console.log(values)
+        // this.props.bookService(values);
     }
     render() {
-        console.log(this.props.formResponse)
         return (
             <Row className="book">
                 <Col xs={12}>
