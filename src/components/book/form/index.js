@@ -71,7 +71,7 @@ class ServiceForm extends Component {
                         />
                         <Field
                             placeholder="Select Hours"
-                            name="ServiceHours"
+                            name="serviceHours"
                             type="number"
                             component={this.generateInput}
                         />

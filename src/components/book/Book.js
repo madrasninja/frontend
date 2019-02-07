@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Row, Col } from "reactstrap";
 import { connect } from "react-redux";
+import moment from 'moment';
 
 import standingNinja from "./../../assets/img/standing-ninja.png";
 import './Book.css';
@@ -9,8 +10,11 @@ import { bookService } from "./../../services/BookService";
 
 class Book extends Component {
     bookaService(values) {
-        console.log(values)
-        // this.props.bookService(values);
+        values.Session_Time = {
+            From: values.serviceDate + values.serviceTime,
+            To: moment(values.serviceDate).hours(values.serviceTime.split(':')[0]).minutes(values.serviceTime.split(':')[1]).add(values.serviceHours, 'h').format('YYYY-MM-DDHH:mm')
+        }
+        this.props.bookService(values);
     }
     render() {
         return (
