@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import {  Form, FormGroup, Input, Button } from "reactstrap";
+import { Row, Col, Form, FormGroup, Input, Button } from "reactstrap";
 import {
     Field,
     reduxForm
@@ -47,8 +47,8 @@ class ServiceForm extends Component {
                 <Form onSubmit={this.props.handleSubmit(this.props.getValues.bind(this))} >
                     <FormGroup>
                         <Field
-                            placeholder="Select Service"
-                            name="Service_ID"
+                            placeholder="Service"
+                            name="Service_Type_ID"
                             list={this.props.serviceTypeList.data}
                             keyword="_id"
                             label="name"
@@ -58,27 +58,35 @@ class ServiceForm extends Component {
                     </FormGroup>
                     <FormGroup>
                         <Field
-                            placeholder="Select Date"
+                            placeholder="Date"
                             name="serviceDate"
                             type="date"
                             component={this.generateInput}
                         />
-                        <Field
-                            placeholder="Select Time"
-                            name="serviceTime"
-                            type="time"
-                            component={this.generateInput}
-                        />
-                        <Field
-                            placeholder="Select Hours"
-                            name="ServiceHours"
-                            type="number"
-                            component={this.generateInput}
-                        />
+                    </FormGroup>
+                    <FormGroup>
+                        <Row>
+                            <Col xs={7}>
+                                <Field
+                                    placeholder="Time"
+                                    name="serviceTime"
+                                    type="time"
+                                    component={this.generateInput}
+                                />
+                            </Col>
+                            <Col xs={5} style={{paddingLeft: '0px'}}>
+                                <Field
+                                    placeholder="Hours"
+                                    name="ServiceHours"
+                                    type="number"
+                                    component={this.generateInput}
+                                />
+                            </Col>
+                        </Row>
                     </FormGroup>
                     <FormGroup>
                         <Field
-                            placeholder="Select Locality"
+                            placeholder="Locality"
                             name="Locality_ID"
                             list={this.props.localityList.data}
                             keyword="_id"
@@ -89,7 +97,7 @@ class ServiceForm extends Component {
                     </FormGroup>
                     <FormGroup>
                         <Field
-                            placeholder="Enter your Firstname"
+                            placeholder="Firstname"
                             name="First_Name"
                             type="text"
                             component={this.generateInput}
@@ -97,7 +105,7 @@ class ServiceForm extends Component {
                     </FormGroup>
                     <FormGroup>
                         <Field
-                            placeholder="Enter your Lastname"
+                            placeholder="Lastname"
                             name="Last_Name"
                             type="text"
                             component={this.generateInput}
@@ -113,7 +121,7 @@ class ServiceForm extends Component {
                     </FormGroup>
                     <FormGroup>
                         <Field
-                            placeholder="Enter Mobile Number"
+                            placeholder="Mobile Number"
                             name="Mobile_Number"
                             type="number"
                             component={this.generateInput}
@@ -121,7 +129,7 @@ class ServiceForm extends Component {
                     </FormGroup>
                     <FormGroup>
                         <Field
-                            placeholder="Enter Alternate Mobile Number"
+                            placeholder="Alternate Mobile Number"
                             name="Alternate_Mobile_Number"
                             type="number"
                             component={this.generateInput}
@@ -129,7 +137,7 @@ class ServiceForm extends Component {
                     </FormGroup>
                     <FormGroup>
                         <Field
-                            placeholder="Enter your Email ID"
+                            placeholder="Email ID"
                             name="Email_Id"
                             type="email"
                             component={this.generateInput}
