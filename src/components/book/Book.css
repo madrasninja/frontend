@@ -8,16 +8,18 @@
 }
 
 .book .ninja {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     border-right: 1px solid #dfdfdf;
 }
 
 .book .ninja img {
-    padding: 6rem;
-    width: 100%;
+    width: 50%;
 }
 
 .book .booking-form {
-    padding: 2rem 5rem;
+    /* padding: 2rem 5rem; */
 }
 
 .book .booking-form .form-control {
