@@ -1,4 +1,4 @@
 /* /index.html 200
 
 # Redirect default Netlify subdomain to primary domain
-http://madrasninja.netlify.com/* http://dev.madrasninja.com/:splat 301!
+# http://madrasninja.netlify.com/* http://dev.madrasninja.com/:splat 301!
