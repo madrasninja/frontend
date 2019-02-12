@@ -1,0 +1,34 @@
+.OurServices {
+    padding: 3rem 0rem;
+
+
+    .heading {
+        font-weight: 300;
+        padding-bottom: 2rem;
+    }
+
+    .service-card {
+        padding: 0.5rem;
+    }
+
+    .service-card .img-block {
+        height: 10rem;
+        width: 100%;
+        background-size: cover;
+        margin-bottom: 1rem;
+    }
+
+    .service-card h4 {
+        text-align: center;
+        font-weight: 300;
+    }
+
+    .promotion {
+        padding: 3rem 0rem;
+    }
+
+    .promotion h3 {
+        font-weight: 300;
+        padding-bottom: 1rem;
+    }
+}

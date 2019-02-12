@@ -1,0 +1,33 @@
+.book {
+    padding: 3rem 0rem;
+    
+    .heading {
+        font-weight: 300;
+        padding-bottom: 2rem; 
+    }
+
+    .ninja {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-right: 1px solid #dfdfdf;
+        
+        img {
+            width: 50%;
+        }
+    }
+
+    .booking-form {
+        .form-control {
+            /* border: none; */
+            border-color: #eee;
+            /* border-radius: 0px; */
+            background-color: #eee;
+            
+            &:focus {
+                box-shadow: none;
+                border-color: #5dd1ff;
+            }
+        }
+    }
+}

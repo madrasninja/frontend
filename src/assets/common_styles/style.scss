@@ -1,0 +1,41 @@
+@font-face {
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 400;
+    src: url('../fonts/opensans-regular/OpenSans-Regular.eot');
+    src: local('Open Sans'),
+        local('Open Sans'),
+        url('../fonts/opensans-regular/OpenSans-Regular.eot#iefix') format('embedded-opentype'),
+        url('../fonts/opensans-regular/OpenSans-Regular.woff2') format('woff2'),
+        url('../fonts/opensans-regular/OpenSans-Regular.woff') format('woff'),
+        url('../fonts/opensans-regular/OpenSans-Regular.ttf') format('truetype');
+}
+
+body {
+    font-family: 'Open Sans';
+    margin: 0;
+    padding: 0;
+}
+
+section {
+    margin-top: 82px;
+}
+
+.btn {
+    border: none !important;
+    border-radius: 0px !important;
+}
+
+.btn-primary {
+    background-color: #00aeef;
+
+    &:hover {
+        background-color: #0096ce;
+    }
+}
+
+@media (min-width: 1600px) {
+    .container {
+        max-width: 1280px;
+    }
+}
