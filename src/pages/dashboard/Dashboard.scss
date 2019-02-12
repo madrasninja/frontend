@@ -1,14 +1,22 @@
 .dashboard {
 
     .heading {
-        background-color: #535353;
+        background-color: #dddddd;
         padding: 2rem 0rem;
-        color: #FFFFFF;
+        color: #000000;
         margin-bottom: 2rem;
 
         h3 {
             font-weight: 300;
             text-align: center;
+        }
+    }
+
+    .content {
+        padding-bottom: 4rem;
+        
+        .card {
+            margin-bottom: 1.5rem;
         }
     }
 }

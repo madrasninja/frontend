@@ -11,6 +11,7 @@ import {
 import ServiceTypeList from "../services/ServiceTypeList/reducer";
 import LocalityList from "../services/LocalityList/reducer";
 import BookService from "../services/BookService/reducer";
+import BookingList from "../services/BookingList/reducer";
 
 /**
  * combineReducers is simply a utility function to simplify the most common use case when writing Redux reducers.
@@ -20,7 +21,8 @@ const rootReducer = combineReducers({
     form: formReducer,
     ServiceTypeList,
     LocalityList,
-    BookService
+    BookService,
+    BookingList
 });
 
 /**

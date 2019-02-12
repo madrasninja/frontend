@@ -77,7 +77,7 @@ class ServiceForm extends Component {
                             <Col xs={5} style={{paddingLeft: '0px'}}>
                                 <Field
                                     placeholder="Hours"
-                                    name="ServiceHours"
+                                    name="serviceHours"
                                     type="number"
                                     component={this.generateInput}
                                 />
