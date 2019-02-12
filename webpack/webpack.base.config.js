@@ -1,5 +1,6 @@
 const path = require('path');
 const webpack = require('webpack');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
     entry: {
@@ -50,6 +51,11 @@ module.exports = {
         modules: [path.resolve(__dirname, '../src'), 'node_modules'], // used to make use of absolute import
         extensions: ['*', '.js', '.jsx', '.json'],
     },
+    plugins: [
+        new HtmlWebpackPlugin({
+            template: 'index.html'
+        })
+    ]
 };
 
 // Note: In production check sass-loader once.
