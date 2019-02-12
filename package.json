@@ -15,7 +15,7 @@
   "homepage": "https://madrasninja.netlify.com/",
   "scripts": {
     "start": "webpack-dev-server --hot --config ./webpack/webpack.dev.config.js",
-    "build": "webpack --config ./webpack/webpack.prod.config.js"
+    "build": "webpack --config ./webpack/webpack.prod.config.js && cp index.html dist/index.html"
   },
   "dependencies": {
     "@babel/polyfill": "^7.2.5",
