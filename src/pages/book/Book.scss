@@ -18,13 +18,21 @@
     }
 
     .booking-form {
+        .p-float-label {
+            label {
+                padding: 0rem 0.5rem
+            }
+        }
+        .form-group {
+            margin-top: 1.2rem;
+        }
         .form-control {
             /* border: none; */
             border-color: #eee;
             /* border-radius: 0px; */
             background-color: #eee;
             
-            &:focus {
+            &:focus, &:hover {
                 box-shadow: none;
                 border-color: #5dd1ff;
             }

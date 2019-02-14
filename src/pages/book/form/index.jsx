@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Row, Col, Form, FormGroup, Input, Button } from "reactstrap";
+import {InputText} from 'primereact/inputtext';
 import {
     Field,
     reduxForm
@@ -35,6 +36,10 @@ class ServiceForm extends Component {
                         placeholder={field.placeholder}
                         {...field.input}
                     />
+                    {/* <span className="p-float-label">
+                        <InputText className="form-control" id="in" type={field.type} {...field.input}/>
+                        <label htmlFor="in">{field.placeholder}</label>
+                    </span> */}
                     <span className="text-danger">{field.meta.touched? field.meta.error:''}</span>
                 </div>
             );

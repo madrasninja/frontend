@@ -48,7 +48,7 @@ class Dashboard extends Component {
                         </CardBody>
                         <CardFooter>
                             {data.ID}
-                            <Button color="primary" sm className="float-right">Assign</Button>
+                            <Button color="primary" size="sm" className="float-right">Assign</Button>
                         </CardFooter>
                     </Card>
                 </Col>

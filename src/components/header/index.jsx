@@ -51,10 +51,13 @@ class Header extends Component {
                                     <Link to="/services" className="nav-link">Our Services</Link>
                                 </NavItem>
                                 <NavItem>
+                                    <Link to="/labour" className="nav-link">Labour Management</Link>
+                                </NavItem>
+                                <NavItem>
                                     <NavLink href="tel:+919360933933">+91 9360933933</NavLink>
                                 </NavItem>
                                 <NavItem>
-                                    <Link to="/" className="nav-link">
+                                    <Link to="/dashboard" className="nav-link">
                                         <span className="login-btn">LOGIN</span>
                                     </Link>
                                 </NavItem>
