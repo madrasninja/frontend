@@ -1,28 +1,60 @@
 import React, { Component } from "react";
-import { Row, Col } from "reactstrap";
+import { Route, Link, Switch, Redirect } from "react-router-dom";
+import {
+    Row, Col, Collapse,
+    Navbar,
+    NavbarToggler,
+    NavbarBrand,
+    Nav,
+    NavItem,
+    NavLink,
+} from "reactstrap";
 
+import AddLabour from './add';
+import LabourHome from "./home";
 import './Labour.scss';
 
 class Labour extends Component {
-    
+    constructor() {
+        super()
+        this.toggle = this.toggle.bind(this);
+        this.state = {
+            isOpen: false
+        };
+    }
+
+    toggle() {
+        this.setState({
+            isOpen: !this.state.isOpen
+        });
+    }
+
     render() {
         return (
             <Row className="labour">
+                <Col xs={12} className="header">
+                    <Navbar color="light" light expand="md">
+                        <Link to="/labour/home">
+                            <NavbarBrand>
+                                Labour Management
+                            </NavbarBrand>
+                        </Link>
+                        <NavbarToggler onClick={this.toggle} />
+                        <Collapse isOpen={this.state.isOpen} navbar>
+                            <Nav className="ml-auto" navbar>
+                                <NavItem>
+                                    <Link to="/labour/add" className="nav-link">Add</Link>
+                                </NavItem>
+                            </Nav>
+                        </Collapse>
+                    </Navbar>
+                </Col>
                 <Col xs={12}>
-                    <Row>
-                        <Col xs={6} md={4} className="text-center text-uppercase" >
-                            <h1>5</h1>
-                            <p>New</p>
-                        </Col>
-                        <Col xs={6} md={4} className="text-center text-uppercase" >
-                            <h1>15</h1>
-                            <p>Pending</p>
-                        </Col>
-                        <Col xs={6} md={4} className="text-center text-uppercase" >
-                            <h1>51</h1>
-                            <p>Verified</p>
-                        </Col>
-                    </Row>
+                    <Switch>
+                        <Route path='/labour/add' component={AddLabour} />
+                        <Route path='/labour/home' component={LabourHome} />
+                        <Redirect to='/labour/home' />
+                    </Switch>
                 </Col>
             </Row>
         );

@@ -7,7 +7,7 @@ import standingNinja from "./../../assets/img/standing-ninja.png";
 import './Book.scss';
 import ServiceForm from "./form";
 import { bookService } from "./../../services/BookService";
-import Notifier from "../../components/notifier/Notifier";
+import Notifier from "../../components/notifier";
 
 class Book extends Component {
     constructor(props) {
@@ -20,8 +20,8 @@ class Book extends Component {
     bookaService(values) {
         let session = moment(values.serviceDate).set({'hours': values.serviceTime.split(':')[0], 'minutes': values.serviceTime.split(':')[1]});
         values.Session_Time = {
-            From: session.format('DD/MM/YYYY hh:mm a'),
-            To: session.add(values.serviceHours, 'h').format('DD/MM/YYYY hh:mm a')
+            From: session.format('DD/MM/YYYY hh:mm'),
+            To: session.add(values.serviceHours, 'h').format('DD/MM/YYYY hh:mm')
         }
         this.props.bookService(values);
     }

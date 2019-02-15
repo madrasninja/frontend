@@ -26,7 +26,7 @@ class Dashboard extends Component {
     }
 
     findDiff(from, to) {
-        return moment(to, 'DD/MM/YYYY hh:mm a').diff(moment(from, 'DD/MM/YYYY hh:mm a'), 'hours')
+        return moment(to, 'DD/MM/YYYY hh:mm').diff(moment(from, 'DD/MM/YYYY hh:mm'), 'hours')
     }
 
     renderList(list) {
@@ -35,13 +35,15 @@ class Dashboard extends Component {
             return (
                 <Col xs={12} sm={6} md={4} key={index}>
                     <Card>
-                        <CardHeader className="text-center">
-                            {hour} {hour > 1 ? 'Hours': 'Hour'}<br/>
-                            {data.service_type.name} at {data.locality.name}
-                        </CardHeader>
                         <CardBody>
-                            <CardTitle className="text-capitalize">{data.user.First_Name} {data.user.Last_Name}</CardTitle>
-                            <CardText>
+                            <CardTitle className="">
+                                {data.service_type.name} at {data.locality.name}<br/>
+                                <small>{moment(data.Session_Time.From, 'DD/MM/YYYY hh:mm').format('hh:mmA DD/MM/YYYY')} - {hour} {hour > 1 ? 'Hours' : 'Hour'}</small>
+                            </CardTitle>
+                            <CardText className="text-black-50">
+                                <span className="text-capitalize">
+                                    {data.user.First_Name} {data.user.Last_Name} 
+                                </span><br/>
                                 {data.Address}<br/>
                                 {data.user.Mobile_Number}
                             </CardText>

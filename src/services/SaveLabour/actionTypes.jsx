@@ -1,0 +1,3 @@
+export const REQ = 'SAVE_LABOUR_SERVICE_REQ';
+export const RES = 'SAVE_LABOUR_SERVICE_RES';
+export const FAIL = 'SAVE_LABOUR_SERVICE_FAIL';
