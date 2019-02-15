@@ -1,9 +1,12 @@
 .labour {
     padding: 0rem 0rem 4rem;
+    min-height: 50vh;
     .header{
         margin-bottom: 1rem;
     }
     .stats {
-        min-height: 50vh;
+        p {
+            color: #aaaaaa;
+        }
     }
 }

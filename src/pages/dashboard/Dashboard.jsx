@@ -62,7 +62,7 @@ class Dashboard extends Component {
         return (
             <Row className="dashboard">
                 <Col xs={12} className="heading">
-                    <h3>Hi, Charles</h3>
+                    <h3>Bookings</h3>
                 </Col>
                 <Col xs={12} className="content">
                     <Row>

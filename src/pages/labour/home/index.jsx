@@ -1,25 +1,69 @@
 import React, { Component } from "react";
-import { Row, Col } from "reactstrap";
+import { connect } from "react-redux";
+import { Row, Col, Card, CardBody, CardTitle, CardText, CardFooter, Button } from "reactstrap";
+import _ from "lodash";
+import moment from "moment";
+
+import { getLabourList } from "./../../../services/LabourList";
 
 class LabourHome extends Component {
+
+    constructor(props) {
+        super(props);
+        props.getLabourList();
+    }
+
+    renderList(list) {
+        if (list.data) {
+            return _.map(list.data, (data, index) => {
+                return (
+                    <Col xs={12} sm={6} md={4} key={index}>
+                        <Card>
+                            <CardBody>
+                                <CardTitle className="">
+                                    <span className="text-capitalize">
+                                        {data.First_Name} {data.Last_Name}
+                                    </span>
+                                    <br />
+                                    <small>{moment(data.Service_Time.From, 'hh:mm').format('hh:mmA')} - {moment(data.Service_Time.To, 'hh:mm').format('hh:mmA')}</small>
+                                </CardTitle>
+                                <CardText className="text-black-50">
+                                    {data.service_type.name} at {data.locality.name}<br />
+                                    {data.Mobile_Number}
+                                </CardText>
+                            </CardBody>
+                            <CardFooter>
+                                <Button className="float-right" color="primary" size="sm">Update</Button>
+                            </CardFooter>
+                        </Card>
+                    </Col>
+                )
+            })
+        }
+    }
 
     render() {
         return (
             <Row>
                 <Col xs={12} className="stats">
                     <Row>
-                        <Col xs={6} md={4} className="text-center text-uppercase" >
-                            <h1>5</h1>
+                        <Col xs={12} md={4} className="text-center text-uppercase" >
+                            <h1>2</h1>
                             <p>New</p>
                         </Col>
-                        <Col xs={6} md={4} className="text-center text-uppercase" >
-                            <h1>15</h1>
+                        <Col xs={12} md={4} className="text-center text-uppercase" >
+                            <h1>6</h1>
                             <p>Pending for verification</p>
                         </Col>
-                        <Col xs={6} md={4} className="text-center text-uppercase" >
-                            <h1>51</h1>
+                        <Col xs={12} md={4} className="text-center text-uppercase" >
+                            <h1>12</h1>
                             <p>Verified</p>
                         </Col>
+                    </Row>
+                </Col>
+                <Col xs={12}>
+                    <Row>
+                        {this.renderList(this.props.labourList)}
                     </Row>
                 </Col>
             </Row>
@@ -27,4 +71,8 @@ class LabourHome extends Component {
     }
 }
 
-export default LabourHome;
+export default connect((reduxData) => {
+    return {
+        labourList: reduxData.LabourList
+    }
+}, { getLabourList })(LabourHome);

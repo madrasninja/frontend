@@ -33,7 +33,7 @@ class Labour extends Component {
         return (
             <Row className="labour">
                 <Col xs={12} className="header">
-                    <Navbar color="light" light expand="md">
+                    <Navbar color="transparent" light expand="md">
                         <Link to="/labour/home">
                             <NavbarBrand>
                                 Labour Management

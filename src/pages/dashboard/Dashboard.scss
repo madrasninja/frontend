@@ -15,18 +15,5 @@
 
     .content {
         padding-bottom: 4rem;
-        
-        .card {
-            border-radius: 0px;
-            margin-bottom: 1.5rem;
-            border: none;
-            border-bottom: 4px solid #eee;
-            &:hover {
-                border-bottom-color: #ddd;
-            }
-            .card-footer {
-                background-color: transparent; 
-            }
-        }
     }
 }

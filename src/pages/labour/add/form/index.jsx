@@ -108,14 +108,14 @@ class AddForm extends Component {
                             component={this.generateInput}
                         />
                     </FormGroup>
-                    <FormGroup>
+                    {/* <FormGroup>
                         <Field
                             placeholder="Address"
                             name="Address"
                             type="textarea"
                             component={this.generateInput}
                         />
-                    </FormGroup>
+                    </FormGroup> */}
                     <FormGroup>
                         <Field
                             placeholder="Mobile Number"
