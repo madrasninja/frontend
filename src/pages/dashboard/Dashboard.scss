@@ -1,19 +1,18 @@
 .dashboard {
+  .heading {
+    padding: 2rem 0rem;
+    color: #000000;
+    padding-bottom: 2rem;
+    border-bottom: 2px solid #eee;
+    margin-bottom: 1rem;
 
-    .heading {
-        padding: 2rem 0rem;
-        color: #000000;
-        padding-bottom: 2rem;
-        border-bottom: 2px solid #eee;
-        margin-bottom: 1rem;
-
-        h3 {
-            font-weight: 300;
-            text-align: center;
-        }
+    h3 {
+      font-weight: 300;
+      text-align: center;
     }
+  }
 
-    .content {
-        padding-bottom: 4rem;
-    }
+  .content {
+    padding-bottom: 4rem;
+  }
 }

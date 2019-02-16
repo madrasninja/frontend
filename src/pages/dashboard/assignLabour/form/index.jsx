@@ -1,30 +1,36 @@
 import React, { Component } from 'react';
 import { Field, reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
-import { ModalBody, ModalFooter, Button, Spinner } from 'reactstrap';
+import { ModalBody, ModalFooter, Button, Spinner, Alert } from 'reactstrap';
 import axios from 'axios';
 
 import { getLabourForBooking } from '../../../../services/LabourListForBooking/index'
+import './style.scss'
 
 class AssignLabourForm extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            spinners: false
+            spinners: false,
+            alertMessageToggle: false,
+            alertMessage: {
+                color: '',
+                message: ''
+            }
         }
     }
-    
+
     componentDidMount() {
         this.props.getLabourForBooking(this.props.bookingId);
     }
 
-    renderField(field) {
+    renderField = field => {
         const { meta: { touched, error } } = field;
         const className = `form-group row ${touched && error ? 'is-invalid' : ''}`
 
         if (field.type == 'dropdownValue') {
             let optionList = _.map(field.list, (data, index) => {
-                return <option key={index} value={data[field._id]}>{data[field.displayName]}</option>;
+                return <option key={index} value={data[field.id]}>{`${data[field.firstName]}  ${data[field.lastName]}`}</option>;
             })
             return (
                 <div className={className}>
@@ -44,41 +50,56 @@ class AssignLabourForm extends Component {
     }
 
     submitForm(values) {
-        // let reqInput = {
-        //     Booking_ID: this.props.bookingId,
-        //     Labour_ID: values._id
-        // }
+        const { bookingId } = this.props;
 
-        // this.setState({ spinners: true })
-        // Axios
-        //     .post('http://api.madrasninja.com/assignlabour', reqInput)
-        //     .then((response) => {
-        //         this.setState({ spinners: false, alertMessage: true, alertMessage: response.data.message })
-        //     })
-        //     .catch((error) => {
-        //         this.setState({ spinners: false, alertMessage: true })
+        let reqInput = {
+            Booking_ID: bookingId,
+            Labour_ID: values.Labour_ID
+        }
 
-        //     })
+        this.setState({ spinners: true })
+        axios
+            .post('http://api.madrasninja.com/assignlabour', reqInput)
+            .then((response) => {
+                this.setState({
+                    spinners: false,
+                    alertMessageToggle: true,
+                    alertMessage: { color: 'success', message: response.data.message }
+                });
+                this.props.reset();
+            })
+            .catch((error) => {
+                this.setState({
+                    spinners: false,
+                    alertMessageToggle: true,
+                    alertMessage: { color: 'danger', message: 'Oops! something went wrong try again.' }
+                })
+            })
     }
 
     render() {
         const { handleSubmit, reset, pristine, submitting, labourListForBooking } = this.props;
-        const { spinners } = this.state;
+        const { spinners, alertMessage, alertMessageToggle } = this.state;
 
         return (
-            <div>
+            <div className='labourAssignForm'>
                 <ModalBody>
                     <form >
                         <Field
                             label="Choose Labour"
                             type="dropdownValue" //api
-                            id='id'
-                            displayName='name'
+                            id='_id'
+                            firstName='First_Name'
+                            lastName='Last_Name'
                             name="Labour_ID"
                             list={labourListForBooking.data}
                             component={this.renderField}
                         />
+
+                        {alertMessageToggle ? <Alert color={alertMessage.color} className='alertWrap text-center'> {alertMessage.message}</Alert> : null}
+
                     </form >
+
                 </ModalBody>
 
                 <ModalFooter>
