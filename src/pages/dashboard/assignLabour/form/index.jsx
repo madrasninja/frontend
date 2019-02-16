@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import { Field, reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
 import { ModalBody, ModalFooter, Button, Spinner } from 'reactstrap';
+import axios from 'axios';
 
 import { getLabourForBooking } from '../../../../services/LabourListForBooking/index'
-import Axios from 'axios';
 
 class AssignLabourForm extends Component {
     constructor(props) {
@@ -13,6 +13,7 @@ class AssignLabourForm extends Component {
             spinners: false
         }
     }
+    
     componentDidMount() {
         this.props.getLabourForBooking(this.props.bookingId);
     }
@@ -28,7 +29,7 @@ class AssignLabourForm extends Component {
             return (
                 <div className={className}>
                     <label className="col-sm-12 col-form-label col-form-label-sm text-center">{field.label}</label>
-                    <div className='col-sm-12 text-center'>
+                    <div className='offset-sm-1 col-sm-10 text-center'>
                         <select className="form-control form-control-sm" {...field.input}>
                             <option value="">Select</option>
                             {optionList}
@@ -43,21 +44,21 @@ class AssignLabourForm extends Component {
     }
 
     submitForm(values) {
-        let reqInput = {
-            Booking_ID: this.props.bookingId,
-            Labour_ID: values._id
-        }
+        // let reqInput = {
+        //     Booking_ID: this.props.bookingId,
+        //     Labour_ID: values._id
+        // }
 
-        this.setState({ spinners: true })
-        Axios
-            .post('http://api.madrasninja.com/assignlabour', reqInput)
-            .then((response) => {
-                this.setState({ spinners: false, alertMessage: true, alertMessage: response.data.message })
-            })
-            .catch((error) => {
-                this.setState({ spinners: false, alertMessage: true })
+        // this.setState({ spinners: true })
+        // Axios
+        //     .post('http://api.madrasninja.com/assignlabour', reqInput)
+        //     .then((response) => {
+        //         this.setState({ spinners: false, alertMessage: true, alertMessage: response.data.message })
+        //     })
+        //     .catch((error) => {
+        //         this.setState({ spinners: false, alertMessage: true })
 
-            })
+        //     })
     }
 
     render() {
