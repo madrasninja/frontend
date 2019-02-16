@@ -10,6 +10,12 @@ import _ from "lodash";
 
 class ServiceForm extends Component {
 
+    state = {
+        required : value => value ? undefined : 'Required',
+        number : value => value && isNaN(Number(value)) ? 'Must be a number' : undefined,
+        mobile_number: value => value && value.length < 10 ? 'Enter valid number' : undefined
+    }
+
     generateInput(field) {
         if (field.type === 'select') {
             let optionList = _.map(field.list, (data, index)=> {
@@ -21,11 +27,18 @@ class ServiceForm extends Component {
             })
             return(
                 <div>
-                    <Input type="select" disabled={field.disable} {...field.input}>
+                    <Input type="select" disabled={field.disable} className={field.meta.touched && field.meta.error? 'input-error' : ''} {...field.input}>
                         <option value="">Select {field.placeholder}</option>
                         {optionList}
                     </Input>
-                    <span className="text-danger">{field.meta.error}</span>
+                    {
+                        field.meta.error && field.meta.touched ? 
+                            <div className="error">
+                                    <span className="icon">!</span>
+                                    <span className="message">{field.meta.error}</span>
+                                </div>
+                            : ''
+                    }
                 </div>
             )
         } else {
@@ -35,18 +48,27 @@ class ServiceForm extends Component {
                         type={field.type}
                         placeholder={field.placeholder}
                         {...field.input}
+                        className={field.meta.touched && field.meta.error ? 'input-error' : ''}
                     />
                     {/* <span className="p-float-label">
                         <InputText className="form-control" id="in" type={field.type} {...field.input}/>
                         <label htmlFor="in">{field.placeholder}</label>
                     </span> */}
-                    <span className="text-danger">{field.meta.touched? field.meta.error:''}</span>
+                    {
+                        field.meta.error && field.meta.touched ?
+                            <div className="error">
+                                    <span className="icon">!</span>
+                                    <span className="message">{field.meta.error}</span>
+                                </div>
+                            : ''
+                    }
                 </div>
             );
         }
     }
 
     render() {
+        let { required, number, mobile_number} = this.state;
         return(
             <div className="booking-form">
                 <Form onSubmit={this.props.handleSubmit(this.props.getValues.bind(this))} >
@@ -59,6 +81,7 @@ class ServiceForm extends Component {
                             label="name"
                             type="select"
                             component={this.generateInput}
+                            validate={[required]}
                         />
                     </FormGroup>
                     <FormGroup>
@@ -67,6 +90,7 @@ class ServiceForm extends Component {
                             name="serviceDate"
                             type="date"
                             component={this.generateInput}
+                            validate={[required]}
                         />
                     </FormGroup>
                     <FormGroup>
@@ -77,14 +101,16 @@ class ServiceForm extends Component {
                                     name="serviceTime"
                                     type="time"
                                     component={this.generateInput}
+                                    validate={[required]}
                                 />
                             </Col>
                             <Col xs={5} style={{paddingLeft: '0px'}}>
                                 <Field
                                     placeholder="Hours"
                                     name="serviceHours"
-                                    type="number"
+                                    type="text"
                                     component={this.generateInput}
+                                    validate={[required, number]}
                                 />
                             </Col>
                         </Row>
@@ -98,6 +124,7 @@ class ServiceForm extends Component {
                             label="name"
                             type="select"
                             component={this.generateInput}
+                            validate={[required]}
                         />
                     </FormGroup>
                     <FormGroup>
@@ -106,6 +133,7 @@ class ServiceForm extends Component {
                             name="First_Name"
                             type="text"
                             component={this.generateInput}
+                            validate={[required]}
                         />
                     </FormGroup>
                     <FormGroup>
@@ -122,14 +150,16 @@ class ServiceForm extends Component {
                             name="Address"
                             type="textarea"
                             component={this.generateInput}
+                            validate={[required]}
                         />
                     </FormGroup>
                     <FormGroup>
                         <Field
                             placeholder="Mobile Number"
                             name="Mobile_Number"
-                            type="number"
+                            type="text"
                             component={this.generateInput}
+                            validate={[required, number, mobile_number]}
                         />
                     </FormGroup>
                     <FormGroup>
@@ -146,6 +176,7 @@ class ServiceForm extends Component {
                             name="Email_Id"
                             type="email"
                             component={this.generateInput}
+                            validate={[required]}
                         />
                     </FormGroup>
                     <div className="text-center">
