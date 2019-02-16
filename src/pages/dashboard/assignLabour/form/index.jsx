@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
 import { Field, reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
-import { ModalBody, ModalFooter, Button, Spinner, Alert } from 'reactstrap';
+import {
+    ModalBody, ModalFooter, FormGroup, Form,
+    Button, Spinner, Alert, Input, Row, Col, Label
+} from 'reactstrap';
 import axios from 'axios';
 
 import { getLabourForBooking } from '../../../../services/LabourListForBooking/index'
@@ -12,10 +15,11 @@ class AssignLabourForm extends Component {
         super(props);
         this.state = {
             spinners: false,
+            visible: true,
             alertMessageToggle: false,
             alertMessage: {
-                color: '',
-                message: ''
+                color: 'danger',
+                message: 'oops something went wrong'
             }
         }
     }
@@ -24,32 +28,41 @@ class AssignLabourForm extends Component {
         this.props.getLabourForBooking(this.props.bookingId);
     }
 
-    renderField = field => {
-        const { meta: { touched, error } } = field;
-        const className = `form-group row ${touched && error ? 'is-invalid' : ''}`
-
-        if (field.type == 'dropdownValue') {
+    generateInput = field => {
+        if (field.type === 'select') {
             let optionList = _.map(field.list, (data, index) => {
-                return <option key={index} value={data[field.id]}>{`${data[field.firstName]}  ${data[field.lastName]}`}</option>;
+                return (
+                    <option value={data[field.id]} key={index}>
+                        {`${data[field.firstName]}  ${data[field.lastName]}`}
+                    </option>
+                );
             })
             return (
-                <div className={className}>
-                    <label className="col-sm-12 col-form-label col-form-label-sm text-center">{field.label}</label>
-                    <div className='offset-sm-1 col-sm-10 text-center'>
-                        <select className="form-control form-control-sm" {...field.input}>
-                            <option value="">Select</option>
-                            {optionList}
-                        </select>
-                        <div className="text-help">
-                            {touched && error ? <div className='text-danger'>{error} </div> : ''}
-                        </div>
-                    </div>
-                </div>
+                <Col sm={{ size: 10, offset: 1 }}>
+                    <Label size='sm ' >{field.label}</Label>
+                    <Input
+                        size='sm'
+                        type="select"
+                        disabled={field.disable}
+                        className={field.meta.touched && field.meta.error ? 'input-error' : ''} {...field.input}
+                    >
+                        <option value="">Select {field.placeholder}</option>
+                        {optionList}
+                    </Input>
+                    {
+                        field.meta.error && field.meta.touched ?
+                            <div className="error">
+                                <span className="icon">!</span>
+                                <span className="message">{field.meta.error}</span>
+                            </div>
+                            : ''
+                    }
+                </Col>
             )
         }
     }
 
-    submitForm(values) {
+    submitForm = values => {
         const { bookingId } = this.props;
 
         let reqInput = {
@@ -77,28 +90,41 @@ class AssignLabourForm extends Component {
             })
     }
 
+    onDismiss = () => {
+        this.setState({ visible: false });
+    }
+
     render() {
         const { handleSubmit, reset, pristine, submitting, labourListForBooking } = this.props;
-        const { spinners, alertMessage, alertMessageToggle } = this.state;
+        const { spinners, alertMessage, alertMessageToggle, visible } = this.state;
 
         return (
-            <div className='labourAssignForm'>
+            <div>
                 <ModalBody>
-                    <form >
-                        <Field
-                            label="Choose Labour"
-                            type="dropdownValue" //api
-                            id='_id'
-                            firstName='First_Name'
-                            lastName='Last_Name'
-                            name="Labour_ID"
-                            list={labourListForBooking.data}
-                            component={this.renderField}
-                        />
+                    <Form >
+                        <FormGroup>
+                            <Field
+                                label="Choose Labour"
+                                type="select" //api
+                                keyword='_id'
+                                firstName='First_Name'
+                                lastName='Last_Name'
+                                name="Labour_ID"
+                                list={labourListForBooking.data}
+                                component={this.generateInput}
+                            />
 
-                        {alertMessageToggle ? <Alert color={alertMessage.color} className='alertWrap text-center'> {alertMessage.message}</Alert> : null}
-
-                    </form >
+                            {alertMessageToggle ?
+                                <Alert
+                                    isOpen={visible}
+                                    toggle={this.onDismiss}
+                                    color={alertMessage.color}
+                                    className='alertWrap text-center'
+                                > {alertMessage.message}
+                                </Alert> : null
+                            }
+                        </FormGroup>
+                    </Form>
 
                 </ModalBody>
 
@@ -107,7 +133,7 @@ class AssignLabourForm extends Component {
                         spinners === true ?
                             <Spinner color="primary" size="sm" />
                             :
-                            <Button color="primary" size='sm' onClick={handleSubmit(this.submitForm.bind(this))}>Submit</Button>
+                            <Button color="primary" size='sm' onClick={handleSubmit(this.submitForm)}>Submit</Button>
                     }
 
                 </ModalFooter>
@@ -131,6 +157,7 @@ const mapStateToProps = (reduxData) => {
         labourListForBooking: reduxData.labourListForBooking
     }
 }
+
 export default reduxForm({
     validate,
     form: 'AssignLabourForm'
