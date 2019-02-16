@@ -1,9 +1,13 @@
 import React, { Component } from "react";
-import { Row, Col, Card, CardBody, CardHeader, CardTitle, CardText, CardFooter, Button } from "reactstrap";
+import {
+    Row, Col, Card, CardBody, CardHeader, CardTitle, CardText, CardFooter, Button,
+    Modal, ModalHeader
+} from "reactstrap";
 import { connect } from "react-redux";
 import _ from "lodash";
 import moment from "moment";
 
+import AssignLabour from './assignLabour/index';
 import { getBookingList } from "./../../services/BookingList";
 import './Dashboard.scss';
 
@@ -13,7 +17,8 @@ class Dashboard extends Component {
         super(props);
         props.getBookingList();
         this.state = {
-            list: []
+            list: [],
+            modal: false
         }
     }
 
@@ -25,8 +30,15 @@ class Dashboard extends Component {
         }
     }
 
-    findDiff(from, to) {
+    findDiff = (from, to) => {
         return moment(to, 'DD/MM/YYYY hh:mm').diff(moment(from, 'DD/MM/YYYY hh:mm'), 'hours')
+    }
+
+    toggle = (data) => {
+        this.setState({
+            bookingId: data.ID,
+            modal: !this.state.modal
+        })
     }
 
     renderList(list) {
@@ -37,20 +49,20 @@ class Dashboard extends Component {
                     <Card>
                         <CardBody>
                             <CardTitle className="">
-                                {data.service_type.name} at {data.locality.name}<br/>
+                                {data.service_type.name} at {data.locality.name}<br />
                                 <small>{moment(data.Session_Time.From, 'DD/MM/YYYY hh:mm').format('hh:mmA DD/MM/YYYY')} - {hour} {hour > 1 ? 'Hours' : 'Hour'}</small>
                             </CardTitle>
                             <CardText className="text-black-50">
                                 <span className="text-capitalize">
-                                    {data.user.First_Name} {data.user.Last_Name} 
-                                </span><br/>
-                                {data.Address}<br/>
+                                    {data.user.First_Name} {data.user.Last_Name}
+                                </span><br />
+                                {data.Address}<br />
                                 {data.user.Mobile_Number}
                             </CardText>
                         </CardBody>
                         <CardFooter>
                             {data.ID}
-                            <Button color="primary" size="sm" className="float-right">Assign</Button>
+                            <Button color="primary" size="sm" className="float-right" onClick={() => this.toggle(data)}>Assign</Button>
                         </CardFooter>
                     </Card>
                 </Col>
@@ -59,6 +71,7 @@ class Dashboard extends Component {
     }
 
     render() {
+        const { bookingId } = this.state;
         return (
             <Row className="dashboard">
                 <Col xs={12} className="heading">
@@ -69,6 +82,11 @@ class Dashboard extends Component {
                         {this.renderList(this.state.list)}
                     </Row>
                 </Col>
+
+                <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
+                    <ModalHeader toggle={this.toggle}>Assign Labour</ModalHeader>
+                    <AssignLabour bookingId={bookingId} />
+                </Modal>
             </Row>
         );
     }

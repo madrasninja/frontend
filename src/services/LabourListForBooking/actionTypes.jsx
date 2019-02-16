@@ -1,0 +1,3 @@
+export const REQ = 'LABOURLIST_FOR_BOOKING_REQ';
+export const RES = 'LABOURLIST_FOR_BOOKING_RES';
+export const FAIL = 'LABOURLIST_FOR_BOOKING_FAIL';
