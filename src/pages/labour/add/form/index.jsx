@@ -8,6 +8,8 @@ import {
 import { connect } from "react-redux";
 import _ from "lodash";
 
+import { validator } from "./../../../../const/validator";
+
 class AddForm extends Component {
 
     generateInput(field) {
@@ -21,11 +23,18 @@ class AddForm extends Component {
             })
             return (
                 <div>
-                    <Input type="select" disabled={field.disable} {...field.input}>
+                    <Input type="select" disabled={field.disable} className={field.meta.touched && field.meta.error ? 'input-error' : ''} {...field.input}>
                         <option value="">Select {field.placeholder}</option>
                         {optionList}
                     </Input>
-                    <span className="text-danger">{field.meta.error}</span>
+                    {
+                        field.meta.error && field.meta.touched ?
+                            <div className="error">
+                                <span className="icon">!</span>
+                                <span className="message">{field.meta.error}</span>
+                            </div>
+                            : ''
+                    }
                 </div>
             )
         } else {
@@ -35,18 +44,23 @@ class AddForm extends Component {
                         type={field.type}
                         placeholder={field.placeholder}
                         {...field.input}
+                        className={field.meta.touched && field.meta.error ? 'input-error' : ''}
                     />
-                    {/* <span className="p-float-label">
-                        <InputText className="form-control" id="in" type={field.type} {...field.input}/>
-                        <label htmlFor="in">{field.placeholder}</label>
-                    </span> */}
-                    <span className="text-danger">{field.meta.touched ? field.meta.error : ''}</span>
+                    {
+                        field.meta.error && field.meta.touched ?
+                            <div className="error">
+                                <span className="icon">!</span>
+                                <span className="message">{field.meta.error}</span>
+                            </div>
+                            : ''
+                    }
                 </div>
             );
         }
     }
 
     render() {
+        const { required, number, mobile_number, email } = validator;
         return (
             <div className="booking-form">
                 <Form onSubmit={this.props.handleSubmit(this.props.getValues.bind(this))} >
@@ -56,6 +70,7 @@ class AddForm extends Component {
                             name="First_Name"
                             type="text"
                             component={this.generateInput}
+                            validate={[required]}
                         />
                     </FormGroup>
                     <FormGroup>
@@ -75,6 +90,7 @@ class AddForm extends Component {
                             label="name"
                             type="select"
                             component={this.generateInput}
+                            validate={[required]}
                         />
                     </FormGroup>
                     <FormGroup>
@@ -85,6 +101,7 @@ class AddForm extends Component {
                                     name="Service_Time.From"
                                     type="time"
                                     component={this.generateInput}
+                                    validate={[required]}
                                 />
                             </Col>
                             <Col xs={6} style={{ paddingLeft: '0px' }}>
@@ -93,6 +110,7 @@ class AddForm extends Component {
                                     name="Service_Time.To"
                                     type="time"
                                     component={this.generateInput}
+                                    validate={[required]}
                                 />
                             </Col>
                         </Row>
@@ -106,6 +124,7 @@ class AddForm extends Component {
                             label="name"
                             type="select"
                             component={this.generateInput}
+                            validate={[required]}
                         />
                     </FormGroup>
                     {/* <FormGroup>
@@ -120,24 +139,27 @@ class AddForm extends Component {
                         <Field
                             placeholder="Mobile Number"
                             name="Mobile_Number"
-                            type="number"
+                            type="text"
                             component={this.generateInput}
+                            validate={[required, number, mobile_number]}
                         />
                     </FormGroup>
                     <FormGroup>
                         <Field
                             placeholder="Alternate Mobile Number"
                             name="Alternate_Mobile_Number"
-                            type="number"
+                            type="text"
                             component={this.generateInput}
+                            validate={[number, mobile_number]}
                         />
                     </FormGroup>
                     <FormGroup>
                         <Field
                             placeholder="Email ID"
                             name="Email_Id"
-                            type="email"
+                            type="text"
                             component={this.generateInput}
+                            validate={[required, email]}
                         />
                     </FormGroup>
                     <div className="text-center">

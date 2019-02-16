@@ -10,11 +10,8 @@ import { bookService } from "./../../services/BookService";
 import Notifier from "../../components/notifier";
 
 class Book extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            responseStatus: false
-        }
+    state = {
+        responseStatus: false
     }
 
     bookaService(values) {

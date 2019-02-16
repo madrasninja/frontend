@@ -8,15 +8,11 @@ import {
 import { connect } from "react-redux";
 import _ from "lodash";
 
+import { validator } from "./../../../const/validator";
+
 class ServiceForm extends Component {
 
-    state = {
-        required : value => value ? undefined : 'Required',
-        number : value => value && isNaN(Number(value)) ? 'Must be a number' : undefined,
-        mobile_number: value => value && value.length < 10 ? 'Enter valid number' : undefined
-    }
-
-    generateInput(field) {
+    generateInput = (field) => {
         if (field.type === 'select') {
             let optionList = _.map(field.list, (data, index)=> {
                 return (
@@ -68,7 +64,7 @@ class ServiceForm extends Component {
     }
 
     render() {
-        let { required, number, mobile_number} = this.state;
+        let { required, number, mobile_number, email} = validator;
         return(
             <div className="booking-form">
                 <Form onSubmit={this.props.handleSubmit(this.props.getValues.bind(this))} >
@@ -168,15 +164,16 @@ class ServiceForm extends Component {
                             name="Alternate_Mobile_Number"
                             type="number"
                             component={this.generateInput}
+                            validate={[number, mobile_number]}
                         />
                     </FormGroup>
                     <FormGroup>
                         <Field
                             placeholder="Email ID"
                             name="Email_Id"
-                            type="email"
+                            type="text"
                             component={this.generateInput}
-                            validate={[required]}
+                            validate={[required, email]}
                         />
                     </FormGroup>
                     <div className="text-center">
