@@ -2,16 +2,23 @@ import React, { Component } from "react";
 import { Row, Col } from "reactstrap";
 import { connect } from "react-redux";
 
+import API_CALL from "./../../../services";
 import { savelabour } from "./../../../services/SaveLabour";
 import AddForm from "./../form";
 import Notifier from "./../../../components/notifier";
 
-class AddLabour extends Component {
+class UpdateLabour extends Component {
+
     constructor(props) {
         super(props);
         this.state = {
             responseStatus: false
         }
+        API_CALL('get', 'getuser/2/' + this.props.match.params.id, null, null, (data)=>{
+            this.setState({
+                labourDetails: data[0]
+            })
+        })
     }
 
     save(data) {
@@ -31,13 +38,14 @@ class AddLabour extends Component {
     }
 
     render() {
+        const {labourDetails} = this.state;
         return (
             <Row>
                 <Col xs={12} sm={12} md={{size: 6, offset: 3}}>
-                    <h3 className="text-center">Add Labour</h3>
+                    <h3 className="text-center">Update Labour</h3>
                     <hr/>
                     <Notifier message={this.state.message} color="success" show={this.state.responseStatus} />
-                    <AddForm getValues={(values)=>this.save(values)}/>
+                    <AddForm getValues={(values)=>this.save(values)} initialValues={labourDetails}/>
                 </Col>
             </Row>
         );
@@ -50,4 +58,4 @@ function mapStateToProps(reduxData) {
     }
 }
 
-export default connect(mapStateToProps, {savelabour})(AddLabour);
+export default connect(mapStateToProps, {savelabour})(UpdateLabour);

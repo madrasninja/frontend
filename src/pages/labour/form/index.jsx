@@ -8,7 +8,7 @@ import {
 import { connect } from "react-redux";
 import _ from "lodash";
 
-import { validator } from "./../../../../const/validator";
+import { validator } from "./../../../const/validator";
 
 class AddForm extends Component {
 
@@ -163,7 +163,7 @@ class AddForm extends Component {
                         />
                     </FormGroup>
                     <div className="text-center">
-                        <Button color="primary">Add</Button>
+                        <Button color="primary">Submit</Button>
                     </div>
                 </Form>
             </div>

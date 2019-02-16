@@ -21,17 +21,15 @@ function API_CALL(method, url, data, type, callback, file) {
         header['Authorization'] = getToken();
     }
     if (callback) {
-        return function (dispatch) {
-            axios({
-                method,
-                url: ROOT_URL + url,
-                data,
-                headers: header,
-                responseType: file ? 'arraybuffer' : 'json',
-            }).then((data) => {
-                callback(data)
-            })
-        }
+        axios({
+            method,
+            url: ROOT_URL + url,
+            data,
+            headers: header,
+            responseType: file ? 'arraybuffer' : 'json',
+        }).then((data) => {
+            return callback(data.data)
+        })
     } else {
         return function (dispatch) {
             dispatch({

@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 import { Row, Col, Card, CardBody, CardTitle, CardText, CardFooter, Button } from "reactstrap";
 import _ from "lodash";
 import moment from "moment";
@@ -33,7 +34,7 @@ class LabourHome extends Component {
                                 </CardText>
                             </CardBody>
                             <CardFooter>
-                                <Button className="float-right" color="primary" size="sm">Update</Button>
+                                <Link to={'/labour/update/' + data._id}><Button className="float-right" color="primary" size="sm">Update</Button></Link>
                             </CardFooter>
                         </Card>
                     </Col>

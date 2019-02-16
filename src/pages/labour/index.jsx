@@ -11,6 +11,7 @@ import {
 } from "reactstrap";
 
 import AddLabour from './add';
+import UpdateLabour from './update';
 import LabourHome from "./home";
 import './Labour.scss';
 
@@ -53,6 +54,7 @@ class Labour extends Component {
                     <Switch>
                         <Route path='/labour/add' component={AddLabour} />
                         <Route path='/labour/home' component={LabourHome} />
+                        <Route path='/labour/update/:id' component={UpdateLabour} />
                         <Redirect to='/labour/home' />
                     </Switch>
                 </Col>
