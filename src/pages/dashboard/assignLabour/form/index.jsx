@@ -32,20 +32,20 @@ class AssignLabourForm extends Component {
         if (field.type === 'select') {
             let optionList = _.map(field.list, (data, index) => {
                 return (
-                    <option value={data[field.id]} key={index}>
-                        {`${data[field.firstName]}  ${data[field.lastName]}`}
+                    <option value={data[field.keyword]} key={index}>
+                        {`${data[field.firstName]} ${data[field.lastName]}`}
                     </option>
                 );
             })
             return (
                 <Col sm={{ size: 10, offset: 1 }}>
-                    <Label size='sm ' >{field.label}</Label>
+                    <Label size='sm'>{field.label}</Label>
                     <Input
                         size='sm'
                         type="select"
                         disabled={field.disable}
                         className={field.meta.touched && field.meta.error ? 'input-error' : ''} {...field.input}
-                    >
+                        >
                         <option value="">Select {field.placeholder}</option>
                         {optionList}
                     </Input>
