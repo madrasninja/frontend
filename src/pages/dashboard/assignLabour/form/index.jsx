@@ -7,7 +7,8 @@ import {
 } from 'reactstrap';
 import axios from 'axios';
 
-import { getLabourForBooking } from '../../../../services/LabourListForBooking/index'
+import { getLabourForBooking } from '../../../../services/LabourListForBooking/index';
+import { getBookingList } from '../../../../services/BookingList/index';
 import './style.scss'
 
 class AssignLabourForm extends Component {
@@ -45,7 +46,7 @@ class AssignLabourForm extends Component {
                         type="select"
                         disabled={field.disable}
                         className={field.meta.touched && field.meta.error ? 'input-error' : ''} {...field.input}
-                        >
+                    >
                         <option value="">Select {field.placeholder}</option>
                         {optionList}
                     </Input>
@@ -63,7 +64,7 @@ class AssignLabourForm extends Component {
     }
 
     submitForm = values => {
-        const { bookingId } = this.props;
+        const { bookingId, reset, getBookingList } = this.props;
 
         let reqInput = {
             Booking_ID: bookingId,
@@ -79,7 +80,8 @@ class AssignLabourForm extends Component {
                     alertMessageToggle: true,
                     alertMessage: { color: 'success', message: response.data.message }
                 });
-                this.props.reset();
+                reset();
+                getBookingList();
             })
             .catch((error) => {
                 this.setState({
@@ -162,5 +164,5 @@ export default reduxForm({
     validate,
     form: 'AssignLabourForm'
 })(
-    connect(mapStateToProps, { getLabourForBooking })(AssignLabourForm)
+    connect(mapStateToProps, { getLabourForBooking, getBookingList })(AssignLabourForm)
 );
