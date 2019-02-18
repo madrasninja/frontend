@@ -19,27 +19,27 @@ class OurServices extends Component {
                 {
                     title: 'Home Cleaning',
                     bgimg: homeCleaning,
-                    description: 'We provide the high quality products, clean & shine',
+                    description: 'Ninja will take care of your day today home cleaning tasks. Ninja trained in providing regular conventional and environmentally friendly cleaning for kitchen, lobbies, hallways and more',
                 }, {
                     title: 'Carpet Cleaning',
                     bgimg: carpetCleaning,
-                    description: 'We provide the high quality products, clean & shine',
+                    description: 'Ninja will safeguard our customers from bacterias which stays in the carpet. Ninja trained in cleaning any carpet material, rugs, mattress, curtains and quick drying within a fraction of seconds',
                 }, {
-                    title: 'Restroom Cleaning',
+                    title: 'Bathroom Cleaning',
                     bgimg: restroomCleaning,
-                    description: 'We provide the high quality products, clean & shine',
+                    description: 'Ninja will thoroughly clean the toilet inside and out to disinfect. Ninja trained in scrubbing and rinsing the sinks, showers, and tubs and to remove scums in the bathroom, making fixtures shine',
                 }, {
                     title: 'Kitchen Cleaning',
                     bgimg: kitchenCleaning,
-                    description: 'We provide the high quality products, clean & shine',
+                    description: 'Ninja provides thorough disinfect, clean and shine surface in your kitchen. Ninja trained in cleaning stove drip pans, sweep and mop floors leaving your kitchen professionally clean and smelling fresh',
                 }, {
                     title: 'Sofa Cleaning',
                     bgimg: sofaCleaning,
-                    description: 'We provide the high quality products, clean & shine',
+                    description: 'Ninja is specialized in restoring the beauty of your sofa and furniture. Ninja trained in removing dust and allergens from sofas, chairs, and other upholstered items that can lead to a healthier environment',
                 }, {
                     title: 'Marble Polishing',
                     bgimg: marblePolishing,
-                    description: 'We provide the high quality products, clean & shine',
+                    description: 'Ninja adds brilliant shine to your marble flooring by restoring the shine of the marble floor. Ninja trained in removing top-level dirt, scuff marks and scratches without creating any mess',
                 }
             ]
         }
