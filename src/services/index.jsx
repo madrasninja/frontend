@@ -1,8 +1,7 @@
 import axios from 'axios';
 import cookie from 'react-cookies';
 
-const ROOT_URL = "http://api.madrasninja.com/";
-// const ROOT_URL = 'http://3.1.1.234/'
+const ROOT_URL = "https://api.madrasninja.com/";
 
 function getToken() {
     return cookie.load('session');

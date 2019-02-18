@@ -31,7 +31,7 @@ class Dashboard extends Component {
     }
 
     findDiff = (from, to) => {
-        return moment(to, 'DD/MM/YYYY hh:mm').diff(moment(from, 'DD/MM/YYYY hh:mm'), 'hours')
+        return moment(to, 'DD/MM/YYYY HH:mm').diff(moment(from, 'DD/MM/YYYY HH:mm'), 'hours')
     }
 
     toggle = (data) => {
@@ -39,6 +39,15 @@ class Dashboard extends Component {
             bookingId: data.ID,
             modal: !this.state.modal
         })
+    }
+
+    renderAction = (data) => {
+        const {_id} = data.status;
+        if (_id == 0) {
+            return <Button color="primary" size="sm" className="float-right" onClick={() => this.toggle(data)}>Assign</Button>;
+        } else if (_id == 2) {
+            return <Button color="success" size="sm" className="float-right">Assigned</Button>
+        }
     }
 
     renderList(list) {
@@ -50,19 +59,21 @@ class Dashboard extends Component {
                         <CardBody>
                             <CardTitle className="">
                                 {data.service_type.name} at {data.locality.name}<br />
-                                <small>{moment(data.Session_Time.From, 'DD/MM/YYYY hh:mm').format('hh:mmA DD/MM/YYYY')} - {hour} {hour > 1 ? 'Hours' : 'Hour'}</small>
+                                <small>{moment(data.Session_Time.From, 'DD/MM/YYYY HH:mm').format('hh:mmA DD/MM/YYYY')} - {hour} {hour > 1 ? 'Hours' : 'Hour'}</small>
                             </CardTitle>
                             <CardText className="text-black-50">
                                 <span className="text-capitalize">
                                     {data.user.First_Name} {data.user.Last_Name}
                                 </span><br />
-                                {data.Address}<br />
-                                {data.user.Mobile_Number}
+                                <small>
+                                    {data.Address}<br />
+                                    {data.user.Mobile_Number}
+                                </small>
                             </CardText>
                         </CardBody>
                         <CardFooter>
                             {data.ID}
-                            <Button color="primary" size="sm" className="float-right" onClick={() => this.toggle(data)}>Assign</Button>
+                            {this.renderAction(data)}
                         </CardFooter>
                     </Card>
                 </Col>
