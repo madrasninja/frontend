@@ -1,7 +1,15 @@
 .input-error {
-    border-color: red;
+    border-color: red !important;
+    .form-control {
+        border-color: red !important;
+    }
 }
 
+label {
+    font-size: 90%;
+    margin-bottom: 0.25rem;
+    color: rgba($color: #999, $alpha: 1)
+}
 
 .form-control {
     border-color: #eee;

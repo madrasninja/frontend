@@ -15,6 +15,7 @@ body {
     font-family: 'Open Sans';
     margin: 0;
     padding: 0;
+    font-size: 16px;
 
     a {
         color: #222222;
@@ -55,6 +56,10 @@ section {
     .card-footer {
         background-color: transparent;
     }
+}
+
+.form-group {
+    margin-bottom: 0.5rem;
 }
 
 @media (min-width: 1600px) {

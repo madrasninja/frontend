@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { Route, BrowserRouter, Switch, Redirect } from 'react-router-dom';
 
 import 'bootstrap/dist/css/bootstrap.css';
+import 'react-datetime/css/react-datetime.css';
 import 'primereact/resources/themes/nova-light/theme.css';
 import 'primereact/resources/primereact.min.css';
 import 'primeicons/primeicons.css';

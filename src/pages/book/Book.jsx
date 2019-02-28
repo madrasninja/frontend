@@ -37,7 +37,7 @@ class Book extends Component {
         return (
             <Row className="book">
                 <Col xs={12}>
-                    <h1 className="text-center heading">Book a Service</h1>
+                    <h3 className="text-center heading">Book a Service</h3>
                 </Col>
                 <Col xs={12}>
                     <Row>

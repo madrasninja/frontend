@@ -6,11 +6,7 @@ import {
     NavbarBrand,
     Nav,
     NavItem,
-    NavLink,
-    Modal, 
-    ModalHeader, 
-    ModalBody, 
-    ModalFooter
+    NavLink
 } from 'reactstrap';
 import { Link } from "react-router-dom";
 

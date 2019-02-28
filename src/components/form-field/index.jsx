@@ -3,31 +3,83 @@ import { Field } from "redux-form";
 import {
     Input
 } from 'reactstrap';
+import Datetime from "react-datetime";
+import moment from "moment";
 
 import "./style.scss";
 
 class FormField extends Component {
 
     generateComponent = (field) => {
-        if (field.type === 'select') {
-            let optionList = _.map(field.list, (data, index) => {
+        const { type, input, placeholder, keyword, list, label, disable, meta } = field;
+        const { error, touched } = meta;
+        if (type === 'select') {
+            let optionList = _.map(list, (data, index) => {
                 return (
-                    <option value={data[field.keyword]} key={index}>
-                        {data[field.label]}
+                    <option value={data[keyword]} key={index}>
+                        {data[label]}
                     </option>
                 );
             })
             return (
                 <div>
-                    <Input type="select" disabled={field.disable} className={field.meta.touched && field.meta.error ? 'input-error' : ''} {...field.input}>
-                        <option value="">Select {field.placeholder}</option>
+                    <label>{placeholder}</label>
+                    <Input type="select" disabled={disable} className={touched && error ? 'input-error' : ''} {...input}>
+                        <option value="">Select {placeholder}</option>
                         {optionList}
                     </Input>
                     {
-                        field.meta.error && field.meta.touched ?
+                        error && touched ?
                             <div className="error">
                                 <span className="icon">!</span>
-                                <span className="message">{field.meta.error}</span>
+                                <span className="message">{error}</span>
+                            </div>
+                            : ''
+                    }
+                </div>
+            )
+        } else if (type == 'date') {
+            return (
+                <div>
+                    <label>{placeholder}</label>
+                    <Datetime
+                        timeFormat={false}
+                        closeOnSelect={true}
+                        dateFormat="DD/MM/YYYY"
+                        isValidDate={(currentDate) => {
+                            return currentDate.isAfter(moment().subtract(1, 'days'))
+                        }}
+                        inputProps={{ placeholder: placeholder }}
+                        {...input}
+                        className={touched && error ? 'input-error' : ''}
+                    />
+                    {
+                        error && touched ?
+                            <div className="error">
+                                <span className="icon">!</span>
+                                <span className="message">{error}</span>
+                            </div>
+                            : ''
+                    }
+                </div>
+            )
+        } else if (type == 'time') {
+            return (
+                <div>
+                    <label>{placeholder}</label>
+                    <Datetime
+                        timeFormat="hh:mm A"
+                        closeOnSelect={true}
+                        dateFormat={false}
+                        inputProps={{ placeholder: placeholder }}
+                        {...input}
+                        className={touched && error ? 'input-error' : ''}
+                    />
+                    {
+                        error && touched ?
+                            <div className="error">
+                                <span className="icon">!</span>
+                                <span className="message">{error}</span>
                             </div>
                             : ''
                     }
@@ -36,17 +88,18 @@ class FormField extends Component {
         } else {
             return (
                 <div>
+                    <label>{placeholder}</label>
                     <Input
-                        type={field.type}
-                        placeholder={field.placeholder}
-                        {...field.input}
-                        className={field.meta.touched && field.meta.error ? 'input-error' : ''}
+                        type={type}
+                        placeholder={placeholder}
+                        {...input}
+                        className={touched && error ? 'input-error' : ''}
                     />
                     {
-                        field.meta.error && field.meta.touched ?
+                        error && touched ?
                             <div className="error">
                                 <span className="icon">!</span>
-                                <span className="message">{field.meta.error}</span>
+                                <span className="message">{error}</span>
                             </div>
                             : ''
                     }

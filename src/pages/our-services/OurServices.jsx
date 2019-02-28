@@ -51,8 +51,8 @@ class OurServices extends Component {
                 <Col xs={12} sm={6} md={4} key={index}>
                     <div className="service-card">
                         <div className="img-block" style={{backgroundImage: 'url('+ data.bgimg +')'}}></div>
-                        <h4>{data.title}</h4>
-                        <p className="text-black-50">{data.description}</p>
+                        <h5>{data.title}</h5>
+                        <p className="text-black-50 text-justify">{data.description}</p>
                     </div>
                 </Col>
             )
@@ -64,7 +64,7 @@ class OurServices extends Component {
             <div className="OurServices">
                 <Row>
                     <Col xs={12}>
-                        <h1 className="text-center heading">Our Services</h1>
+                        <h3 className="text-center heading">Our Services</h3>
                     </Col>
                     <Col xs={12}>
                         <Row>

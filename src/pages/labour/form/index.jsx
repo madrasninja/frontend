@@ -14,7 +14,7 @@ class AddForm extends Component {
     render() {
         const { required, number, mobile_number, email } = validator;
         return (
-            <div className="booking-form">
+            <div>
                 <Form onSubmit={this.props.handleSubmit(this.props.getValues.bind(this))} >
                     <FormGroup>
                         <FormField
