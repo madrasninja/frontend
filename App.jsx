@@ -15,8 +15,10 @@ import OurServices from './src/pages/our-services/OurServices';
 import Dashboard from './src/pages/dashboard/Dashboard';
 import Book from './src/pages/book/Book';
 import Labour from "./src/pages/labour";
+import Login from './src/pages/login';
 import { getServiceTypeList } from "./src/services/ServiceTypeList";
 import { getLocalityList } from "./src/services/LocalityList";
+import cookie from 'react-cookies';
 
 class App extends Component {
 
@@ -26,26 +28,44 @@ class App extends Component {
         props.getLocalityList();
     }
 
+    renderRoutes = () => {
+        if (cookie.load('session')) {
+            return (
+                <Switch>
+                    <Route path='/' exact component={Home} />
+                    <Route path='/services' component={OurServices} />
+                    <Route path='/dashboard' component={Dashboard} />
+                    <Route path='/book' component={Book} />
+                    <Route path='/labour' component={Labour} />
+                    <Redirect to='/' />
+                </Switch>
+            )
+        } else {
+            return (
+                <Switch>
+                    <Route path='/' exact component={Home} />
+                    <Route path='/services' component={OurServices} />
+                    <Route path='/book' component={Book} />
+                    <Route path='/signin' component={Login} />
+                    <Redirect to='/' />
+                </Switch>
+            )
+        }
+    }
+
     render() {
         return (
             <BrowserRouter>
                 <div className="App">
                     <Header />
                     <section className="container">
-                        <Switch>
-                            <Route path='/' exact component={Home} />
-                            <Route path='/services' component={OurServices} />
-                            <Route path='/dashboard' component={Dashboard} />
-                            <Route path='/book' component={Book} />
-                            <Route path='/labour' component={Labour} />
-                            <Redirect to='/' />
-                        </Switch>
+                        {this.renderRoutes()}
                     </section>
                     <Footer />
                 </div>
             </BrowserRouter>
         );
-   }
+    }
 }
 
 export default connect(null, {

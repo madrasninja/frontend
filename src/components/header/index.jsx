@@ -6,29 +6,77 @@ import {
     NavbarBrand,
     Nav,
     NavItem,
-    NavLink
+    NavLink,
 } from 'reactstrap';
 import { Link } from "react-router-dom";
 
 import "./Header.scss";
 import logo from "./../../assets/img/logo.png";
+import cookie from "react-cookies";
 
 class Header extends Component {
     constructor(props) {
         super(props);
-    
+
         this.toggle = this.toggle.bind(this);
         this.state = {
-          isOpen: false
+            isOpen: false
         };
     }
-    
+
     toggle() {
         this.setState({
-          isOpen: !this.state.isOpen
+            isOpen: !this.state.isOpen
         });
     }
-    
+
+    renderMenu = () => {
+        if (cookie.load('session')) {
+            return (
+                <Nav className="ml-auto" navbar>
+                    <NavItem>
+                        <Link to="/" className="nav-link">Home</Link>
+                    </NavItem>
+                    <NavItem>
+                        <Link to="/services" className="nav-link">Our Services</Link>
+                    </NavItem>
+                    <NavItem>
+                        <NavLink href="tel:+919360933933">+91 9360933933</NavLink>
+                    </NavItem>
+                    <NavItem>
+                        <Link to="/book" className="nav-link">Book</Link>
+                    </NavItem>
+                    <NavItem>
+                        <Link to="/dashboard" className="nav-link">Dashboard</Link>
+                    </NavItem>
+                    <NavItem>
+                        <Link to="/labour/home" className="nav-link">Labour Management</Link>
+                    </NavItem>
+                </Nav>
+            )
+        } else {
+            return (
+                <Nav className="ml-auto" navbar>
+                    <NavItem>
+                        <Link to="/" className="nav-link">Home</Link>
+                    </NavItem>
+                    <NavItem>
+                        <Link to="/services" className="nav-link">Our Services</Link>
+                    </NavItem>
+                    <NavItem>
+                        <NavLink href="tel:+919360933933">+91 9360933933</NavLink>
+                    </NavItem>
+                    <NavItem>
+                        <Link to="/book" className="nav-link">Book</Link>
+                    </NavItem>
+                    <NavItem>
+                        <Link to="/signin" className="nav-link">LOGIN</Link>
+                    </NavItem>
+                </Nav>
+            )
+        }
+    }
+
     render() {
         return (
             <header>
@@ -39,26 +87,7 @@ class Header extends Component {
                         </NavbarBrand>
                         <NavbarToggler onClick={this.toggle} />
                         <Collapse isOpen={this.state.isOpen} navbar>
-                            <Nav className="ml-auto" navbar>
-                                <NavItem>
-                                    <Link to="/" className="nav-link">Home</Link>
-                                </NavItem>
-                                <NavItem>
-                                    <Link to="/services" className="nav-link">Our Services</Link>
-                                </NavItem>
-                                <NavItem>
-                                    <NavLink href="tel:+919360933933">+91 9360933933</NavLink>
-                                </NavItem>
-                                <NavItem>
-                                    <Link to="/labour/home" className="nav-link">Labour Management</Link>
-                                </NavItem>
-                                <NavItem>
-                                    <Link to="/dashboard" className="nav-link">
-                                        {/* <span className="login-btn">LOGIN</span> */}
-                                        Dashboard
-                                    </Link>
-                                </NavItem>
-                            </Nav>
+                            {this.renderMenu()}
                         </Collapse>
                     </div>
                 </Navbar>
