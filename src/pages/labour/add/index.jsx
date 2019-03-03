@@ -15,6 +15,8 @@ class AddLabour extends Component {
     }
 
     save(data) {
+        data.Service_Time.From = data.Service_Time.From.format('HH:mm');
+        data.Service_Time.To = data.Service_Time.To.format('HH:mm');
         this.props.savelabour(data);
     }
 

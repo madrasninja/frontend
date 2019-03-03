@@ -22,7 +22,7 @@ class ServiceForm extends Component {
                             name="Service_Type_ID"
                             list={this.props.serviceTypeList.data}
                             keyword="_id"
-                            label="name"
+                            option="name"
                             type="select"
                             validate={[required]}
                         />
@@ -61,7 +61,7 @@ class ServiceForm extends Component {
                             name="Locality_ID"
                             list={this.props.localityList.data}
                             keyword="_id"
-                            label="name"
+                            option="name"
                             type="select"
                             validate={[required]}
                         />

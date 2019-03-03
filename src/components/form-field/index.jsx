@@ -11,19 +11,19 @@ import "./style.scss";
 class FormField extends Component {
 
     generateComponent = (field) => {
-        const { type, input, placeholder, keyword, list, label, disable, meta } = field;
+        const { type, input, placeholder, keyword, list, label, option, disable, meta } = field;
         const { error, touched } = meta;
         if (type === 'select') {
             let optionList = _.map(list, (data, index) => {
                 return (
                     <option value={data[keyword]} key={index}>
-                        {data[label]}
+                        {data[option]}
                     </option>
                 );
             })
             return (
                 <div>
-                    <label>{placeholder}</label>
+                    <label>{label ? label : placeholder}</label>
                     <Input type="select" disabled={disable} className={touched && error ? 'input-error' : ''} {...input}>
                         <option value="">Select {placeholder}</option>
                         {optionList}

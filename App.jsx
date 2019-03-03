@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Route, BrowserRouter, Switch, Redirect } from 'react-router-dom';
+import cookie from 'react-cookies';
 
 import 'bootstrap/dist/css/bootstrap.css';
 import 'react-datetime/css/react-datetime.css';
@@ -16,9 +17,9 @@ import Dashboard from './src/pages/dashboard/Dashboard';
 import Book from './src/pages/book/Book';
 import Labour from "./src/pages/labour";
 import Login from './src/pages/login';
+import Signup from './src/pages/signup';
 import { getServiceTypeList } from "./src/services/ServiceTypeList";
 import { getLocalityList } from "./src/services/LocalityList";
-import cookie from 'react-cookies';
 
 class App extends Component {
 
@@ -47,6 +48,7 @@ class App extends Component {
                     <Route path='/services' component={OurServices} />
                     <Route path='/book' component={Book} />
                     <Route path='/signin' component={Login} />
+                    <Route path='/signup' component={Signup} />
                     <Redirect to='/' />
                 </Switch>
             )

@@ -3,10 +3,13 @@ import {
     Collapse,
     Navbar,
     NavbarToggler,
-    NavbarBrand,
     Nav,
     NavItem,
     NavLink,
+    UncontrolledDropdown,
+    DropdownToggle,
+    DropdownMenu,
+    DropdownItem
 } from 'reactstrap';
 import { Link } from "react-router-dom";
 
@@ -35,9 +38,6 @@ class Header extends Component {
             return (
                 <Nav className="ml-auto" navbar>
                     <NavItem>
-                        <Link to="/" className="nav-link">Home</Link>
-                    </NavItem>
-                    <NavItem>
                         <Link to="/services" className="nav-link">Our Services</Link>
                     </NavItem>
                     <NavItem>
@@ -46,20 +46,30 @@ class Header extends Component {
                     <NavItem>
                         <Link to="/book" className="nav-link">Book</Link>
                     </NavItem>
-                    <NavItem>
-                        <Link to="/dashboard" className="nav-link">Dashboard</Link>
-                    </NavItem>
-                    <NavItem>
-                        <Link to="/labour/home" className="nav-link">Labour Management</Link>
-                    </NavItem>
+                    <UncontrolledDropdown nav inNavbar>
+                        <DropdownToggle nav caret>
+                            Charles
+                        </DropdownToggle>
+                        <DropdownMenu right>
+                            <DropdownItem>
+                                <Link to="/dashboard">Dashboard</Link>
+                            </DropdownItem>
+                            <DropdownItem>
+                                <Link to="/labour/home">Labour Management</Link>
+                            </DropdownItem>
+                            <DropdownItem divider />
+                            <DropdownItem onClick={() => {
+                                    cookie.remove('session');
+                                    window.location.reload();
+                                }}>Logout
+                            </DropdownItem>
+                        </DropdownMenu>
+                    </UncontrolledDropdown>
                 </Nav>
             )
         } else {
             return (
                 <Nav className="ml-auto" navbar>
-                    <NavItem>
-                        <Link to="/" className="nav-link">Home</Link>
-                    </NavItem>
                     <NavItem>
                         <Link to="/services" className="nav-link">Our Services</Link>
                     </NavItem>
@@ -82,9 +92,7 @@ class Header extends Component {
             <header>
                 <Navbar color="light" light fixed="top" expand="md">
                     <div className="container">
-                        <NavbarBrand href="/">
-                            <img src={logo} className="Header-logo" alt="logo" />
-                        </NavbarBrand>
+                        <Link to="/" className="navbar-brand"><img src={logo} className="Header-logo" alt="logo" /></Link>
                         <NavbarToggler onClick={this.toggle} />
                         <Collapse isOpen={this.state.isOpen} navbar>
                             {this.renderMenu()}
