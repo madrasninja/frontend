@@ -7,6 +7,8 @@ import {
 } from 'reactstrap';
 import axios from 'axios';
 
+import FormField from "../../../../components/form-field";
+import { validator } from "../../../../const/validator";
 import { getLabourForBooking } from '../../../../services/LabourListForBooking/index';
 import { getBookingList } from '../../../../services/BookingList/index';
 import './style.scss'
@@ -29,46 +31,12 @@ class AssignLabourForm extends Component {
         this.props.getLabourForBooking(this.props.bookingId);
     }
 
-    generateInput = field => {
-        if (field.type === 'select') {
-            let optionList = _.map(field.list, (data, index) => {
-                return (
-                    <option value={data[field.keyword]} key={index}>
-                        {`${data[field.firstName]} ${data[field.lastName]}`}
-                    </option>
-                );
-            })
-            return (
-                <Col sm={{ size: 10, offset: 1 }}>
-                    <Label size='sm'>{field.label}</Label>
-                    <Input
-                        size='sm'
-                        type="select"
-                        disabled={field.disable}
-                        className={field.meta.touched && field.meta.error ? 'input-error' : ''} {...field.input}
-                    >
-                        <option value="">Select {field.placeholder}</option>
-                        {optionList}
-                    </Input>
-                    {
-                        field.meta.error && field.meta.touched ?
-                            <div className="error">
-                                <span className="icon">!</span>
-                                <span className="message">{field.meta.error}</span>
-                            </div>
-                            : ''
-                    }
-                </Col>
-            )
-        }
-    }
-
-    submitForm = values => {
+    submitForm = ({ Labour_ID }) => {
         const { bookingId, reset, getBookingList } = this.props;
 
         let reqInput = {
             Booking_ID: bookingId,
-            Labour_ID: values.Labour_ID
+            Labour_ID
         }
 
         this.setState({ spinners: true })
@@ -99,13 +67,14 @@ class AssignLabourForm extends Component {
     render() {
         const { handleSubmit, reset, pristine, submitting, labourListForBooking } = this.props;
         const { spinners, alertMessage, alertMessageToggle, visible } = this.state;
+        const { required } = validator;
 
         return (
             <div>
                 <ModalBody>
                     <Form >
                         <FormGroup>
-                            <Field
+                            {/* <Field
                                 label="Choose Labour"
                                 type="select" //api
                                 keyword='_id'
@@ -114,6 +83,15 @@ class AssignLabourForm extends Component {
                                 name="Labour_ID"
                                 list={labourListForBooking.data}
                                 component={this.generateInput}
+                            /> */}
+                            <FormField
+                                name="Labour_ID"
+                                list={labourListForBooking.data}
+                                placeholder="Labour"
+                                keyword='_id'
+                                label={"First_Name" + "Last_Name"}
+                                type="select"
+                                validate={[required]}
                             />
 
                             {alertMessageToggle ?
@@ -144,24 +122,13 @@ class AssignLabourForm extends Component {
     }
 }
 
-function validate(values) {
-    const errors = {};
-
-    if (!values.Labour_ID) {
-        errors.Labour_ID = 'Please Select Labour'
-    }
-
-    return errors;
-}
-
-const mapStateToProps = (reduxData) => {
+const mapStateToProps = ({ labourListForBooking }) => {
     return {
-        labourListForBooking: reduxData.labourListForBooking
+        labourListForBooking
     }
 }
 
-export default reduxForm({
-    validate,
+export default reduxForm({    
     form: 'AssignLabourForm'
 })(
     connect(mapStateToProps, { getLabourForBooking, getBookingList })(AssignLabourForm)
