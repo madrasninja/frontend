@@ -5,14 +5,16 @@ import {Link} from "react-router-dom";
  
 import SignupForm from "./form";
 
+import API_CALL from "../../services";
+
 import './style.scss';
 
 export default class Signup extends Component {
 
-    apicall = data => {
-        console.log(data)
-        cookie.save('session', true, {path: '/'});
-        window.location.reload();
+    apicall = values => {
+        API_CALL('post', 'signup', values, null, data=>{
+            console.log(data);
+        })
     }
     render() {
         return (

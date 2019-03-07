@@ -18,7 +18,7 @@ class SignupForm extends Component {
                     <FormGroup>
                         <FormField
                             placeholder="Firstname"
-                            name="firstName"
+                            name="First_Name"
                             type="text"
                             validate={[required]}
                         />
@@ -26,14 +26,14 @@ class SignupForm extends Component {
                     <FormGroup>
                         <FormField
                             placeholder="Lastname"
-                            name="lastName"
+                            name="Last_Name"
                             type="text"
                         />
                     </FormGroup>
                     <FormGroup>
                         <FormField
                             placeholder="Mobile Number"
-                            name="mobileNumber"
+                            name="Mobile_Number"
                             type="text"
                             validate={[required, number, mobile_number]}
                         />
@@ -41,7 +41,7 @@ class SignupForm extends Component {
                     <FormGroup>
                         <FormField
                             placeholder="Email ID"
-                            name="email"
+                            name="Email_Id"
                             type="text"
                             validate={[required, email]}
                         />
@@ -50,6 +50,14 @@ class SignupForm extends Component {
                         <FormField
                             placeholder="Password"
                             name="password"
+                            type="password"
+                            validate={[required]}
+                        />
+                    </FormGroup>
+                    <FormGroup>
+                        <FormField
+                            placeholder="Confirm Password"
+                            name="cpassword"
                             type="password"
                             validate={[required]}
                         />

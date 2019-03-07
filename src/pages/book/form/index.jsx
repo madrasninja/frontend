@@ -113,7 +113,7 @@ class ServiceForm extends Component {
                             validate={[required, email]}
                         />
                     </FormGroup>
-                    <div className="text-center">
+                    <div className="text-center mt-4">
                         <Button color="primary">Book</Button>
                     </div>
                 </Form>

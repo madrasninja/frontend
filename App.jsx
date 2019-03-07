@@ -18,8 +18,10 @@ import Book from './src/pages/book/Book';
 import Labour from "./src/pages/labour";
 import Login from './src/pages/login';
 import Signup from './src/pages/signup';
+import BookSuccess from './src/pages/book/success';
 import { getServiceTypeList } from "./src/services/ServiceTypeList";
 import { getLocalityList } from "./src/services/LocalityList";
+import SetPassword from './src/pages/setpassword';
 
 class App extends Component {
 
@@ -37,6 +39,7 @@ class App extends Component {
                     <Route path='/services' component={OurServices} />
                     <Route path='/dashboard' component={Dashboard} />
                     <Route path='/book' component={Book} />
+                    <Route path='/bookSuccess' component={BookSuccess} />
                     <Route path='/labour' component={Labour} />
                     <Redirect to='/' />
                 </Switch>
@@ -47,8 +50,10 @@ class App extends Component {
                     <Route path='/' exact component={Home} />
                     <Route path='/services' component={OurServices} />
                     <Route path='/book' component={Book} />
+                    <Route path='/bookSuccess' component={BookSuccess} />
                     <Route path='/signin' component={Login} />
                     <Route path='/signup' component={Signup} />
+                    <Route path='/setPassword' component={SetPassword} />
                     <Redirect to='/' />
                 </Switch>
             )

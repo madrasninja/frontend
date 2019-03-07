@@ -22,17 +22,13 @@ class Book extends Component {
             From: session.format('DD/MM/YYYY HH:mm'),
             To: session.add(values.serviceHours, 'h').format('DD/MM/YYYY HH:mm')
         }
-        console.log(values)
-        // this.props.bookService(values);
+        this.props.bookService(values);
     }
     componentWillReceiveProps(nextProps) {
         if (this.props.formResponse !== nextProps.formResponse) {
-            let {message, response} = nextProps.formResponse.data;
+            let {response} = nextProps.formResponse.data;
             if (response === 'success') {
-                this.setState({
-                    responseStatus: true,
-                    message
-                })
+                this.props.history.push({pathname: '/booksuccess'})
             }
         }
     }

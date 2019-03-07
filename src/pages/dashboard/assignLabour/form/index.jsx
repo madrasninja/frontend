@@ -89,7 +89,7 @@ class AssignLabourForm extends Component {
                                 list={labourListForBooking.data}
                                 placeholder="Labour"
                                 keyword='_id'
-                                label={"First_Name" + "Last_Name"}
+                                option="First_Name"
                                 type="select"
                                 validate={[required]}
                             />

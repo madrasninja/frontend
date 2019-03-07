@@ -5,14 +5,19 @@ import { Link } from "react-router-dom";
  
 import LoginForm from "./form";
 
+import API_CALL from "../../services";
+
 import './style.scss';
 
 export default class Login extends Component {
 
     apicall = data => {
-        console.log(data)
-        cookie.save('session', true, {path: '/'});
-        window.location.reload();
+        API_CALL('post', 'login', data, null, data=>{
+            if (data.result == "success") {
+                cookie.save('session', data.accessToken, {path: '/'}); 
+                window.location.reload();
+            }
+        })
     }
     render() {
         return (

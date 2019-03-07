@@ -18,7 +18,7 @@ class LoginForm extends Component {
                     <FormGroup>
                         <FormField
                             placeholder="Email ID/Mobile Number"
-                            name="username"
+                            name="email"
                             type="text"
                             validate={[required]}
                         />
