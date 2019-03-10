@@ -11,8 +11,8 @@ import { validator } from "./../../../const/validator";
 class LoginForm extends Component {
     render() {
         let { required } = validator;
-        const {handleSubmit} = this.props;
-        return(
+        const { handleSubmit } = this.props;
+        return (
             <div>
                 <Form onSubmit={handleSubmit(this.props.getValues.bind(this))} >
                     <FormGroup>

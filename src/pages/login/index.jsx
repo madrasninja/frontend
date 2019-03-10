@@ -8,18 +8,32 @@ import LoginForm from "./form";
 import API_CALL from "../../services";
 
 import './style.scss';
+import Notifier from "../../components/notifier";
 
 export default class Login extends Component {
+
+    state = {
+        color: 'primary',
+        message: '',
+        notifier: false
+    }
 
     apicall = data => {
         API_CALL('post', 'login', data, null, data=>{
             if (data.result == "success") {
                 cookie.save('session', data.accessToken, {path: '/'}); 
                 window.location.reload();
+            } else {
+                this.setState({
+                    color: 'danger',
+                    message: data.message,
+                    notifier: true
+                })
             }
         })
     }
     render() {
+        const { color, message, notifier } = this.state;
         return (
             <div className="login">
                 <Row>
@@ -31,6 +45,7 @@ export default class Login extends Component {
                     </Col>
                     <Col xs={12} md={{ size: 4, offset: 4 }}>
                         <LoginForm getValues={(data)=> this.apicall(data)} />
+                        <Notifier color={color} message={message} show={notifier} />
                     </Col>
                     <Col xs={12} className="add-on text-center">
                         <h6 className="text-primary">Forgot Password?</h6>

@@ -12,6 +12,7 @@ import {
     DropdownItem
 } from 'reactstrap';
 import { Link } from "react-router-dom";
+import { connect } from "react-redux";
 
 import "./Header.scss";
 import logo from "./../../assets/img/logo.png";
@@ -35,6 +36,7 @@ class Header extends Component {
 
     renderMenu = () => {
         if (cookie.load('session')) {
+            const {First_Name} = this.props.userData;
             return (
                 <Nav className="ml-auto" navbar>
                     <NavItem>
@@ -48,7 +50,7 @@ class Header extends Component {
                     </NavItem>
                     <UncontrolledDropdown nav inNavbar>
                         <DropdownToggle nav caret>
-                            Charles
+                            {First_Name}
                         </DropdownToggle>
                         <DropdownMenu right>
                             <DropdownItem>
@@ -104,4 +106,9 @@ class Header extends Component {
     }
 }
 
-export default Header;
+export default connect(reduxData=>{
+    console.log(reduxData.UserDetails)
+    return {
+        userData: reduxData.UserDetails.data
+    }
+}, {})(Header);

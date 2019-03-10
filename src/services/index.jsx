@@ -17,7 +17,7 @@ function API_CALL(method, url, data, type, callback, file) {
     // });
     let header = {};
     if (getToken()) {
-        // header['Authorization'] = getToken();
+        header['token'] = getToken();
     }
     if (callback) {
         axios({

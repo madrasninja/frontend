@@ -24,7 +24,7 @@ class Notifier extends React.Component {
 
     render() {
         return (
-            <Alert color={this.props.color} isOpen={this.state.visible} toggle={this.onDismiss}>
+            <Alert className="mt-4 mb-4" color={this.props.color} isOpen={this.state.visible} toggle={this.onDismiss}>
                 {this.props.message}
             </Alert>
         );

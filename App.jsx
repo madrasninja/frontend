@@ -21,6 +21,7 @@ import Signup from './src/pages/signup';
 import BookSuccess from './src/pages/book/success';
 import { getServiceTypeList } from "./src/services/ServiceTypeList";
 import { getLocalityList } from "./src/services/LocalityList";
+import { getMe } from "./src/services/UserDetails";
 import SetPassword from './src/pages/setpassword';
 
 class App extends Component {
@@ -29,6 +30,9 @@ class App extends Component {
         super(props);
         props.getServiceTypeList();
         props.getLocalityList();
+        if (cookie.load('session')) {
+            props.getMe();
+        }
     }
 
     renderRoutes = () => {
@@ -77,5 +81,6 @@ class App extends Component {
 
 export default connect(null, {
     getServiceTypeList,
-    getLocalityList
+    getLocalityList,
+    getMe
 })(App);

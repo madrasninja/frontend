@@ -1,22 +1,46 @@
 import React, { Component } from "react";
 import { Row, Col } from "reactstrap";
 import cookie from "react-cookies";
-import {Link} from "react-router-dom";
- 
+import { Link } from "react-router-dom";
+
 import SignupForm from "./form";
 
 import API_CALL from "../../services";
 
 import './style.scss';
+import Notifier from "../../components/notifier";
 
 export default class Signup extends Component {
 
+    state = {
+        notifier: false,
+        color: 'primary',
+        message: ''
+    }
+
     apicall = values => {
-        API_CALL('post', 'signup', values, null, data=>{
+        API_CALL('post', 'signup', values, null, data => {
             console.log(data);
+            const { type, message } = data;
+            if (type == 2) {
+                this.setState({
+                    notifier: true,
+                    color: 'info',
+                    message: 'Hey ' + values.First_Name + ', you are already entitled. We have emailed you the link, can setup password there.'
+                })
+            } else if (type == 1) {
+
+            } else {
+                this.setState({
+                    notifier: true,
+                    color: 'danger',
+                    message
+                })
+            }
         })
     }
     render() {
+        const { notifier, color, message } = this.state;
         return (
             <div className="login">
                 <Row>
@@ -27,7 +51,8 @@ export default class Signup extends Component {
                         <p className="text-black-50">One account for all the services</p>
                     </Col>
                     <Col xs={12} md={{ size: 4, offset: 4 }}>
-                        <SignupForm getValues={(data)=> this.apicall(data)} />
+                        <SignupForm getValues={(data) => this.apicall(data)} />
+                        <Notifier show={notifier} color={color} message={message} />
                     </Col>
                     <Col xs={12} className="add-on text-center">
                         Already have an account? <Link to="/signin">Signin</Link>
