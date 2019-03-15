@@ -54,6 +54,7 @@ module.exports = {
     plugins: [
         new HtmlWebpackPlugin({
             template: 'index.html',
+            filename: '_redirects',
             favicon: 'favicon.png'
         })
     ]
