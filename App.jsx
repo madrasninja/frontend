@@ -23,6 +23,7 @@ import { getServiceTypeList } from "./src/services/ServiceTypeList";
 import { getLocalityList } from "./src/services/LocalityList";
 import { getMe } from "./src/services/UserDetails";
 import SetPassword from './src/pages/setpassword';
+import ValidateUser from './src/pages/validateuser';
 
 class App extends Component {
 
@@ -58,6 +59,7 @@ class App extends Component {
                     <Route path='/signin' component={Login} />
                     <Route path='/signup' component={Signup} />
                     <Route path='/setPassword' component={SetPassword} />
+                    <Route path='/validateuser' component={ValidateUser} />
                     <Redirect to='/' />
                 </Switch>
             )
