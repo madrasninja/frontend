@@ -55,6 +55,7 @@
     "@babel/preset-es2015": "^7.0.0-beta.53",
     "@babel/preset-react": "^7.0.0",
     "babel-loader": "^8.0.4",
+    "copy-webpack-plugin": "^5.0.1",
     "css-loader": "^0.28.9",
     "file-loader": "^1.1.6",
     "html-webpack-plugin": "^3.2.0",
