@@ -107,7 +107,6 @@ class Header extends Component {
 }
 
 export default connect(reduxData=>{
-    console.log(reduxData.UserDetails)
     return {
         userData: reduxData.UserDetails.data
     }
