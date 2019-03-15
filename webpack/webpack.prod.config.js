@@ -14,9 +14,8 @@ module.exports = merge(base, {
         }),
         new CopyPlugin([
             {
-              from: '../_redirects',
-              to: '../dist',
-              toType: 'file',
+              from: './public',
+              to: './',
             },
         ]),
     ],
