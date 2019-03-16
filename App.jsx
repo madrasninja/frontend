@@ -15,74 +15,80 @@ import Footer from './src/components/footer/Footer';
 import OurServices from './src/pages/our-services/OurServices';
 import Dashboard from './src/pages/dashboard/Dashboard';
 import Book from './src/pages/book/Book';
-import Labour from "./src/pages/labour";
+import Labour from './src/pages/labour';
 import Login from './src/pages/login';
 import Signup from './src/pages/signup';
 import BookSuccess from './src/pages/book/success';
-import { getServiceTypeList } from "./src/services/ServiceTypeList";
-import { getLocalityList } from "./src/services/LocalityList";
-import { getMe } from "./src/services/UserDetails";
+import { getServiceTypeList } from './src/services/ServiceTypeList';
+import { getLocalityList } from './src/services/LocalityList';
+import { getMe } from './src/services/UserDetails';
 import SetPassword from './src/pages/setpassword';
 import ValidateUser from './src/pages/validateuser';
+import User from './src/pages/user';
 
 class App extends Component {
+	constructor(props) {
+		super(props);
+		props.getServiceTypeList();
+		props.getLocalityList();
+		if (cookie.load('session')) {
+			props.getMe();
+		}
+	}
 
-    constructor(props) {
-        super(props);
-        props.getServiceTypeList();
-        props.getLocalityList();
-        if (cookie.load('session')) {
-            props.getMe();
-        }
-    }
+	renderRoutes = () => {
+		if (cookie.load('session')) {
+			return (
+				<Switch>
+					<Route path="/" exact component={Home} />
+					<Route path="/services" component={OurServices} />
+					<Route path="/dashboard" component={Dashboard} />
+					<Route path="/book" component={Book} />
+					<Route path="/bookSuccess" component={BookSuccess} />
+					<Route path="/labour" component={Labour} />
+					<Route path="/user" component={User} />
+					<Redirect to="/" />
+				</Switch>
+			);
+		} else {
+			return (
+				<Switch>
+					<Route path="/" exact component={Home} />
+					<Route path="/services" component={OurServices} />
+					<Route path="/book" component={Book} />
+					<Route path="/bookSuccess" component={BookSuccess} />
+					<Route path="/signin" component={Login} />
+					<Route path="/signup" component={Signup} />
+					<Route path="/setPassword" component={SetPassword} />
+					<Route path="/validateuser" component={ValidateUser} />
+					<Redirect to="/" />
+				</Switch>
+			);
+		}
+	};
 
-    renderRoutes = () => {
-        if (cookie.load('session')) {
-            return (
-                <Switch>
-                    <Route path='/' exact component={Home} />
-                    <Route path='/services' component={OurServices} />
-                    <Route path='/dashboard' component={Dashboard} />
-                    <Route path='/book' component={Book} />
-                    <Route path='/bookSuccess' component={BookSuccess} />
-                    <Route path='/labour' component={Labour} />
-                    <Redirect to='/' />
-                </Switch>
-            )
-        } else {
-            return (
-                <Switch>
-                    <Route path='/' exact component={Home} />
-                    <Route path='/services' component={OurServices} />
-                    <Route path='/book' component={Book} />
-                    <Route path='/bookSuccess' component={BookSuccess} />
-                    <Route path='/signin' component={Login} />
-                    <Route path='/signup' component={Signup} />
-                    <Route path='/setPassword' component={SetPassword} />
-                    <Route path='/validateuser' component={ValidateUser} />
-                    <Redirect to='/' />
-                </Switch>
-            )
-        }
-    }
-
-    render() {
-        return (
-            <BrowserRouter>
-                <div className="App">
-                    <Header />
-                    <section className="container">
-                        {this.renderRoutes()}
-                    </section>
-                    <Footer />
-                </div>
-            </BrowserRouter>
-        );
-    }
+	render() {
+		return (
+			<BrowserRouter>
+				<div className="App">
+					<Header />
+					<section className="container">{this.renderRoutes()}</section>
+					<Footer />
+				</div>
+			</BrowserRouter>
+		);
+	}
 }
 
-export default connect(null, {
-    getServiceTypeList,
-    getLocalityList,
-    getMe
-})(App);
+export default connect(
+	(reduxData) => {
+		return {
+			userData: reduxData.UserDetails.data
+		};
+	},
+	{
+		getServiceTypeList,
+		getLocalityList,
+		getMe
+	}
+)(App);

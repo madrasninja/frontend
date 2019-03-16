@@ -37,7 +37,7 @@ class AddForm extends Component {
                             name="Service_Type_ID"
                             list={this.props.serviceTypeList.data}
                             keyword="_id"
-                            name="name"
+                            option="name"
                             type="select"
                             validate={[required]}
                         />

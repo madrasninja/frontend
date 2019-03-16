@@ -46,22 +46,6 @@ class LabourHome extends Component {
     render() {
         return (
             <Row>
-                <Col xs={12} className="stats">
-                    <Row>
-                        <Col xs={12} md={4} className="text-center text-uppercase" >
-                            <h1>2</h1>
-                            <p>New</p>
-                        </Col>
-                        <Col xs={12} md={4} className="text-center text-uppercase" >
-                            <h1>6</h1>
-                            <p>Pending for verification</p>
-                        </Col>
-                        <Col xs={12} md={4} className="text-center text-uppercase" >
-                            <h1>12</h1>
-                            <p>Verified</p>
-                        </Col>
-                    </Row>
-                </Col>
                 <Col xs={12}>
                     <Row>
                         {this.renderList(this.props.labourList)}
