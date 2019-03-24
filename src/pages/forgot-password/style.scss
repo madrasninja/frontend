@@ -1,0 +1,18 @@
+.login {
+    padding: 4rem 0rem;
+    h3{
+        font-weight: 300;
+    }
+    form, .add-on {
+        padding-top: 2rem;
+        button {
+            padding: 0.6rem;
+        }
+    }
+    a {
+        color: #00aeef;
+        &:hover, &:focus {
+            color: #0096ce;
+        }
+    }
+}
