@@ -7,7 +7,7 @@ import arrivedNinja from '../../../assets/img/arrived-ninja.png';
 
 class BookSuccess extends Component {
 	componentWillMount = () => {
-		const { Booking_ID, history } = this.props.formResponse;
+		const { formResponse: { Booking_ID }, history } = this.props;
 		if (!Booking_ID) {
 			history.push({ pathname: '/book' });
 		}

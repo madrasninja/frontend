@@ -20,8 +20,8 @@ class SetPassword extends Component {
 		super(props);
 		const { token } = this.state;
 		API_CALL('get', 'validatetoken?token=' + token, null, null, (data) => {
-			const { response } = data;
-			if (response == 'success') {
+			const { code } = data;
+			if (code == 'MNS027') {
 				this.setState({ show: true });
 			} else {
 				this.setState({ error: true });
@@ -31,8 +31,8 @@ class SetPassword extends Component {
 
 	setPassword(values) {
 		API_CALL('post', 'setpassword', { ...values, verifyToken: this.state.token }, null, (data) => {
-			const { response, message } = data;
-			if (response == 'success') {
+			const { code, message } = data;
+			if (code == 'MNS028') {
 				this.setState({
 					showSuccess: true
 				});

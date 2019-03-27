@@ -27,8 +27,8 @@ class Book extends Component {
 
 	componentWillReceiveProps(nextProps) {
 		if (this.props.formResponse !== nextProps.formResponse) {
-			let { response } = nextProps.formResponse.data;
-			if (response == 'success') {
+			let { Booking_ID } = nextProps.formResponse;
+			if (Booking_ID) {
 				this.props.history.push({ pathname: '/booksuccess' });
 			}
 		}
@@ -48,7 +48,10 @@ class Book extends Component {
 							<h4 className="text-center font-weight-light">Fill up & get ninjafied</h4>
 							<hr />
 							<Notifier message={this.state.message} color="success" show={this.state.responseStatus} />
-							<ServiceForm getValues={(values) => this.bookaService(values)} />
+							<ServiceForm
+								getValues={(values) => this.bookaService(values)}
+								initialValues={this.props.userData}
+							/>
 						</Col>
 					</Row>
 				</Col>
@@ -59,7 +62,8 @@ class Book extends Component {
 
 function mapStateToProps(reduxData) {
 	return {
-		formResponse: reduxData.BookService
+		formResponse: reduxData.BookService.data,
+		userData: reduxData.UserDetails.data
 	};
 }
 

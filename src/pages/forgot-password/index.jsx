@@ -19,16 +19,17 @@ export default class ForgotPassword extends Component {
 
 	apicall = (data) => {
 		API_CALL('post', 'forgetpassword', data, null, (data) => {
-			if (data.result == 'success') {
+			const { code, message } = data;
+			if (code == 'MNS029') {
 				this.setState({
 					color: 'success',
-					message: data.message,
+					message: message,
 					notifier: true
 				});
 			} else {
 				this.setState({
 					color: 'danger',
-					message: data.message,
+					message: message,
 					notifier: true
 				});
 			}

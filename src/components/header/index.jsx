@@ -88,7 +88,7 @@ class Header extends Component {
 							<DropdownItem
 								onClick={() => {
 									API_CALL('get', 'logout', null, null, (data) => {
-										if (data.result == 'success') {
+										if (data.code == 'MNS024') {
 											cookie.remove('session');
 											window.location.reload();
 										}

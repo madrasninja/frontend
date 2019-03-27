@@ -19,13 +19,14 @@ export default class Login extends Component {
 
 	apicall = (data) => {
 		API_CALL('post', 'login', data, null, (data) => {
-			if (data.result == 'success') {
-				cookie.save('session', data.accessToken, { path: '/' });
+			const { code, data: { accessToken }, message } = data;
+			if (code == 'MNS020') {
+				cookie.save('session', accessToken, { path: '/' });
 				window.location.reload();
 			} else {
 				this.setState({
 					color: 'danger',
-					message: data.message,
+					message: message,
 					notifier: true
 				});
 			}
