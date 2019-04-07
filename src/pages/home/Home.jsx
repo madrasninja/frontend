@@ -40,12 +40,12 @@ class Home extends Component {
 								services.
 							</div>
 						</Col>
-						<Col sm={4} className="align-self-center">
+						<Col sm={4} className="d-none d-sm-block align-self-center">
 							<img src="https://image.freepik.com/free-photo/close-up-woman-s-hand-holding-bucket-with-cleaning-supplies-pink-napkin_23-2147916411.jpg" />
 						</Col>
 					</Row>
 					<Row className="content-block">
-						<Col sm={4} className="align-self-center">
+						<Col sm={4} className="d-none d-sm-block align-self-center">
 							<img src="https://image.freepik.com/free-photo/closeup-hands-wearing-gloves-cleaning-sink-faucet-domestic-chores-concept_53876-14720.jpg" />
 						</Col>
 						<Col sm={{ size: 8 }} className="align-self-center">
@@ -71,12 +71,12 @@ class Home extends Component {
 								appealing results, the best services and the personal attention to the details you want.
 							</div>
 						</Col>
-						<Col sm={4} className="align-self-center">
+						<Col sm={4} className="d-none d-sm-block align-self-center">
 							<img src="https://image.freepik.com/free-photo/garage-gate-water-cleaning_1426-1496.jpg" />
 						</Col>
 					</Row>
 					<Row className="content-block">
-						<Col sm={4} className="align-self-center">
+						<Col sm={4} className="d-none d-sm-block align-self-center">
 							<img src="https://image.freepik.com/free-photo/payment-terminal-besides-spray-bottle-rubber-gloves_1088-1108.jpg" />
 						</Col>
 						<Col sm={{ size: 8 }} className="align-self-center">
