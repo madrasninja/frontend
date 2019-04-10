@@ -1,6 +1,7 @@
-import API_CALL from "..";
-import * as types from "./actionTypes";
+import API_CALL from '..';
+import * as types from './actionTypes';
 
-export function getBookingList() {
-    return API_CALL('get', 'getbookinglist', null, types);
+export function getBookingList(offset) {
+	let url = offset ? `getbookinglist/${offset}` : `getbookinglist`;
+	return API_CALL('get', url, null, types);
 }

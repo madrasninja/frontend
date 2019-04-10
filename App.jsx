@@ -26,6 +26,7 @@ import SetPassword from './src/pages/setpassword';
 import ValidateUser from './src/pages/validateuser';
 import User from './src/pages/user';
 import ForgotPassword from './src/pages/forgot-password';
+import Booking from './src/pages/bookings/Booking';
 
 class App extends Component {
 	constructor(props) {
@@ -48,6 +49,7 @@ class App extends Component {
 					<Route path="/booksuccess" component={BookSuccess} />
 					<Route path="/labour" component={Labour} />
 					<Route path="/user" component={User} />
+					<Route path="/bookings" component={Booking} />
 					<Redirect to="/" />
 				</Switch>
 			);

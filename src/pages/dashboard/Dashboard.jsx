@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Row, Col } from 'reactstrap';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import _ from 'lodash';
 
@@ -9,30 +10,19 @@ import './Dashboard.scss';
 import BookingCard from '../../components/booking-card';
 
 class Dashboard extends Component {
-	constructor(props) {
-		super(props);
-		props.getBookingList();
-		this.state = {
-			list: []
-		};
-	}
-
-	componentWillReceiveProps(nextProps) {
-		if (this.props.list != nextProps.list) {
-			this.setState({
-				list: nextProps.list.data
-			});
-		}
+	componentDidMount() {
+		this.props.getBookingList();
 	}
 
 	renderList(list) {
 		return _.map(list, (data, index) => {
-			return <BookingCard data={data} key={index} />;
+			if (index <= 2) return <BookingCard data={data} key={index} />;
 		});
 	}
 
 	render() {
 		const { First_Name, Last_Name, Email_Id, Mobile_Number, User_Type } = this.props.userData;
+		const { data } = this.props.list;
 		return (
 			<Row className="dashboard">
 				<Col xs={12} className="text-center heading">
@@ -47,7 +37,16 @@ class Dashboard extends Component {
 					<h4 className="font-weight-light">Recent bookings</h4>
 				</Col>
 				<Col xs={12} className="content">
-					<Row>{this.renderList(this.state.list)}</Row>
+					<Row>{this.renderList(data)}</Row>
+					{data.length > 3 ? (
+						<Row className="view-more">
+							<Col className="text-center">
+								<Link to="/bookings">View more</Link>
+							</Col>
+						</Row>
+					) : (
+						''
+					)}
 				</Col>
 			</Row>
 		);

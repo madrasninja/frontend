@@ -15,7 +15,7 @@ body {
 	margin: 0;
 	padding: 0;
 	font-size: 16px;
-	background-color: #f8f9fa;
+	// background-color: #f8f9fa;
 
 	a {
 		color: #222222;
@@ -57,9 +57,9 @@ section {
 	margin-bottom: 1.5rem;
 	border: none;
 	border-bottom: 4px solid #eee;
-
 	&:hover {
 		border-bottom-color: #ddd;
+		box-shadow: 0px -30px 30px -50px;
 	}
 
 	.card-footer {

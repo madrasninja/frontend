@@ -13,10 +13,13 @@ class UpdateLabour extends Component {
 		this.state = {
 			responseStatus: false
 		};
-		API_CALL('get', 'getuser/3/' + this.props.match.params.id, null, null, (data) => {
-			this.setState({
-				labourDetails: data[0]
-			});
+		API_CALL('get', 'getuser/3/' + this.props.match.params.id, null, null, (response) => {
+			const { data, code } = response;
+			if (code == 'MNS020') {
+				this.setState({
+					labourDetails: data[0]
+				});
+			}
 		});
 	}
 
@@ -28,25 +31,31 @@ class UpdateLabour extends Component {
 
 	componentWillReceiveProps(nextProps) {
 		if (this.props.formResponse !== nextProps.formResponse) {
-			let { message, response } = nextProps.formResponse.data;
-			if (response === 'success') {
+			let { code, message } = nextProps.formResponse.data;
+			if (code === 'MNS002') {
 				this.setState({
 					responseStatus: true,
 					message
+				});
+			} else {
+				this.setState({
+					responseStatus: true,
+					message,
+					color: 'danger'
 				});
 			}
 		}
 	}
 
 	render() {
-		const { labourDetails } = this.state;
+		const { labourDetails, message, color, responseStatus } = this.state;
 		return (
 			<Row>
 				<Col xs={12} sm={12} md={{ size: 6, offset: 3 }}>
 					<h3 className="text-center">Update Labour</h3>
 					<hr />
-					<Notifier message={this.state.message} color="success" show={this.state.responseStatus} />
 					<AddForm getValues={(values) => this.save(values)} initialValues={labourDetails} />
+					<Notifier message={message} color={color} show={responseStatus} />
 				</Col>
 			</Row>
 		);
