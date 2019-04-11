@@ -32,7 +32,10 @@ export default class Booking extends Component {
 					<h2 className="font-weight-light">Booking History</h2>
 				</Col>
 				<Col xs={12} className="content">
-					<Row>{this.renderList(data)}</Row>
+					<Row>{data.UpcomingBooking && this.renderList(data.UpcomingBooking)}</Row>
+				</Col>
+				<Col xs={12} className="content">
+					<Row>{data.PastBooking && this.renderList(data.PastBooking)}</Row>
 				</Col>
 			</Row>
 		);

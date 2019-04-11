@@ -15,9 +15,10 @@ class Dashboard extends Component {
 	}
 
 	renderList(list) {
-		return _.map(list, (data, index) => {
-			if (index <= 2) return <BookingCard data={data} key={index} />;
-		});
+		if (list)
+			return _.map(list.UpcomingBooking, (data, index) => {
+				if (index <= 2) return <BookingCard data={data} key={index} />;
+			});
 	}
 
 	render() {
@@ -38,7 +39,7 @@ class Dashboard extends Component {
 				</Col>
 				<Col xs={12} className="content">
 					<Row>{this.renderList(data)}</Row>
-					{data.length > 3 ? (
+					{data.UpcomingBooking && data.UpcomingBooking.length > 3 ? (
 						<Row className="view-more">
 							<Col className="text-center">
 								<Link to="/bookings">View more</Link>
