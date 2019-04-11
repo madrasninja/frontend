@@ -15,12 +15,12 @@ class Book extends Component {
 	};
 
 	bookaService(values) {
-		let { serviceTime } = values;
+		let { serviceTime, serviceDate } = values;
 		serviceTime = serviceTime.format('HH:mm');
-		let session = values.serviceDate.set({ hours: serviceTime.split(':')[0], minutes: serviceTime.split(':')[1] });
+		let session = serviceDate.set({ hours: serviceTime.split(':')[0], minutes: serviceTime.split(':')[1] });
 		values.Session_Time = {
-			From: session.format('DD/MM/YYYY HH:mm'),
-			To: session.add(values.serviceHours, 'h').format('DD/MM/YYYY HH:mm')
+			From: session.format('YYYY-MM-DD HH:mm:ss'),
+			To: session.add(values.serviceHours, 'h').format('YYYY-MM-DD HH:mm:ss')
 		};
 		this.props.bookService(values);
 	}

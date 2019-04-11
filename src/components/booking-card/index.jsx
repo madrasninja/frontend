@@ -11,7 +11,7 @@ class BookingCard extends Component {
 	};
 
 	findDiff = (from, to) => {
-		return moment(to, 'DD/MM/YYYY HH:mm').diff(moment(from, 'DD/MM/YYYY HH:mm'), 'hours');
+		return moment(to, 'YYYY-MM-DD HH:mm:ss').diff(moment(from, 'YYYY-MM-DD HH:mm:ss'), 'hours');
 	};
 
 	toggle = (data) => {
@@ -60,7 +60,7 @@ class BookingCard extends Component {
 							{data.service_type.name} at {data.locality.name}
 							<br />
 							<small>
-								{moment(data.Session_Time.From, 'DD/MM/YYYY HH:mm').format('hh:mmA DD/MM/YYYY')} -{' '}
+								{moment(data.Session_Time.From, 'YYYY-MM-DD HH:mm:ss').format('hh:mmA DD/MM/YYYY')} -{' '}
 								{hour} {hour > 1 ? 'Hours' : 'Hour'}
 							</small>
 						</CardTitle>
