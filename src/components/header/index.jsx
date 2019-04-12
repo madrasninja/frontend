@@ -83,6 +83,9 @@ class Header extends Component {
 							<DropdownItem>
 								<Link to="/dashboard">Dashboard</Link>
 							</DropdownItem>
+							<DropdownItem>
+								<Link to="/bookings">Booking History</Link>
+							</DropdownItem>
 							{this.renderDropDown(User_Type)}
 							<DropdownItem divider />
 							<DropdownItem

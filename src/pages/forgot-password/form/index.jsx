@@ -13,7 +13,13 @@ class ForgotPasswordForm extends Component {
 			<div>
 				<Form onSubmit={handleSubmit(this.props.getValues.bind(this))}>
 					<FormGroup>
-						<FormField placeholder="Email ID" name="Email_Id" type="text" validate={[ required ]} />
+						<FormField
+							label="Email ID"
+							placeholder="Enter your Email ID"
+							name="Email_Id"
+							type="text"
+							validate={[ required ]}
+						/>
 					</FormGroup>
 					<div className="text-center mt-4">
 						<Button color="primary" block>

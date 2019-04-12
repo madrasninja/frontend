@@ -13,8 +13,8 @@ import Notifier from '../../components/notifier';
 export default class Login extends Component {
 	state = {
 		color: 'primary',
-		message: '',
-		notifier: false
+		message: 'adfdafdaf',
+		notifier: true
 	};
 
 	apicall = (data) => {

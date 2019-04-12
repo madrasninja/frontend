@@ -8,6 +8,7 @@ import { userType } from '../../const/user-type';
 import { getBookingList } from './../../services/BookingList';
 import './Dashboard.scss';
 import BookingCard from '../../components/booking-card';
+import NoData from '../../components/no-data';
 
 class Dashboard extends Component {
 	componentDidMount() {
@@ -15,10 +16,17 @@ class Dashboard extends Component {
 	}
 
 	renderList(list) {
-		if (list)
-			return _.map(list.UpcomingBooking, (data, index) => {
+		if (list.length > 0) {
+			return _.map(list, (data, index) => {
 				if (index <= 2) return <BookingCard data={data} key={index} />;
 			});
+		} else {
+			return (
+				<Col>
+					<NoData message="Sorry, we couldn't find any booking" />
+				</Col>
+			);
+		}
 	}
 
 	render() {
@@ -38,7 +46,7 @@ class Dashboard extends Component {
 					<h4 className="font-weight-light">Recent bookings</h4>
 				</Col>
 				<Col xs={12} className="content">
-					<Row>{this.renderList(data)}</Row>
+					<Row>{data.UpcomingBooking && this.renderList(data.UpcomingBooking)}</Row>
 					{data.UpcomingBooking && data.UpcomingBooking.length > 3 ? (
 						<Row className="view-more">
 							<Col className="text-center">
