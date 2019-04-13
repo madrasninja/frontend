@@ -27,6 +27,7 @@ import ValidateUser from './src/pages/validateuser';
 import User from './src/pages/user';
 import ForgotPassword from './src/pages/forgot-password';
 import Booking from './src/pages/bookings/Booking';
+import ScrollToTop from './src/components/scroll-to-top';
 
 class App extends Component {
 	constructor(props) {
@@ -76,7 +77,9 @@ class App extends Component {
 			<BrowserRouter>
 				<div className="App">
 					<Header />
-					<section className="container">{this.renderRoutes()}</section>
+					<ScrollToTop>
+						<section className="container">{this.renderRoutes()}</section>
+					</ScrollToTop>
 					<Footer />
 				</div>
 			</BrowserRouter>

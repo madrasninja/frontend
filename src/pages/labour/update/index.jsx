@@ -6,13 +6,20 @@ import API_CALL from './../../../services';
 import { savelabour } from './../../../services/SaveLabour';
 import AddForm from './../form';
 import Notifier from './../../../components/notifier';
+import moment from 'moment';
 
 class UpdateLabour extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			responseStatus: false
+			responseStatus: false,
+			labourDetails: {
+				Service_Time: {}
+			}
 		};
+	}
+
+	componentDidMount() {
 		API_CALL('get', 'getuser/3/' + this.props.match.params.id, null, null, (response) => {
 			const { data, code } = response;
 			if (code == 'MNS020') {
@@ -48,7 +55,10 @@ class UpdateLabour extends Component {
 	}
 
 	render() {
-		const { labourDetails, message, color, responseStatus } = this.state;
+		let { labourDetails, message, color, responseStatus } = this.state;
+		let { Service_Time: { From, To } } = labourDetails;
+		if (From) labourDetails.Service_Time.From = moment().set('h', From.split(':')[0]).set('m', From.split(':')[1]);
+		if (To) labourDetails.Service_Time.To = moment().set('h', To.split(':')[0]).set('m', To.split(':')[1]);
 		return (
 			<Row>
 				<Col xs={12} sm={12} md={{ size: 6, offset: 3 }}>

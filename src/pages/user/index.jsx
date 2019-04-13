@@ -11,8 +11,8 @@ class User extends Component {
 			<Row className="user">
 				<Col xs={12} className="header">
 					<Navbar color="transparent" light expand="md">
-						<Link to="/user/home">
-							<NavbarBrand>User Management</NavbarBrand>
+						<Link to="/user/home" className="navbar-brand">
+							User Management
 						</Link>
 					</Navbar>
 				</Col>

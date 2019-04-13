@@ -9,7 +9,7 @@ class Banner extends Component {
 		return (
 			<div className="Banner">
 				<div className="content container">
-					<h2>One Stop Destination For All Your Cleaning Service Needs</h2>
+					<h2 className="text-center">One Stop Destination For All Your Cleaning Service Needs</h2>
 					<p>Home - Restroom - Kitchen - Office</p>
 					<Link to="/book">
 						<Button color="primary">Book Your Service</Button>
