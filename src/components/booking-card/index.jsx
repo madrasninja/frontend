@@ -1,7 +1,22 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import moment from 'moment';
-import { Col, Card, CardBody, CardTitle, CardText, CardFooter, Button, Modal, ModalHeader } from 'reactstrap';
+import {
+	Row,
+	Col,
+	Card,
+	CardBody,
+	CardTitle,
+	CardText,
+	CardFooter,
+	Button,
+	Modal,
+	ModalHeader,
+	UncontrolledDropdown,
+	DropdownToggle,
+	DropdownMenu,
+	DropdownItem
+} from 'reactstrap';
 
 import AssignLabour from './assignLabour';
 
@@ -48,6 +63,10 @@ class BookingCard extends Component {
 		}
 	};
 
+	cancel = (data) => {
+		console.log(data);
+	};
+
 	render() {
 		const { bookingId } = this.state;
 		const { data } = this.props;
@@ -57,8 +76,27 @@ class BookingCard extends Component {
 				<Card>
 					<CardBody>
 						<CardTitle>
-							{data.service_type.name} at {data.locality.name}
-							<br />
+							<Row>
+								<Col xs={10}>
+									{data.service_type.name} at {data.locality.name}
+								</Col>
+								<Col xs={2}>
+									<UncontrolledDropdown>
+										<DropdownToggle className="option" color="link">
+											&#8285;
+										</DropdownToggle>
+										<DropdownMenu right>
+											<DropdownItem
+												onClick={() => {
+													this.cancel(data);
+												}}
+											>
+												Cancel
+											</DropdownItem>
+										</DropdownMenu>
+									</UncontrolledDropdown>
+								</Col>
+							</Row>
 							<small>
 								{moment(data.Session_Time.From, 'YYYY-MM-DD HH:mm:ss').format('hh:mmA DD/MM/YYYY')} -{' '}
 								{hour} {hour > 1 ? 'Hours' : 'Hour'}

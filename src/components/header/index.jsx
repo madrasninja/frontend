@@ -88,6 +88,9 @@ class Header extends Component {
 							</DropdownItem>
 							{this.renderDropDown(User_Type)}
 							<DropdownItem divider />
+							<DropdownItem>
+								<Link to="/changepassword">Change Password</Link>
+							</DropdownItem>
 							<DropdownItem
 								onClick={() => {
 									API_CALL('get', 'logout', null, null, (data) => {
