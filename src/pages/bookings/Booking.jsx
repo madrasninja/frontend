@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Row, Col } from 'reactstrap';
+import classnames from 'classnames';
+import { Row, Col, TabContent, TabPane, Nav, NavItem, NavLink } from 'reactstrap';
 
 import { getBookingList } from './../../services/BookingList';
 import BookingCard from '../../components/booking-card';
@@ -16,6 +17,9 @@ import './style.scss';
 	{ getBookingList }
 )
 export default class Booking extends Component {
+	state = {
+		activeTab: 'UpcomingBooking'
+	};
 	renderList(list) {
 		if (list.length > 0) {
 			return _.map(list, (data, index) => {
@@ -33,6 +37,14 @@ export default class Booking extends Component {
 		this.props.getBookingList();
 	}
 
+	toggle = (instance) => {
+		if (this.state.activeTab !== instance) {
+			this.setState({
+				activeTab: instance
+			});
+		}
+	};
+
 	render() {
 		const { data } = this.props.list;
 		return (
@@ -41,12 +53,49 @@ export default class Booking extends Component {
 					<h2 className="font-weight-light">Booking History</h2>
 				</Col>
 				<Col xs={12} className="content">
-					<h4>Current</h4>
-					<Row>{data.UpcomingBooking && this.renderList(data.UpcomingBooking)}</Row>
-				</Col>
-				<Col xs={12} className="content">
-					<h4>Past</h4>
-					<Row className="old">{data.PastBooking && this.renderList(data.PastBooking)}</Row>
+					<Nav tabs justified>
+						<NavItem>
+							<NavLink
+								className={classnames({ active: this.state.activeTab === 'UpcomingBooking' })}
+								onClick={() => {
+									this.toggle('UpcomingBooking');
+								}}
+							>
+								Current
+							</NavLink>
+						</NavItem>
+						<NavItem>
+							<NavLink
+								className={classnames({ active: this.state.activeTab === 'PastBooking' })}
+								onClick={() => {
+									this.toggle('PastBooking');
+								}}
+							>
+								Past
+							</NavLink>
+						</NavItem>
+						<NavItem>
+							<NavLink
+								className={classnames({ active: this.state.activeTab === 'Cancelled' })}
+								onClick={() => {
+									this.toggle('Cancelled');
+								}}
+							>
+								Cancelled
+							</NavLink>
+						</NavItem>
+					</Nav>
+					<TabContent activeTab={this.state.activeTab}>
+						<TabPane tabId="UpcomingBooking">
+							<Row>{data.UpcomingBooking && this.renderList(data.UpcomingBooking)}</Row>
+						</TabPane>
+						<TabPane tabId="PastBooking">
+							<Row className="old">{data.PastBooking && this.renderList(data.PastBooking)}</Row>
+						</TabPane>
+						<TabPane tabId="Cancelled">
+							<Row className="old">{data.Cancelled && this.renderList(data.Cancelled)}</Row>
+						</TabPane>
+					</TabContent>
 				</Col>
 			</Row>
 		);

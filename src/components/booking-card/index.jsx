@@ -19,7 +19,10 @@ import {
 } from 'reactstrap';
 
 import AssignLabour from './assignLabour';
+import API_CALL from '../../services';
+import { getBookingList } from '../../services/BookingList';
 
+@connect(null, { getBookingList })
 class BookingCard extends Component {
 	state = {
 		modal: false
@@ -60,11 +63,59 @@ class BookingCard extends Component {
 					Assigned
 				</Button>
 			);
+		} else if (_id == 4) {
+			return (
+				<Button color="secondary" size="sm" className="float-right">
+					Completed
+				</Button>
+			);
 		}
 	};
 
 	cancel = (data) => {
-		console.log(data);
+		const { ID } = data;
+		API_CALL('get', `cancelbooking/${ID}`, null, null, (data) => {
+			const { code, message } = data;
+			if (code == 'MNS033') {
+				this.props.getBookingList();
+			}
+		});
+	};
+
+	renderTitle = (data) => {
+		if ([ 0, 1, 2, 3 ].indexOf(data.Status_ID) >= 0) {
+			return (
+				<Row>
+					<Col xs={10}>
+						{data.service_type.name} at {data.locality.name}
+					</Col>
+					<Col xs={2}>
+						<UncontrolledDropdown>
+							<DropdownToggle className="option" color="link">
+								&#8285;
+							</DropdownToggle>
+							<DropdownMenu right>
+								<DropdownItem
+									onClick={() => {
+										this.cancel(data);
+									}}
+								>
+									Cancel
+								</DropdownItem>
+							</DropdownMenu>
+						</UncontrolledDropdown>
+					</Col>
+				</Row>
+			);
+		} else {
+			return (
+				<Row>
+					<Col xs={12}>
+						{data.service_type.name} at {data.locality.name}
+					</Col>
+				</Row>
+			);
+		}
 	};
 
 	render() {
@@ -76,27 +127,7 @@ class BookingCard extends Component {
 				<Card>
 					<CardBody>
 						<CardTitle>
-							<Row>
-								<Col xs={10}>
-									{data.service_type.name} at {data.locality.name}
-								</Col>
-								<Col xs={2}>
-									<UncontrolledDropdown>
-										<DropdownToggle className="option" color="link">
-											&#8285;
-										</DropdownToggle>
-										<DropdownMenu right>
-											<DropdownItem
-												onClick={() => {
-													this.cancel(data);
-												}}
-											>
-												Cancel
-											</DropdownItem>
-										</DropdownMenu>
-									</UncontrolledDropdown>
-								</Col>
-							</Row>
+							{this.renderTitle(data)}
 							<small>
 								{moment(data.Session_Time.From, 'YYYY-MM-DD HH:mm:ss').format('hh:mmA DD/MM/YYYY')} -{' '}
 								{hour} {hour > 1 ? 'Hours' : 'Hour'}

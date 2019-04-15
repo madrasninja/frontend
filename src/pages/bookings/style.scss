@@ -3,7 +3,7 @@
 		padding: 2rem 0rem;
 		color: #000000;
 		padding-bottom: 2rem;
-		border-bottom: 2px solid #eee;
+		// border-bottom: 2px solid #eee;
 		margin-bottom: 1rem;
 	}
 	.content {
@@ -13,6 +13,31 @@
 			margin-bottom: 1rem;
 			text-align: center;
 		}
-		margin: 2rem 0rem;
+		.tab-content {
+			margin: 2rem 0rem;
+		}
+		.nav {
+			&.nav-tabs {
+				border: none;
+				.nav-item {
+					.nav-link {
+						transition: 250ms;
+						font-size: 1.2rem;
+						color: rgba($color: #000000, $alpha: 0.8);
+						text-transform: uppercase;
+						border-radius: 0px;
+						border: none;
+						border-bottom: 2px solid rgba($color: #000000, $alpha: 0.05);
+						cursor: pointer;
+						&:hover {
+							border-bottom: 2px solid rgba($color: #000000, $alpha: 0.2);
+						}
+						&.active {
+							border-bottom: 2px solid #00aeef;
+						}
+					}
+				}
+			}
+		}
 	}
 }
