@@ -49,7 +49,8 @@ class FormField extends Component {
 						closeOnSelect={true}
 						dateFormat="DD/MM/YYYY"
 						isValidDate={(currentDate) => {
-							return currentDate.isAfter(moment().subtract(1, 'days'));
+							if (input.name == 'DOB') return currentDate.isBefore(moment().subtract(1, 'days'));
+							else return currentDate.isAfter(moment().subtract(1, 'days'));
 						}}
 						inputProps={{ placeholder: placeholder }}
 						{...input}
@@ -76,6 +77,28 @@ class FormField extends Component {
 						inputProps={{ placeholder: placeholder }}
 						{...input}
 						className={touched && error ? 'input-error' : ''}
+					/>
+					{error && touched ? (
+						<div className="error">
+							<span className="icon">!</span>
+							<span className="message">{error}</span>
+						</div>
+					) : (
+						''
+					)}
+				</div>
+			);
+		} else if (type == 'file') {
+			return (
+				<div>
+					<label>{label ? label : placeholder}</label>
+					<Input
+						type={type}
+						placeholder={placeholder}
+						{...input}
+						className={touched && error ? 'input-error' : ''}
+						value={null}
+						accept={'.pdf, .png, .jpg, .jpeg'}
 					/>
 					{error && touched ? (
 						<div className="error">

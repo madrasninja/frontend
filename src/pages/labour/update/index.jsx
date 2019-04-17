@@ -6,7 +6,8 @@ import API_CALL from './../../../services';
 import { savelabour } from './../../../services/SaveLabour';
 import AddForm from './../form';
 import Notifier from './../../../components/notifier';
-import moment from 'moment';
+import moment, { isMoment } from 'moment';
+import ImageCrop from '../../../components/image-crop';
 
 class UpdateLabour extends Component {
 	constructor(props) {
@@ -15,7 +16,8 @@ class UpdateLabour extends Component {
 			responseStatus: false,
 			labourDetails: {
 				Service_Time: {}
-			}
+			},
+			avatar: undefined
 		};
 	}
 
@@ -31,9 +33,18 @@ class UpdateLabour extends Component {
 	}
 
 	save(data) {
-		data.Service_Time.From = data.Service_Time.From.format('HH:mm');
-		data.Service_Time.To = data.Service_Time.To.format('HH:mm');
-		this.props.savelabour(data);
+		const { avatar } = this.state;
+		if (avatar) {
+			data.avatar = avatar;
+		}
+		data.Id_Prof = data.Id_Prof[0];
+		data.Service_Time_From = data.Service_Time.From.format('HH:mm');
+		data.Service_Time_To = data.Service_Time.To.format('HH:mm');
+		let formdata = new FormData();
+		for (let i in data) {
+			formdata.append(i, data[i]);
+		}
+		this.props.savelabour(formdata);
 	}
 
 	componentWillReceiveProps(nextProps) {
@@ -42,7 +53,8 @@ class UpdateLabour extends Component {
 			if (code === 'MNS002') {
 				this.setState({
 					responseStatus: true,
-					message
+					message,
+					color: 'success'
 				});
 			} else {
 				this.setState({
@@ -57,13 +69,16 @@ class UpdateLabour extends Component {
 	render() {
 		let { labourDetails, message, color, responseStatus } = this.state;
 		let { Service_Time: { From, To } } = labourDetails;
-		if (From) labourDetails.Service_Time.From = moment().set('h', From.split(':')[0]).set('m', From.split(':')[1]);
-		if (To) labourDetails.Service_Time.To = moment().set('h', To.split(':')[0]).set('m', To.split(':')[1]);
+		if (!isMoment(From) && From)
+			labourDetails.Service_Time.From = moment().set('h', From.split(':')[0]).set('m', From.split(':')[1]);
+		if (!isMoment(To) && To)
+			labourDetails.Service_Time.To = moment().set('h', To.split(':')[0]).set('m', To.split(':')[1]);
 		return (
 			<Row>
 				<Col xs={12} sm={12} md={{ size: 6, offset: 3 }}>
 					<h3 className="text-center">Update Labour</h3>
 					<hr />
+					<ImageCrop setImage={(file) => this.setState({ avatar: file })} />
 					<AddForm getValues={(values) => this.save(values)} initialValues={labourDetails} />
 					<Notifier message={message} color={color} show={responseStatus} />
 				</Col>
