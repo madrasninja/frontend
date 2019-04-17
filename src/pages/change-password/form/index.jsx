@@ -50,21 +50,9 @@ class ChangePasswordForm extends Component {
 function validate(values) {
     const errors = {};
 
-    if (!values.Old_Password) {
-        errors.Old_Password = "Enter Current Password"
-    }
-
-    if (!values.New_Password) {
-        errors.New_Password = "Enter New Password"
-    }
-
-    if (!values.Confirm_Password) {
-        errors.Confirm_Password = "Enter Confirm Password"
-    }
-
     if (values.New_Password !== values.Confirm_Password) {
         errors.Confirm_Password = "Confirm Password does not match"
-    } else { }
+    }
 
     // if (values.New_Password) {
     //     if (values.New_Password.length < 8) {
