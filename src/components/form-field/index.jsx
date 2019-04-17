@@ -36,8 +36,8 @@ class FormField extends Component {
 							<span className="message">{error}</span>
 						</div>
 					) : (
-						''
-					)}
+							''
+						)}
 				</div>
 			);
 		} else if (type == 'date') {
@@ -62,8 +62,8 @@ class FormField extends Component {
 							<span className="message">{error}</span>
 						</div>
 					) : (
-						''
-					)}
+							''
+						)}
 				</div>
 			);
 		} else if (type == 'time') {
@@ -84,8 +84,8 @@ class FormField extends Component {
 							<span className="message">{error}</span>
 						</div>
 					) : (
-						''
-					)}
+							''
+						)}
 				</div>
 			);
 		} else if (type == 'file') {
@@ -126,8 +126,8 @@ class FormField extends Component {
 							<span className="message">{error}</span>
 						</div>
 					) : (
-						''
-					)}
+							''
+						)}
 				</div>
 			);
 		}

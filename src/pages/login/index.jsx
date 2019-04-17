@@ -32,6 +32,7 @@ export default class Login extends Component {
 			}
 		});
 	};
+	
 	render() {
 		const { color, message, notifier } = this.state;
 		return (
