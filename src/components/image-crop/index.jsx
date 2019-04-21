@@ -3,7 +3,7 @@ import ReactCrop from 'react-image-crop';
 import { Row, Col, Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import 'react-image-crop/lib/ReactCrop.scss';
 
-import userImage from '../../assets/img/user.svg';
+import defaultImage from '../../assets/img/user.svg';
 import './style.scss';
 
 export default class ImageCrop extends Component {
@@ -86,7 +86,8 @@ export default class ImageCrop extends Component {
 	}
 	render() {
 		const { crop, croppedImageUrl, src } = this.state;
-
+		let userImage = defaultImage;
+		if (this.props.image) userImage = this.props.image;
 		return (
 			<Row>
 				<Modal
@@ -134,7 +135,9 @@ export default class ImageCrop extends Component {
 								color="primary"
 								onClick={() => {
 									const { croppedImageUrl } = this.state;
-									this.props.setImage(new File([ croppedImageUrl ], 'user_avatat.jpg'));
+									this.props.setImage(
+										new File([ croppedImageUrl ], 'user_avatat.jpg', { type: 'image/jpg' })
+									);
 									this.toggle();
 								}}
 							>
@@ -149,7 +152,7 @@ export default class ImageCrop extends Component {
 				<Col xs={12} className="text-center">
 					<img
 						src={croppedImageUrl ? window.URL.createObjectURL(croppedImageUrl) : userImage}
-						style={{ width: '200px', borderRadius: '50%' }}
+						style={{ width: '150px', borderRadius: '50%' }}
 					/>
 					<br />
 					<Button className="mt-4" onClick={() => this.toggle()}>

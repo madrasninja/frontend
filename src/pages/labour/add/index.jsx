@@ -22,6 +22,7 @@ class AddLabour extends Component {
 			data.avatar = avatar;
 		}
 		data.Id_Prof = data.Id_Prof[0];
+		data.DOB = data.DOB.format('YYYY-MM-DD');
 		data.Service_Time_From = data.Service_Time.From.format('HH:mm');
 		data.Service_Time_To = data.Service_Time.To.format('HH:mm');
 		let formdata = new FormData();
@@ -34,13 +35,13 @@ class AddLabour extends Component {
 	componentWillReceiveProps(nextProps) {
 		if (this.props.formResponse !== nextProps.formResponse) {
 			let { code, message } = nextProps.formResponse.data;
-			if (code === 'MNS003') {
+			if (code === 'MNS001') {
 				this.setState({
 					responseStatus: true,
 					message,
 					color: 'success'
 				});
-			} else {
+			} else if (!nextProps.formResponse.requesting) {
 				this.setState({
 					responseStatus: true,
 					message,

@@ -40,10 +40,10 @@ class BookingCard extends Component {
 	};
 
 	renderAction = (data) => {
-		const { _id } = data.status;
+		const { Status_ID } = data;
 		const { User_Type } = this.props.userData;
 
-		if (_id == 0) {
+		if (Status_ID == 0) {
 			if (User_Type == 1 || User_Type == 2) {
 				return (
 					<Button color="primary" size="sm" className="float-right" onClick={() => this.toggle(data)}>
@@ -57,16 +57,22 @@ class BookingCard extends Component {
 					</Button>
 				);
 			}
-		} else if (_id == 2) {
+		} else if (Status_ID == 2) {
 			return (
 				<Button color="success" size="sm" className="float-right">
 					Assigned
 				</Button>
 			);
-		} else if (_id == 4) {
+		} else if (Status_ID == 4) {
 			return (
 				<Button color="secondary" size="sm" className="float-right">
 					Completed
+				</Button>
+			);
+		} else if (Status_ID == 5) {
+			return (
+				<Button color="danger" size="sm" className="float-right">
+					Cancelled
 				</Button>
 			);
 		}
@@ -92,7 +98,7 @@ class BookingCard extends Component {
 					<Col xs={2}>
 						<UncontrolledDropdown>
 							<DropdownToggle className="option" color="link">
-								&#8285;
+								<i className="fa fa-ellipsis-v" />
 							</DropdownToggle>
 							<DropdownMenu right>
 								<DropdownItem

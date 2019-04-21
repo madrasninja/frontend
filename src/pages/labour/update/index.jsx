@@ -37,6 +37,7 @@ class UpdateLabour extends Component {
 		if (avatar) {
 			data.avatar = avatar;
 		}
+		if (isMoment(data.DOB)) data.DOB = data.DOB.format('YYYY-MM-DD');
 		data.Id_Prof = data.Id_Prof[0];
 		data.Service_Time_From = data.Service_Time.From.format('HH:mm');
 		data.Service_Time_To = data.Service_Time.To.format('HH:mm');
@@ -56,7 +57,7 @@ class UpdateLabour extends Component {
 					message,
 					color: 'success'
 				});
-			} else {
+			} else if (!nextProps.formResponse.requesting) {
 				this.setState({
 					responseStatus: true,
 					message,
@@ -78,7 +79,7 @@ class UpdateLabour extends Component {
 				<Col xs={12} sm={12} md={{ size: 6, offset: 3 }}>
 					<h3 className="text-center">Update Labour</h3>
 					<hr />
-					<ImageCrop setImage={(file) => this.setState({ avatar: file })} />
+					<ImageCrop image={labourDetails.avatar} setImage={(file) => this.setState({ avatar: file })} />
 					<AddForm getValues={(values) => this.save(values)} initialValues={labourDetails} />
 					<Notifier message={message} color={color} show={responseStatus} />
 				</Col>
