@@ -23,7 +23,7 @@ import API_CALL from '../../../services';
 @connect(
 	(reduxData) => {
 		return {
-			userList: reduxData.UserList,
+			userList: reduxData.UserList.data,
 			userData: reduxData.UserDetails.data
 		};
 	},
@@ -61,9 +61,9 @@ export default class UserHome extends Component {
 	};
 
 	renderList(list) {
-		if (list.data) {
+		if (list) {
 			const currentUserID = this.props.userData._id;
-			return _.map(list.data, (data, index) => {
+			return _.map(list, (data, index) => {
 				const { First_Name, Last_Name, Mobile_Number, User_Type, Email_Id, _id } = data;
 				if (_id != currentUserID) {
 					return (
@@ -122,7 +122,7 @@ export default class UserHome extends Component {
 		return (
 			<Row>
 				<Col xs={12}>
-					<Row>{this.renderList(this.props.userList)}</Row>
+					<Row>{this.renderList(this.props.userList.activeUser)}</Row>
 				</Col>
 			</Row>
 		);

@@ -21,8 +21,8 @@ class LabourHome extends Component {
 	};
 
 	renderList(list) {
-		if (list.data) {
-			return _.map(list.data, (data, index) => {
+		if (list) {
+			return _.map(list, (data, index) => {
 				let imgUrl = userImage;
 				if (data.avatar) {
 					imgUrl = data.avatar;
@@ -106,7 +106,7 @@ class LabourHome extends Component {
 export default connect(
 	(reduxData) => {
 		return {
-			labourList: reduxData.LabourList
+			labourList: reduxData.LabourList.data
 		};
 	},
 	{ getLabourList }
