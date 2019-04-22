@@ -34,7 +34,8 @@ class LabourHome extends Component {
 								<Row>
 									<Col xs={9} className="align-self-center">
 										<span className="text-capitalize">
-											{data.First_Name} {data.Last_Name}
+											{data.First_Name} {data.Last_Name}{' '}
+											<span className="splitter">{this.renderGenderIcon(data.Gender)}</span>
 										</span>
 										<br />
 										<small>
@@ -50,29 +51,25 @@ class LabourHome extends Component {
 									{data.service_type.name} at {data.locality.name}
 								</div>
 								<CardText className="text-black-50 mt-2">
-									<small>
+									{data.Mobile_Number ? (
 										<div>
-											{data.Mobile_Number ? (
-												<span>
-													<i className="fas fa-phone" /> {data.Mobile_Number}
-												</span>
-											) : null}
-											{data.DOB ? (
-												<span className="splitter">
-													<i className="fas fa-birthday-cake" /> {data.DOB}
-												</span>
-											) : null}
-											<span className="splitter">{this.renderGenderIcon(data.Gender)}</span>
+											<i className="fas fa-phone" /> {data.Mobile_Number}
 										</div>
+									) : null}
+									{data.DOB ? (
 										<div>
-											<i class="fas fa-envelope" /> {data.Email_Id}
+											<i className="fas fa-birthday-cake" /> {data.DOB}
 										</div>
-										{data.Address ? (
-											<div>
-												<i className="fas fa-map-marker-alt" /> {data.Address}
-											</div>
-										) : null}
-									</small>
+									) : null}
+									<div />
+									<div>
+										<i class="fas fa-envelope" /> {data.Email_Id}
+									</div>
+									{data.Address ? (
+										<div>
+											<i className="fas fa-map-marker-alt" /> {data.Address}
+										</div>
+									) : null}
 								</CardText>
 							</CardBody>
 							<CardFooter>

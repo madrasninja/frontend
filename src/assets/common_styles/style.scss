@@ -83,6 +83,11 @@ section {
 				margin-right: 5px;
 			}
 		}
+		.card-text {
+			svg {
+				font-size: 70%;
+			}
+		}
 	}
 
 	.card-footer {
@@ -110,7 +115,7 @@ section {
 	margin-bottom: 0.5rem;
 }
 
-@media (min-width: 1600px) {
+@media (min-width: 1400px) {
 	.container {
 		max-width: 1280px;
 	}
