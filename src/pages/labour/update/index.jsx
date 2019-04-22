@@ -26,7 +26,7 @@ class UpdateLabour extends Component {
 			const { data, code } = response;
 			if (code == 'MNS020') {
 				this.setState({
-					labourDetails: data[0]
+					labourDetails: data.activeUser[0]
 				});
 			}
 		});

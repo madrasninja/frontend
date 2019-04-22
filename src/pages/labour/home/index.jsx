@@ -51,22 +51,26 @@ class LabourHome extends Component {
 								</div>
 								<CardText className="text-black-50 mt-2">
 									<small>
-										{data.Mobile_Number ? (
-											<span>
-												<i className="fas fa-phone" /> {data.Mobile_Number}
-											</span>
-										) : null}
-										{data.DOB ? (
-											<span className="splitter">
-												<i className="fas fa-birthday-cake" /> {data.DOB}
-											</span>
-										) : null}
-										<span className="splitter">{this.renderGenderIcon(data.Gender)}</span>
-										<br />
+										<div>
+											{data.Mobile_Number ? (
+												<span>
+													<i className="fas fa-phone" /> {data.Mobile_Number}
+												</span>
+											) : null}
+											{data.DOB ? (
+												<span className="splitter">
+													<i className="fas fa-birthday-cake" /> {data.DOB}
+												</span>
+											) : null}
+											<span className="splitter">{this.renderGenderIcon(data.Gender)}</span>
+										</div>
+										<div>
+											<i class="fas fa-envelope" /> {data.Email_Id}
+										</div>
 										{data.Address ? (
-											<span>
+											<div>
 												<i className="fas fa-map-marker-alt" /> {data.Address}
-											</span>
+											</div>
 										) : null}
 									</small>
 								</CardText>
