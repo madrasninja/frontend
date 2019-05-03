@@ -22,15 +22,6 @@ export default class PaymentPage extends Component {
 		API_CALL('post', 'getpaymenthash', { Booking_ID }, null, (response) => {
 			const { code, data } = response;
 			if (code == 'MNS020') {
-				data['surl'] = '/';
-				data['furl'] = '/';
-				data['productinfo'] = data.pinfo;
-				data['firstname'] = data.fname;
-				data['phone'] = data.mobile;
-				delete data.mobile;
-				delete data.fname;
-				delete data.pinfo;
-				console.log(data);
 				bolt.launch(data, handler);
 			}
 		});
