@@ -1,0 +1,14 @@
+.labourlist-styling {
+  .btn-outline-secondary {
+    &:hover {
+      color: #6c757d;
+      background: transparent;
+    }
+    &:focus {
+      box-shadow: none;
+    }
+    &:active {
+      box-shadow: none;
+    }
+  }
+}
