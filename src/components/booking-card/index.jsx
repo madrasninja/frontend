@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import moment from 'moment';
+import { Link } from 'react-router-dom';
 import {
 	Row,
 	Col,
@@ -43,7 +44,7 @@ class BookingCard extends Component {
 		const { Status_ID } = data;
 		const { User_Type } = this.props.userData;
 
-		if (Status_ID == 0) {
+		if (Status_ID == 0 || Status_ID == 1) {
 			if (User_Type == 1 || User_Type == 2) {
 				return (
 					<Button color="primary" size="sm" className="float-right" onClick={() => this.toggle(data)}>
@@ -126,7 +127,7 @@ class BookingCard extends Component {
 
 	render() {
 		const { bookingId } = this.state;
-		const { data } = this.props;
+		const { data, userData: { User_Type } } = this.props;
 		let hour = this.findDiff(data.Session_Time.From, data.Session_Time.To);
 		return (
 			<Col xs={12} sm={6} md={4}>
@@ -150,6 +151,18 @@ class BookingCard extends Component {
 								{data.user.Mobile_Number}
 							</small>
 						</CardText>
+						<div>
+							<small className="text-black-50">Payment Status</small>
+							<br />
+							{data.Status_ID == 0 ? 'Pending' : 'Success'}
+							{data.Status_ID == 0 && User_Type == 4 ? (
+								<Link to={`/makepayment/${data.ID}`} className="float-right payment-link">
+									Pay &#8377;200
+								</Link>
+							) : (
+								''
+							)}
+						</div>
 					</CardBody>
 					<CardFooter>
 						{data.ID}

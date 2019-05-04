@@ -31,6 +31,7 @@ import 'primereact/resources/themes/nova-light/theme.css';
 import 'primereact/resources/primereact.min.css';
 import 'primeicons/primeicons.css';
 import 'assets/common_styles/style.scss';
+import PaymentPage from './src/pages/payment';
 
 class App extends Component {
 	constructor(props) {
@@ -54,6 +55,7 @@ class App extends Component {
 					<Route path="/labour" component={Labour} />
 					<Route path="/user" component={User} />
 					<Route path="/bookings" component={Booking} />
+					<Route path="/makepayment/:id" component={PaymentPage} />
 					<Route path="/changepassword" component={ChangePassword} />
 					<Redirect to="/" />
 				</Switch>
