@@ -47,6 +47,7 @@ class Dashboard extends Component {
 				</Col>
 				<Col xs={12} className="content">
 					<Row>{data.UpcomingBooking && this.renderList(data.UpcomingBooking)}</Row>
+					{data.length == 0 ? <NoData message="Sorry, we couldn't find any booking" /> : ''}
 					{data.UpcomingBooking && data.UpcomingBooking.length > 3 ? (
 						<Row className="view-more">
 							<Col className="text-center">

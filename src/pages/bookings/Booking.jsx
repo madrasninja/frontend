@@ -95,6 +95,7 @@ export default class Booking extends Component {
 						<TabPane tabId="Cancelled">
 							<Row className="old">{data.Cancelled && this.renderList(data.Cancelled)}</Row>
 						</TabPane>
+						{data.length == 0 ? <NoData message="Sorry, we couldn't find any booking" /> : ''}
 					</TabContent>
 				</Col>
 			</Row>

@@ -154,8 +154,8 @@ class BookingCard extends Component {
 						<div>
 							<small className="text-black-50">Payment Status</small>
 							<br />
-							{data.Status_ID == 0 ? 'Pending' : 'Success'}
-							{data.Status_ID == 0 && User_Type == 4 ? (
+							{data.Payment_Status == 0 ? 'Pending' : 'Success'}
+							{data.Payment_Status == 0 && User_Type == 4 ? (
 								<Link to={`/makepayment/${data.ID}`} className="float-right payment-link">
 									Pay &#8377;200
 								</Link>
