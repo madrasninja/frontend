@@ -16,7 +16,8 @@ import {
 	UncontrolledDropdown,
 	DropdownToggle,
 	DropdownMenu,
-	DropdownItem
+	DropdownItem,
+	UncontrolledTooltip
 } from 'reactstrap';
 
 import AssignLabour from './assignLabour';
@@ -60,9 +61,14 @@ class BookingCard extends Component {
 			}
 		} else if (Status_ID == 2) {
 			return (
-				<Button color="success" size="sm" className="float-right">
-					Assigned
-				</Button>
+				<span className="float-right">
+					<Button color="success" size="sm" id={data.ID}>
+						Assigned
+					</Button>
+					<UncontrolledTooltip placement="top" target={data.ID}>
+						Click to view Labour details
+					</UncontrolledTooltip>
+				</span>
 			);
 		} else if (Status_ID == 4) {
 			return (
@@ -170,7 +176,10 @@ class BookingCard extends Component {
 					</CardFooter>
 				</Card>
 				<Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
-					<ModalHeader toggle={this.toggle}>Assign Labour</ModalHeader>
+					<ModalHeader toggle={this.toggle}>
+						Assign Labour <br />
+						<small className="text-black-50">Choose the labour & submit</small>
+					</ModalHeader>
 					<AssignLabour bookingId={bookingId} />
 				</Modal>
 			</Col>
