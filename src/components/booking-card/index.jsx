@@ -23,25 +23,34 @@ import {
 import AssignLabour from './assignLabour';
 import API_CALL from '../../services';
 import { getBookingList } from '../../services/BookingList';
+import LabourDetails from './labourDetails';
 
 @connect(null, { getBookingList })
 class BookingCard extends Component {
 	state = {
-		modal: false
+		modal: false,
+		labourDetailsModal: false
 	};
 
 	findDiff = (from, to) => {
 		return moment(to, 'YYYY-MM-DD HH:mm:ss').diff(moment(from, 'YYYY-MM-DD HH:mm:ss'), 'hours');
 	};
 
-	toggle = (data) => {
+	toggle = data => {
 		this.setState({
 			bookingId: data.ID,
 			modal: !this.state.modal
 		});
 	};
 
-	renderAction = (data) => {
+	toggleLabourDetails = ({ Labours }) => {
+		this.setState({
+			labourDetails: Labours,
+			labourDetailsModal: !this.state.labourDetailsModal
+		});
+	};
+
+	renderAction = data => {
 		const { Status_ID } = data;
 		const { User_Type } = this.props.userData;
 
@@ -62,7 +71,7 @@ class BookingCard extends Component {
 		} else if (Status_ID == 2) {
 			return (
 				<span className="float-right">
-					<Button color="success" size="sm" id={data.ID}>
+					<Button color="success" size="sm" id={data.ID} onClick={() => this.toggleLabourDetails(data)}>
 						Assigned
 					</Button>
 					<UncontrolledTooltip placement="top" target={data.ID}>
@@ -85,7 +94,7 @@ class BookingCard extends Component {
 		}
 	};
 
-	cancel = (data) => {
+	cancel = data => {
 		const { ID } = data;
 		API_CALL('get', `cancelbooking/${ID}`, null, null, (data) => {
 			const { code, message } = data;
@@ -95,8 +104,8 @@ class BookingCard extends Component {
 		});
 	};
 
-	renderTitle = (data) => {
-		if ([ 0, 1, 2, 3 ].indexOf(data.Status_ID) >= 0) {
+	renderTitle = data => {
+		if ([0, 1, 2, 3].indexOf(data.Status_ID) >= 0) {
 			return (
 				<Row>
 					<Col xs={10}>
@@ -132,9 +141,10 @@ class BookingCard extends Component {
 	};
 
 	render() {
-		const { bookingId } = this.state;
+		const { bookingId, modal, labourDetailsModal, labourDetails } = this.state;
 		const { data, userData: { User_Type } } = this.props;
 		let hour = this.findDiff(data.Session_Time.From, data.Session_Time.To);
+
 		return (
 			<Col xs={12} sm={6} md={4}>
 				<Card>
@@ -166,8 +176,8 @@ class BookingCard extends Component {
 									Pay &#8377;200
 								</Link>
 							) : (
-								''
-							)}
+									''
+								)}
 						</div>
 					</CardBody>
 					<CardFooter>
@@ -175,12 +185,17 @@ class BookingCard extends Component {
 						{this.renderAction(data)}
 					</CardFooter>
 				</Card>
-				<Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
+				<Modal isOpen={modal} toggle={this.toggle} className={this.props.className}>
 					<ModalHeader toggle={this.toggle}>
 						Assign Labour <br />
 						<small className="text-black-50">Choose the labour & submit</small>
 					</ModalHeader>
 					<AssignLabour bookingId={bookingId} />
+				</Modal>
+
+				<Modal size="lg" isOpen={labourDetailsModal} toggle={this.toggleLabourDetails} className={this.props.className} centered>
+					<ModalHeader toggle={this.toggleLabourDetails}>Labour Details </ModalHeader>
+					<LabourDetails labourDetails={labourDetails} />
 				</Modal>
 			</Col>
 		);

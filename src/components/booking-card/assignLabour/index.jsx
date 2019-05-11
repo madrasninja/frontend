@@ -25,7 +25,8 @@ class AssignLabour extends Component {
 			},
 			disabled: true,
 			Labour_ID: '',
-			btnIndex: null
+			btnIndex: null,
+			assigned: false
 		}
 	}
 
@@ -87,12 +88,13 @@ class AssignLabour extends Component {
 
 
 		this.setState({ spinners: true })
-		API_CALL('post', 'assignlabour', reqInput, null, response => {			
+		API_CALL('post', 'assignlabour', reqInput, null, response => {
 			if (response.code == "MNS014") {
 				this.setState({
 					spinners: false,
 					alertMessageToggle: true,
-					alertMessage: { color: 'success', message: response.message }
+					alertMessage: { color: 'success', message: response.message, },
+					assigned: true
 				});
 				getBookingList();
 			} else this.setState({
@@ -105,9 +107,9 @@ class AssignLabour extends Component {
 
 	render() {
 		const { labourListForBooking: { requesting } } = this.props;
-		const { spinners, disabled, alertMessageToggle, alertMessage, visible } = this.state;
+		const { spinners, disabled, alertMessageToggle, alertMessage, visible, assigned } = this.state;
 
-		if (requesting) return <Spinner color="primary" size="lg" />
+		if (requesting) return <ModalBody className='text-center'><Spinner color="primary" size="lg" /></ModalBody>
 		else {
 			return (
 				<div>
@@ -128,8 +130,10 @@ class AssignLabour extends Component {
 						{
 							spinners === true ?
 								<Spinner color="primary" size="sm" />
-								:
-								<Button disabled={disabled} color="primary" size='sm' onClick={this.submitForm}>Submit</Button>
+								: assigned ?
+									<Button color="success" size='sm' >Assigned</Button>
+									:
+									<Button disabled={disabled} color="primary" size='sm' onClick={this.submitForm}>Submit</Button>
 						}
 					</ModalFooter>
 				</div>
