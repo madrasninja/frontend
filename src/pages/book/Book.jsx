@@ -3,7 +3,6 @@ import { Row, Col } from 'reactstrap';
 import { connect } from 'react-redux';
 import moment from 'moment';
 
-import standingNinja from './../../assets/img/standing-ninja.png';
 import './Book.scss';
 import ServiceForm from './form';
 import { bookService } from './../../services/BookService';
@@ -16,12 +15,8 @@ class Book extends Component {
 
 	bookaService(values) {
 		let { serviceTime, serviceDate } = values;
-		serviceTime = serviceTime.format('HH:mm');
 		let session = serviceDate.set({ hours: serviceTime.split(':')[0], minutes: serviceTime.split(':')[1] });
-		values.Session_Time = {
-			From: session.format('YYYY-MM-DD HH:mm:ss'),
-			To: session.add(values.serviceHours, 'h').format('YYYY-MM-DD HH:mm:ss')
-		};
+		values.Session_Time_From = session.format('YYYY-MM-DD HH:mm:ss');
 		this.props.bookService(values);
 	}
 
@@ -41,11 +36,8 @@ class Book extends Component {
 				</Col>
 				<Col xs={12}>
 					<Row>
-						<Col xs={12} sm={3} md={6} className="text-center ninja">
-							<img src={standingNinja} alt="ninja" />
-						</Col>
-						<Col xs={12} sm={9} md={{ size: 4, offset: 1 }}>
-							<h4 className="text-center font-weight-light">Fill up & get ninjafied</h4>
+						<Col xs={12}>
+							{/* <h4 className="text-center font-weight-light">Fill up & get ninjafied</h4> */}
 							<hr />
 							<Notifier message={this.state.message} color="success" show={this.state.responseStatus} />
 							<ServiceForm

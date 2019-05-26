@@ -36,8 +36,8 @@ class FormField extends Component {
 							<span className="message">{error}</span>
 						</div>
 					) : (
-							''
-						)}
+						''
+					)}
 				</div>
 			);
 		} else if (type == 'date') {
@@ -50,7 +50,7 @@ class FormField extends Component {
 						dateFormat="DD/MM/YYYY"
 						isValidDate={(currentDate) => {
 							if (input.name == 'DOB') return currentDate.isBefore(moment().subtract(1, 'days'));
-							else return currentDate.isAfter(moment().subtract(1, 'days'));
+							else return currentDate.isAfter(moment());
 						}}
 						inputProps={{ placeholder: placeholder }}
 						{...input}
@@ -62,8 +62,8 @@ class FormField extends Component {
 							<span className="message">{error}</span>
 						</div>
 					) : (
-							''
-						)}
+						''
+					)}
 				</div>
 			);
 		} else if (type == 'time') {
@@ -84,8 +84,8 @@ class FormField extends Component {
 							<span className="message">{error}</span>
 						</div>
 					) : (
-							''
-						)}
+						''
+					)}
 				</div>
 			);
 		} else if (type == 'file') {
@@ -126,8 +126,8 @@ class FormField extends Component {
 							<span className="message">{error}</span>
 						</div>
 					) : (
-							''
-						)}
+						''
+					)}
 				</div>
 			);
 		}
