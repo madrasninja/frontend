@@ -60,18 +60,16 @@ class AssignLabour extends Component {
 								<img src={avatar ? avatar : defaultUser} height="60" width="60" className="rounded-circle" />
 							</Col>
 
-							<Col md={7} sm={7}>
-								<span>
+							<Col md={10} sm={10}>
+								<span className='d-inline-block'>
 									<h6 className="mb-0 mt-2">{`${First_Name} ${Last_Name}`}</h6>
 									<p className="text-muted">{Email_Id}</p>
 								</span>
-							</Col>
 
-							<Col md={3} sm={3} className="text-right">
-								<div className="Checkbox">
+								<span className="Checkbox d-inline-block checkbox-wrap">
 									<input type="checkbox" id={`checkbox-${_id}`} onChange={(e) => this.handleOnchange(e, _id, index)} />
 									<div className="Checkbox-visible"></div>
-								</div>
+								</span>
 							</Col>
 						</Row>
 					</ListGroupItem>

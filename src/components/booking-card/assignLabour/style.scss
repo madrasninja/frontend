@@ -1,4 +1,10 @@
 .labourlist-styling {
+  .checkbox-wrap {
+    position: absolute !important;
+    right: 27px;
+    top: 20px;
+  }
+
   .btn-outline-secondary {
     &:hover {
       color: #6c757d;
@@ -26,7 +32,6 @@
       border: 1px solid gray;
       width: 16px;
       height: 16px;
-      margin: 20px 65px;
       background: #fff;
       border: 1px solid rgba(134, 131, 131, 0.49);
       border-radius: 3px;
@@ -38,7 +43,6 @@
       left: 50%;
       top: 50%;
       transform: translatex(-50%) translatey(-50%);
-      margin: 20px 65px;
       display: block;
       cursor: pointer;
       width: 20px;
@@ -59,7 +63,7 @@
     > input:focus + .Checkbox-visible {
       border-color: #00aeef;
     }
-  }  
+  }
 }
 
 .alert-wrap {
