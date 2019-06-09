@@ -1,4 +1,4 @@
-.labourlist-styling {  
+.labourlist-styling {
   .btn-outline-secondary {
     &:hover {
       color: #6c757d;
@@ -59,5 +59,11 @@
     > input:focus + .Checkbox-visible {
       border-color: #00aeef;
     }
-  }
+  }  
+}
+
+.alert-wrap {
+  left: 15px;
+  position: absolute !important;
+  bottom: -8px;
 }

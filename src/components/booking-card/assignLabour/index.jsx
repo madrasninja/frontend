@@ -27,7 +27,8 @@ class AssignLabour extends Component {
 			Labour_ID: '',
 			btnIndex: null,
 			assigned: false,
-			Labour_ID: []
+			Labour_ID: [],
+			toggleAlert: false
 		}
 	}
 
@@ -85,35 +86,39 @@ class AssignLabour extends Component {
 	}
 
 	submitForm = () => {
-		const { bookingId, getBookingList } = this.props;
+		const { bookingId, getBookingList, requiredStaffs } = this.props;
 		const { Labour_ID } = this.state;
 
 		let reqInput = {
 			Booking_ID: bookingId,
 			Labour_ID
 		}
-		
-		this.setState({ spinners: true })
-		API_CALL('post', 'assignlabour', reqInput, null, response => {
-			if (response.code == "MNS014") {
-				this.setState({
+
+		// to check number of labours booked are not less than number of labours assigned
+		if (Labour_ID.length === requiredStaffs) this.setState({ toggleAlert: true })
+		else {
+			this.setState({ spinners: true, toggleAlert: false })
+			API_CALL('post', 'assignlabour', reqInput, null, response => {
+				if (response.code == "MNS014") {
+					this.setState({
+						spinners: false,
+						alertMessageToggle: true,
+						alertMessage: { color: 'success', message: response.message, },
+						assigned: true
+					});
+					getBookingList();
+				} else this.setState({
 					spinners: false,
 					alertMessageToggle: true,
-					alertMessage: { color: 'success', message: response.message, },
-					assigned: true
+					alertMessage: { color: 'danger', message: response.message }
 				});
-				getBookingList();
-			} else this.setState({
-				spinners: false,
-				alertMessageToggle: true,
-				alertMessage: { color: 'danger', message: response.message }
-			});
-		})
+			})
+		}
 	}
 
 	render() {
 		const { labourListForBooking: { requesting } } = this.props;
-		const { spinners, disabled, alertMessageToggle, alertMessage, visible, assigned } = this.state;
+		const { spinners, disabled, alertMessageToggle, alertMessage, visible, assigned, toggleAlert } = this.state;
 
 		if (requesting) return <ModalBody className='text-center'><Spinner color="primary" size="lg" /></ModalBody>
 		else {
@@ -139,7 +144,10 @@ class AssignLabour extends Component {
 								: assigned ?
 									<Button color="success" size='sm' >Assigned</Button>
 									:
-									<Button disabled={disabled} color="primary" size='sm' onClick={this.submitForm}>Submit</Button>
+									<span>
+										{toggleAlert ? <Alert color='warning'>Number of labours assigning must be equal to number of labours booked</Alert> : null}
+										<Button disabled={disabled} color="primary" size='sm' className='float-right' onClick={this.submitForm}>Submit</Button>
+									</span>
 						}
 					</ModalFooter>
 				</div>

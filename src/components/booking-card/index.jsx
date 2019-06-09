@@ -188,9 +188,10 @@ class BookingCard extends Component {
 				<Modal isOpen={modal} toggle={this.toggle} className={this.props.className}>
 					<ModalHeader toggle={this.toggle}>
 						Assign Labour <br />
-						<small className="text-black-50">Choose the labour & submit</small>
+						{/* <small className="text-black-50">Choose the labour & submit</small> */}
+						<small className="text-black-50">Required Labour(s): <span className='font-weight-bold'>{data.No_Of_Staff}</span></small>
 					</ModalHeader>
-					<AssignLabour bookingId={bookingId} />
+					<AssignLabour bookingId={bookingId} requiredStaffs={data.No_Of_Staff} />
 				</Modal>
 
 				<Modal size="lg" isOpen={labourDetailsModal} toggle={this.toggleLabourDetails} className={this.props.className} centered>
