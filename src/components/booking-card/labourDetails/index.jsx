@@ -14,7 +14,7 @@ import './style.scss';
 
 class LabourDetails extends Component {
 
-    renderEmpInfo = () => {
+    renderLabourInfo = () => {
         const { labourDetails } = this.props;
 
         let info = _.map(labourDetails, (response, index) => {
@@ -37,7 +37,7 @@ class LabourDetails extends Component {
     render() {
         return (
             <div>
-                <ModalBody>{this.renderEmpInfo()}</ModalBody>
+                <ModalBody>{this.renderLabourInfo()}</ModalBody>
             </div>
         );
     }

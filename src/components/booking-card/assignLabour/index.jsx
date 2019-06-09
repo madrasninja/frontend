@@ -26,7 +26,8 @@ class AssignLabour extends Component {
 			disabled: true,
 			Labour_ID: '',
 			btnIndex: null,
-			assigned: false
+			assigned: false,
+			Labour_ID: []
 		}
 	}
 
@@ -36,13 +37,16 @@ class AssignLabour extends Component {
 		getLabourForBooking(bookingId);
 	}
 
-	handleBtnOnclick = (Labour_ID, btnIndex) => {
-		this.setState({ Labour_ID, btnIndex, disabled: false })
+	handleOnchange = (event, id) => {
+		const { Labour_ID } = this.state;
+		let checkedStatus = document.getElementById(`checkbox-${id}`).checked;
+
+		checkedStatus ? this.state.Labour_ID.push(id) : _.remove(Labour_ID, num => num === id)
+		Labour_ID.length === 0 ? this.setState({ disabled: true }) : this.setState({ disabled: false })
 	}
 
 	renderAssignLabour = () => {
 		const { labourListForBooking: { data } } = this.props;
-		const { btnIndex } = this.state;
 
 		let labourList = data.length !== 0 ?
 			_.map(data, (response, index) => {
@@ -63,7 +67,10 @@ class AssignLabour extends Component {
 							</Col>
 
 							<Col md={3} sm={3} className="text-right">
-								<Button outline={btnIndex === index ? false : true} color="secondary" className="mt-3" size="sm" onClick={() => this.handleBtnOnclick(_id, index)}><i className="fa fa-check" /></Button>
+								<div className="Checkbox">
+									<input type="checkbox" id={`checkbox-${_id}`} onChange={(e) => this.handleOnchange(e, _id, index)} />
+									<div className="Checkbox-visible"></div>
+								</div>
 							</Col>
 						</Row>
 					</ListGroupItem>
@@ -85,8 +92,7 @@ class AssignLabour extends Component {
 			Booking_ID: bookingId,
 			Labour_ID
 		}
-
-
+		
 		this.setState({ spinners: true })
 		API_CALL('post', 'assignlabour', reqInput, null, response => {
 			if (response.code == "MNS014") {
