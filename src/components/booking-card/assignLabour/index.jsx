@@ -93,7 +93,7 @@ class AssignLabour extends Component {
 		}
 
 		// to check number of labours booked are not less than number of labours assigned
-		if (Labour_ID.length === requiredStaffs) this.setState({ toggleAlert: true })
+		if (Labour_ID.length < requiredStaffs) this.setState({ toggleAlert: true })
 		else {
 			this.setState({ spinners: true, toggleAlert: false })
 			API_CALL('post', 'assignlabour', reqInput, null, response => {
