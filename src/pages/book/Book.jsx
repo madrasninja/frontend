@@ -15,6 +15,7 @@ class Book extends Component {
 
 	bookaService(values) {
 		let { serviceTime, serviceDate } = values;
+		serviceTime = serviceTime.format('HH:mm');
 		let session = serviceDate.set({ hours: serviceTime.split(':')[0], minutes: serviceTime.split(':')[1] });
 		values.Session_Time_From = session.format('YYYY-MM-DD HH:mm:ss');
 		this.props.bookService(values);
