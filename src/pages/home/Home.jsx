@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Row, Col } from 'reactstrap';
+import { Row, Col, Button } from 'reactstrap';
 
 import Banner from './../../components/banner/Banner';
 import WorkFlow from './work-flow/WorkFlow';
@@ -7,7 +7,7 @@ import './Home.scss';
 import OurServices from './../../pages/our-services/OurServices';
 import sittingNinja from './../../assets/img/sitting-ninja.png';
 
-class Home extends Component {
+export default class Home extends Component {
 	render() {
 		return (
 			<Row className="Home">
@@ -97,5 +97,3 @@ class Home extends Component {
 		);
 	}
 }
-
-export default Home;

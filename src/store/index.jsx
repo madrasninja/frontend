@@ -10,6 +10,7 @@ import LabourList from '../services/LabourList/reducer';
 import labourListForBooking from '../services/LabourListForBooking/reducer';
 import UserDetails from '../services/UserDetails/reducer';
 import UserList from '../services/UserList/reducer';
+import Notification from '../services/NotificationService/reducer';
 
 /**
  * combineReducers is simply a utility function to simplify the most common use case when writing Redux reducers.
@@ -25,7 +26,8 @@ const rootReducer = combineReducers({
 	labourListForBooking,
 	LabourList,
 	UserDetails,
-	UserList
+	UserList,
+	Notification
 });
 
 /**

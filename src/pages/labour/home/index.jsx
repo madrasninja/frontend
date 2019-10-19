@@ -50,7 +50,7 @@ class LabourHome extends Component {
 								<div className="text-black-50 mt-2">
 									{data.service_type.name} at {data.locality.name}
 								</div>
-								<CardText className="text-black-50 mt-2">
+								<div className="details text-black-50 mt-2">
 									{data.Mobile_Number ? (
 										<div>
 											<i className="fas fa-phone" /> {data.Mobile_Number}
@@ -63,14 +63,14 @@ class LabourHome extends Component {
 									) : null}
 									<div />
 									<div>
-										<i class="fas fa-envelope" /> {data.Email_Id}
+										<i className="fas fa-envelope" /> {data.Email_Id}
 									</div>
 									{data.Address ? (
 										<div>
 											<i className="fas fa-map-marker-alt" /> {data.Address}
 										</div>
 									) : null}
-								</CardText>
+								</div>
 							</CardBody>
 							<CardFooter>
 								{data.Id_Prof ? (

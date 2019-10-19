@@ -24,6 +24,6 @@ header nav {
 		}
 	}
 	&:active {
-		background-color: #f8f9fa;
+		background-color: rgba($color: #000000, $alpha: 0.04) !important;
 	}
 }

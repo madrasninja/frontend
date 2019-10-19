@@ -30,10 +30,25 @@ import 'react-datetime/css/react-datetime.css';
 import 'primereact/resources/themes/nova-light/theme.css';
 import 'primereact/resources/primereact.min.css';
 import 'primeicons/primeicons.css';
+import 'animate.css';
 import 'assets/common_styles/style.scss';
 import PaymentPage from './src/pages/payment';
+import PushNotificaton from './src/components/push-notification';
 
-class App extends Component {
+@connect(
+	(reduxData) => {
+		return {
+			userData: reduxData.UserDetails.data,
+			notifications: reduxData.Notification.data
+		};
+	},
+	{
+		getServiceTypeList,
+		getLocalityList,
+		getMe
+	}
+)
+export default class App extends Component {
 	constructor(props) {
 		super(props);
 		props.getServiceTypeList();
@@ -82,6 +97,7 @@ class App extends Component {
 		return (
 			<BrowserRouter>
 				<div className="App">
+					<PushNotificaton />
 					<Header />
 					<ScrollToTop>
 						<section className="container">{this.renderRoutes()}</section>
@@ -92,16 +108,3 @@ class App extends Component {
 		);
 	}
 }
-
-export default connect(
-	(reduxData) => {
-		return {
-			userData: reduxData.UserDetails.data
-		};
-	},
-	{
-		getServiceTypeList,
-		getLocalityList,
-		getMe
-	}
-)(App);

@@ -1,0 +1,16 @@
+.push-notification {
+	position: fixed;
+	right: 1rem;
+	margin-top: 1rem;
+	min-width: 300px;
+	z-index: 1031;
+	.card-block {
+		position: relative;
+		margin-bottom: 1rem;
+		border-radius: 0.25rem;
+		box-shadow: 0px 12px 15px -11px rgba($color: #000000, $alpha: 0.4);
+		.title {
+			border-bottom: 2px solid rgba($color: #ffffff, $alpha: 0.1);
+		}
+	}
+}

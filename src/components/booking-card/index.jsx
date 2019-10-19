@@ -36,7 +36,7 @@ class BookingCard extends Component {
 		return moment(to, 'YYYY-MM-DD HH:mm:ss').diff(moment(from, 'YYYY-MM-DD HH:mm:ss'), 'hours');
 	};
 
-	toggle = data => {
+	toggle = (data) => {
 		this.setState({
 			bookingId: data.ID,
 			modal: !this.state.modal
@@ -50,7 +50,7 @@ class BookingCard extends Component {
 		});
 	};
 
-	renderAction = data => {
+	renderAction = (data) => {
 		const { Status_ID } = data;
 		const { User_Type } = this.props.userData;
 
@@ -94,7 +94,7 @@ class BookingCard extends Component {
 		}
 	};
 
-	cancel = data => {
+	cancel = (data) => {
 		const { ID } = data;
 		API_CALL('get', `cancelbooking/${ID}`, null, null, (data) => {
 			const { code, message } = data;
@@ -104,8 +104,8 @@ class BookingCard extends Component {
 		});
 	};
 
-	renderTitle = data => {
-		if ([0, 1, 2, 3].indexOf(data.Status_ID) >= 0) {
+	renderTitle = (data) => {
+		if ([ 0, 1, 2, 3 ].indexOf(data.Status_ID) >= 0) {
 			return (
 				<Row>
 					<Col xs={10}>
@@ -171,13 +171,13 @@ class BookingCard extends Component {
 							<small className="text-black-50">Payment Status</small>
 							<br />
 							{data.Payment_Status == 0 ? 'Pending' : 'Success'}
-							{data.Payment_Status == 0 && User_Type == 4 ? (
+							{data.Status_ID != 4 && data.Payment_Status == 0 && User_Type == 4 ? (
 								<Link to={`/makepayment/${data.ID}`} className="float-right payment-link">
 									Pay &#8377;200
 								</Link>
 							) : (
-									''
-								)}
+								''
+							)}
 						</div>
 					</CardBody>
 					<CardFooter>
@@ -193,7 +193,13 @@ class BookingCard extends Component {
 					<AssignLabour bookingId={bookingId} />
 				</Modal>
 
-				<Modal size="lg" isOpen={labourDetailsModal} toggle={this.toggleLabourDetails} className={this.props.className} centered>
+				<Modal
+					size="lg"
+					isOpen={labourDetailsModal}
+					toggle={this.toggleLabourDetails}
+					className={this.props.className}
+					centered
+				>
 					<ModalHeader toggle={this.toggleLabourDetails}>Labour Details </ModalHeader>
 					<LabourDetails labourDetails={labourDetails} />
 				</Modal>
