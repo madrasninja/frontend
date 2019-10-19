@@ -26,7 +26,9 @@ class AssignLabour extends Component {
 			disabled: true,
 			Labour_ID: '',
 			btnIndex: null,
-			assigned: false
+			assigned: false,
+			Labour_ID: [],
+			toggleAlert: false
 		}
 	}
 
@@ -36,13 +38,16 @@ class AssignLabour extends Component {
 		getLabourForBooking(bookingId);
 	}
 
-	handleBtnOnclick = (Labour_ID, btnIndex) => {
-		this.setState({ Labour_ID, btnIndex, disabled: false })
+	handleOnchange = (event, id) => {
+		const { Labour_ID } = this.state;
+		let checkedStatus = document.getElementById(`checkbox-${id}`).checked;
+
+		checkedStatus ? this.state.Labour_ID.push(id) : _.remove(Labour_ID, num => num === id)
+		Labour_ID.length === 0 ? this.setState({ disabled: true }) : this.setState({ disabled: false })
 	}
 
 	renderAssignLabour = () => {
 		const { labourListForBooking: { data } } = this.props;
-		const { btnIndex } = this.state;
 
 		let labourList = data.length !== 0 ?
 			_.map(data, (response, index) => {
@@ -55,15 +60,16 @@ class AssignLabour extends Component {
 								<img src={avatar ? avatar : defaultUser} height="60" width="60" className="rounded-circle" />
 							</Col>
 
-							<Col md={7} sm={7}>
-								<span>
+							<Col md={10} sm={10}>
+								<span className='d-inline-block'>
 									<h6 className="mb-0 mt-2">{`${First_Name} ${Last_Name}`}</h6>
 									<p className="text-muted">{Email_Id}</p>
 								</span>
-							</Col>
 
-							<Col md={3} sm={3} className="text-right">
-								<Button outline={btnIndex === index ? false : true} color="secondary" className="mt-3" size="sm" onClick={() => this.handleBtnOnclick(_id, index)}><i className="fa fa-check" /></Button>
+								<span className="Checkbox d-inline-block checkbox-wrap">
+									<input type="checkbox" id={`checkbox-${_id}`} onChange={(e) => this.handleOnchange(e, _id, index)} />
+									<div className="Checkbox-visible"></div>
+								</span>
 							</Col>
 						</Row>
 					</ListGroupItem>
@@ -78,7 +84,7 @@ class AssignLabour extends Component {
 	}
 
 	submitForm = () => {
-		const { bookingId, getBookingList } = this.props;
+		const { bookingId, getBookingList, requiredStaffs } = this.props;
 		const { Labour_ID } = this.state;
 
 		let reqInput = {
@@ -86,28 +92,31 @@ class AssignLabour extends Component {
 			Labour_ID
 		}
 
-
-		this.setState({ spinners: true })
-		API_CALL('post', 'assignlabour', reqInput, null, response => {
-			if (response.code == "MNS014") {
-				this.setState({
+		// to check number of labours booked are not less than number of labours assigned
+		if (Labour_ID.length < requiredStaffs) this.setState({ toggleAlert: true })
+		else {
+			this.setState({ spinners: true, toggleAlert: false })
+			API_CALL('post', 'assignlabour', reqInput, null, response => {
+				if (response.code == "MNS014") {
+					this.setState({
+						spinners: false,
+						alertMessageToggle: true,
+						alertMessage: { color: 'success', message: response.message, },
+						assigned: true
+					});
+					getBookingList();
+				} else this.setState({
 					spinners: false,
 					alertMessageToggle: true,
-					alertMessage: { color: 'success', message: response.message, },
-					assigned: true
+					alertMessage: { color: 'danger', message: response.message }
 				});
-				getBookingList();
-			} else this.setState({
-				spinners: false,
-				alertMessageToggle: true,
-				alertMessage: { color: 'danger', message: response.message }
-			});
-		})
+			})
+		}
 	}
 
 	render() {
 		const { labourListForBooking: { requesting } } = this.props;
-		const { spinners, disabled, alertMessageToggle, alertMessage, visible, assigned } = this.state;
+		const { spinners, disabled, alertMessageToggle, alertMessage, visible, assigned, toggleAlert } = this.state;
 
 		if (requesting) return <ModalBody className='text-center'><Spinner color="primary" size="lg" /></ModalBody>
 		else {
@@ -133,7 +142,10 @@ class AssignLabour extends Component {
 								: assigned ?
 									<Button color="success" size='sm' >Assigned</Button>
 									:
-									<Button disabled={disabled} color="primary" size='sm' onClick={this.submitForm}>Submit</Button>
+									<span>
+										{toggleAlert ? <Alert color='warning'>Number of labours assigning must be equal to number of labours booked</Alert> : null}
+										<Button disabled={disabled} color="primary" size='sm' className='float-right' onClick={this.submitForm}>Submit</Button>
+									</span>
 						}
 					</ModalFooter>
 				</div>
