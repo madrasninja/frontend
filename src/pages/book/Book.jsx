@@ -1,6 +1,7 @@
 import React, { Component, useState, useEffect } from 'react';
 import { Row, Col } from 'reactstrap';
 import { useSelector, useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 
 import './Book.scss';
 import ServiceForm from './form';
@@ -8,15 +9,21 @@ import { bookService } from './../../services/BookService';
 
 const Book = () => {
 	const dispatch = useDispatch();
+	const history = useHistory();
 
 	const [ responseStatus, setresponseStatus ] = useState(false);
 
 	const formResponse = useSelector((state) => state.BookService.data);
 	const userData = useSelector((state) => state.UserDetails.data);
 
-	useEffect(() => {
-		console.log(formResponse);
-	}, []);
+	useEffect(
+		() => {
+			if (formResponse && formResponse.Booking_ID) {
+				history.push({ pathname: '/booksuccess' });
+			}
+		},
+		[ formResponse ]
+	);
 
 	const bookaService = (values) => {
 		let { serviceTime, serviceDate } = values;

@@ -39,7 +39,7 @@ export default class UserHome extends Component {
 	returnColor(type) {
 		if (type == 1) return 'danger';
 		else if (type == 2) return 'success';
-		else if (type == 3) return 'secondary';
+		else if (type == 3) return 'warning';
 		else return 'primary';
 	}
 
@@ -103,8 +103,10 @@ export default class UserHome extends Component {
 											</UncontrolledDropdown>
 										</Col>
 									</Row>
-									<Button color={this.returnColor(User_Type)} size="sm" />{' '}
-									<small className="text-black-50">{userType[User_Type]}</small>
+									{/* <Button color={this.returnColor(User_Type)} size="sm" />{' '} */}
+									<small className={`text-${this.returnColor(User_Type)}`}>
+										{userType[User_Type]}
+									</small>
 									<CardText>
 										<small>
 											{Mobile_Number}
@@ -125,7 +127,7 @@ export default class UserHome extends Component {
 		return (
 			<Row>
 				<Col xs={12}>
-					<Row>{this.renderList(this.props.userList.activeUser)}</Row>
+					<Row>{this.renderList(_.sortBy(this.props.userList.activeUser, [ 'User_Type' ]))}</Row>
 				</Col>
 			</Row>
 		);

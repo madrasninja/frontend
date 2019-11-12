@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 import arrivedNinja from '../../../assets/img/arrived-ninja.png';
+import { clearServiceID } from '../../../services/BookService';
 
 class BookSuccess extends Component {
 	componentWillMount = () => {
@@ -50,6 +51,9 @@ class BookSuccess extends Component {
 			return null;
 		}
 	}
+	componentWillUnmount() {
+		this.props.clearServiceID();
+	}
 }
 
 function mapStateToProps(reduxData) {
@@ -58,4 +62,4 @@ function mapStateToProps(reduxData) {
 	};
 }
 
-export default connect(mapStateToProps, {})(BookSuccess);
+export default connect(mapStateToProps, { clearServiceID })(BookSuccess);

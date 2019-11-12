@@ -9,7 +9,6 @@ import Notifier from './../../../components/notifier';
 import moment, { isMoment } from 'moment';
 import ImageCrop from '../../../components/image-crop';
 import { addNotification } from '../../../services/NotificationService';
-import Loader from '../../../components/loader';
 
 class UpdateLabour extends Component {
 	constructor(props) {
@@ -56,11 +55,6 @@ class UpdateLabour extends Component {
 			if (code === 'MNS002') {
 				this.props.addNotification({ title: 'Success', message, color: 'bg-success' });
 				this.props.history.push('/labour/home');
-				// this.setState({
-				// 	responseStatus: true,
-				// 	message,
-				// 	color: 'success'
-				// });
 			} else if (!nextProps.formResponse.requesting) {
 				this.setState({
 					responseStatus: true,
