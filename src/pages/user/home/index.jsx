@@ -19,6 +19,7 @@ import _ from 'lodash';
 import { userType } from '../../../const/user-type';
 import { getUserList } from './../../../services/UserList';
 import API_CALL from '../../../services';
+import { addNotification } from '../../../services/NotificationService';
 
 @connect(
 	(reduxData) => {
@@ -27,7 +28,7 @@ import API_CALL from '../../../services';
 			userData: reduxData.UserDetails.data
 		};
 	},
-	{ getUserList }
+	{ getUserList, addNotification }
 )
 export default class UserHome extends Component {
 	constructor(props) {
@@ -46,6 +47,7 @@ export default class UserHome extends Component {
 		API_CALL('get', `deleteuser/${id}`, null, null, (data) => {
 			const { code, message } = data;
 			if (code == 'MNS040') {
+				this.props.addNotification({ title: 'Success', message: 'User deleted', color: 'bg-danger' });
 				this.props.getUserList();
 			}
 		});
@@ -55,6 +57,7 @@ export default class UserHome extends Component {
 		API_CALL('get', `makeusadmin/${id}`, null, null, (data) => {
 			const { code, message } = data;
 			if (code == 'MNS020') {
+				this.props.addNotification({ title: 'Success', message: 'Assigned as Admin' });
 				this.props.getUserList();
 			}
 		});

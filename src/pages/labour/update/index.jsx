@@ -8,6 +8,8 @@ import AddForm from './../form';
 import Notifier from './../../../components/notifier';
 import moment, { isMoment } from 'moment';
 import ImageCrop from '../../../components/image-crop';
+import { addNotification } from '../../../services/NotificationService';
+import Loader from '../../../components/loader';
 
 class UpdateLabour extends Component {
 	constructor(props) {
@@ -52,11 +54,13 @@ class UpdateLabour extends Component {
 		if (this.props.formResponse !== nextProps.formResponse) {
 			let { code, message } = nextProps.formResponse.data;
 			if (code === 'MNS002') {
-				this.setState({
-					responseStatus: true,
-					message,
-					color: 'success'
-				});
+				this.props.addNotification({ title: 'Success', message, color: 'bg-success' });
+				this.props.history.push('/labour/home');
+				// this.setState({
+				// 	responseStatus: true,
+				// 	message,
+				// 	color: 'success'
+				// });
 			} else if (!nextProps.formResponse.requesting) {
 				this.setState({
 					responseStatus: true,
@@ -94,4 +98,4 @@ function mapStateToProps(reduxData) {
 	};
 }
 
-export default connect(mapStateToProps, { savelabour })(UpdateLabour);
+export default connect(mapStateToProps, { savelabour, addNotification })(UpdateLabour);

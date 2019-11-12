@@ -1,65 +1,46 @@
-import React, { Component } from 'react';
+import React, { Component, useState, useEffect } from 'react';
 import { Row, Col } from 'reactstrap';
-import { connect } from 'react-redux';
-import moment from 'moment';
+import { useSelector, useDispatch } from 'react-redux';
 
 import './Book.scss';
 import ServiceForm from './form';
 import { bookService } from './../../services/BookService';
-import Notifier from '../../components/notifier';
 
-class Book extends Component {
-	state = {
-		responseStatus: false
-	};
+const Book = () => {
+	const dispatch = useDispatch();
 
-	bookaService(values) {
+	const [ responseStatus, setresponseStatus ] = useState(false);
+
+	const formResponse = useSelector((state) => state.BookService.data);
+	const userData = useSelector((state) => state.UserDetails.data);
+
+	useEffect(() => {
+		console.log(formResponse);
+	}, []);
+
+	const bookaService = (values) => {
 		let { serviceTime, serviceDate } = values;
 		serviceTime = serviceTime.format('HH:mm');
 		let session = serviceDate.set({ hours: serviceTime.split(':')[0], minutes: serviceTime.split(':')[1] });
 		values.Session_Time_From = session.format('YYYY-MM-DD HH:mm:ss');
-		this.props.bookService(values);
-	}
-
-	componentWillReceiveProps(nextProps) {
-		if (this.props.formResponse !== nextProps.formResponse) {
-			let { Booking_ID } = nextProps.formResponse;
-			if (Booking_ID) {
-				this.props.history.push({ pathname: '/booksuccess' });
-			}
-		}
-	}
-	render() {
-		return (
-			<Row className="book">
-				<Col xs={12}>
-					<h3 className="text-center heading">Book a Service</h3>
-				</Col>
-				<Col xs={12}>
-					<Row>
-						<Col xs={12}>
-							{/* <h4 className="text-center font-weight-light">Fill up & get ninjafied</h4> */}
-							<hr />
-							<Notifier message={this.state.message} color="success" show={this.state.responseStatus} />
-							<ServiceForm
-								getValues={(values) => this.bookaService(values)}
-								initialValues={this.props.userData}
-							/>
-						</Col>
-					</Row>
-				</Col>
-			</Row>
-		);
-	}
-}
-
-function mapStateToProps(reduxData) {
-	return {
-		formResponse: reduxData.BookService.data,
-		userData: reduxData.UserDetails.data
+		dispatch(bookService(values));
 	};
-}
 
-export default connect(mapStateToProps, {
-	bookService
-})(Book);
+	return (
+		<Row className="book">
+			<Col xs={12}>
+				<h3 className="text-center heading">Book a Service</h3>
+			</Col>
+			<Col xs={12}>
+				<Row>
+					<Col xs={12}>
+						<hr />
+						<ServiceForm getValues={(values) => bookaService(values)} initialValues={userData} />
+					</Col>
+				</Row>
+			</Col>
+		</Row>
+	);
+};
+
+export default Book;

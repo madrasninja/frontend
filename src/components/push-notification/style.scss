@@ -5,6 +5,12 @@
 	min-width: 300px;
 	z-index: 1031;
 	.card-block {
+		&.bg-primary,
+		&.bg-danger,
+		&.bg-warning,
+		&.bg-success {
+			color: #ffffff !important;
+		}
 		position: relative;
 		margin-bottom: 1rem;
 		border-radius: 0.25rem;

@@ -7,6 +7,13 @@ export function addNotification(data) {
 	};
 }
 
+export function setTimer(data) {
+	return {
+		type: types.SET_TIMER,
+		payload: data
+	};
+}
+
 export function popNotification(data) {
 	return {
 		type: types.POP,
